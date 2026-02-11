@@ -3,11 +3,18 @@
     "socialLinks": [
       { "id": "github", "label": "GitHub", "url": "#", "icon": "Github" },
       { "id": "linkedin", "label": "LinkedIn", "url": "#", "icon": "Linkedin" },
-      { "id": "twitter", "label": "Twitter", "url": "#", "icon": "Twitter" }
+      { "id": "whatsapp", "label": "WhatsApp", "url": "#", "icon": "Whatsapp" }
     ],
     "resume": {
       "label": "Resume",
       "file": "/resume.pdf"
+    },
+    "labels": {
+      "socialProfiles": "Social Profiles",
+      "quickLinks": "Quick Links",
+      "loading": "Loading...",
+      "moreOptions": "More options",
+      "present": "Present"
     }
   },
 
@@ -25,10 +32,15 @@
       "highlight": "UI Engineering"
     },
     "description": "Building responsive, accessible, and high-performance web interfaces using HTML, CSS, JavaScript, and React.",
-
+    "cta": {
+      "label": "My Projects",
+      "tooltipTitle": "Browse Portfolio",
+      "tooltipDesc": "Explore my collection of full-stack projects, creative designs, and technical solutions built with modern technologies."
+    },
     "navigation": [
       {
         "page": "about",
+        "label": "About",
         "description": "My journey & story",
         "route": "/about",
         "theme": "coral",
@@ -37,6 +49,7 @@
       },
       {
         "page": "skills",
+        "label": "Skills",
         "description": "Tech & expertise",
         "route": "/skills",
         "theme": "sky",
@@ -45,6 +58,7 @@
       },
       {
         "page": "projects",
+        "label": "Projects",
         "description": "Featured work",
         "route": "/portfolio",
         "theme": "violet",
@@ -53,6 +67,7 @@
       },
       {
         "page": "contact",
+        "label": "Contact",
         "description": "Let's connect",
         "route": "/contact",
         "theme": "emerald",
@@ -86,13 +101,16 @@
       "letter": "A",
       "theme": "coral"
     },
-
     "description": [
       "I’m a Front-end Developer with 6+ years of experience building scalable, accessible, and high-performance user interfaces.",
       "My work focuses on writing clean, maintainable UI code and translating complex Figma designs into production-ready components.",
       "I’ve worked closely with PMs, designers, and engineers to balance performance, accessibility, and visual precision."
     ],
-
+    "cvCta": {
+      "label": "Resume",
+      "tooltipTitle": "Download Portfolio PDF",
+      "tooltipDesc": "Provides a comprehensive version of my resume in a recruiter-friendly format, containing all key technical skills and contact details."
+    },
     "tabs": [
       {
         "id": "experience",
@@ -143,7 +161,10 @@
       "letter": "S",
       "theme": "sky"
     },
-
+    "labels": {
+      "tools": "Ecosystem Tools",
+      "craft": "The Craft"
+    },
     "levels": [
       {
         "label": "Advanced",
@@ -164,7 +185,6 @@
         "skills": [{ "name": "Angular", "percentage": 65 }]
       }
     ],
-
     "tools": [
       "VS Code",
       "Git / GitHub",
@@ -175,7 +195,6 @@
       "Figma",
       "Jira"
     ],
-
     "craft": [
       "Build responsive, accessible interfaces with clean UI systems",
       "Translate Figma into production UI with pixel precision",
@@ -189,20 +208,29 @@
       "letter": "P",
       "theme": "violet"
     },
-
     "cta": {
       "label": "View Live Project",
-      "arrow": "↗"
+      "arrow": "↗",
+      "tooltipTitle": "Launch Application",
+      "tooltipDesc": "Opens the live, hosted version of this project in a new tab for you to explore the features and user experience firsthand."
     },
-
+    "labels": {
+      "projectThumbnails": "Project thumbnails",
+      "scrollLeft": "Scroll thumbnails left",
+      "scrollRight": "Scroll thumbnails right",
+      "prevProject": "Previous project",
+      "nextProject": "Next project",
+      "moreTags": "More",
+      "connect": "Connect"
+    },
     "projects": [
       {
         "id": 1,
-        "title": "Docquity - Webinar Landing Page",
+        "title": "Bal Sakha",
         "description": "Developed a responsive webinar landing page as part of a front-end interview assignment",
         "tags": ["Angular", "TypeScript", "HTML5", "CSS3", "Figma"],
         "url": "https://docquity-webinar.netlify.app/",
-        "thumbnail": "https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&h=400&fit=crop",
+        "thumbnail": "src/assets/balsakha-thumbnail.png",
         "accent": "#d42fd4"
       },
       {
@@ -223,25 +251,43 @@
       "letter": "C",
       "theme": "emerald"
     },
-
+    "whatsapp": {
+      "label": "WhatsApp Me",
+      "hint": "Click to open chat instantly",
+      "description": "The fastest way to get a response. Usually active during IST business hours for quick brainstorming or project talk.",
+      "messageTemplate": "Hi Rajat, I visited your portfolio and would like to connect for a project."
+    },
     "form": {
-      "submitLabel": "Send Message",
+      "submitLabel": "Send Inquiry",
       "fields": {
         "name": { "label": "Name", "placeholder": "Your name" },
         "email": { "label": "Email", "placeholder": "your@email.com" },
         "message": {
           "label": "Message",
-          "placeholder": "Tell me about your project..."
+          "placeholder": "What can I help you with?"
         }
       }
     },
-
+    "prompts": {
+      "formal": "Looking for a formal proposal?",
+      "informal": "Need to brainstorm quickly?",
+      "switchToEmail": "Reach out via Email",
+      "switchToWhatsApp": "Switch to WhatsApp"
+    },
+    "labels": {
+      "connect": "Connect",
+      "socialProfiles": "Social Profiles",
+      "location": "Location",
+      "sendMail": "Send Mail",
+      "callNow": "Call Now",
+      "copy": "Copy",
+      "whatsAppShort": "WhatsApp"
+    },
     "info": [
-      { "label": "Email", "value": "hello@rajatgulati.com", "icon": "Mail" },
-      { "label": "Phone", "value": "+91 98765 43210", "icon": "Phone" },
+      { "label": "Email", "value": "rajat.gulati27@gmail.com", "icon": "Mail" },
+      { "label": "Phone", "value": "+91 9899321639", "icon": "Phone" },
       { "label": "Location", "value": "New Delhi, India", "icon": "MapPin" }
     ],
-
     "availability": {
       "title": "Available for freelance work",
       "description": "Currently taking on new projects. Let's discuss your ideas!"

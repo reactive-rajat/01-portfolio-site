@@ -17,7 +17,7 @@ function Skills() {
   if (loading) {
     return (
       <div className="min-h-screen grid place-items-center text-white">
-        Loading...
+        {content?.global?.labels?.loading || "Loading..."}
       </div>
     );
   }
@@ -74,7 +74,9 @@ function Skills() {
       <section className="space-y-4">
         <div className="flex items-center gap-3 text-foreground">
           <Wrench size={20} className="text-[hsl(var(--sky))]" />
-          <h3 className="text-xl font-bold tracking-tight">Ecosystem Tools</h3>
+          <h3 className="text-xl font-bold tracking-tight">
+            {skillsData.labels.tools}
+          </h3>
         </div>
         <div className="rounded-2xl border border-[hsl(var(--sky)/0.1)] bg-[hsl(var(--sky)/0.02)] backdrop-blur-sm hover:bg-[hsl(var(--sky)/0.05)] transition-colors group grid gap-3 p-6">
           <div className="flex flex-wrap gap-2">
@@ -95,7 +97,9 @@ function Skills() {
       <section className="space-y-4 pt-1">
         <div className="flex items-center gap-3 text-foreground">
           <Zap size={20} className="text-[hsl(var(--sky))]" />
-          <h3 className="text-xl font-bold tracking-tight">The Craft</h3>
+          <h3 className="text-xl font-bold tracking-tight">
+            {skillsData.labels.craft}
+          </h3>
         </div>
         <div className="rounded-2xl border border-[hsl(var(--sky)/0.1)] bg-[hsl(var(--sky)/0.02)] backdrop-blur-sm hover:bg-[hsl(var(--sky)/0.05)] transition-colors group grid gap-4 p-6">
           {craft.map(function (item, i) {

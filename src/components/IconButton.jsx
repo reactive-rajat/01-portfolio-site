@@ -2,19 +2,21 @@ import { useIsDesktop } from "../hooks/useIsDesktop";
 import { themes } from "../theme";
 
 const sizeStyles = {
-  sm: "w-10 h-10 rounded-xl",
-  lg: "w-16 h-16 rounded-2xl",
+  xs: "w-9 h-9 rounded-lg",
+  sm: "w-12 h-12 rounded-xl",
+  lg: "w-[56px] h-[56px] rounded-2xl",
 };
 
 const iconSizeStyles = {
+  xs: "w-4 h-4",
   sm: "w-5 h-5",
   lg: "w-6 h-6",
 };
 
 // Default styles for neutral since it's not in the main theme file
 const neutralStyles = {
-  base: "bg-secondary/50 border border-border/50 text-muted-foreground",
-  hover: "hover:bg-secondary hover:border-border hover:text-foreground",
+  base: "icon-btn-neutral",
+  hover: "", // Handled by global class
 };
 
 function IconButton(props) {

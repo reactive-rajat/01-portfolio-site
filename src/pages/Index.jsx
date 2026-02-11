@@ -5,17 +5,35 @@ import { useContent } from "../context/ContentContext";
 import { getIcon } from "../utils/iconMap";
 import CertificationBadge from "../components/CertificationBadge";
 import PrimaryButton from "../components/PrimaryButton";
-import { ArrowRight, MessageSquare } from "lucide-react";
-import Whatsapp from "../icons/icon_whatsapp.svg?react";
+import Icon from "../components/Icon";
+import {
+  MoreVertical,
+  ArrowRight,
+  Download,
+  MessageSquare,
+} from "lucide-react";
 
 function Index() {
   const [hoveredIndex, setHoveredIndex] = React.useState(null);
+  const [isSocialMenuOpen, setIsSocialMenuOpen] = React.useState(false);
+  const menuRef = React.useRef(null);
   const { content, loading } = useContent();
+
+  // Close menu when clicking outside
+  React.useEffect(() => {
+    function handleClickOutside(event) {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsSocialMenuOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   if (loading) {
     return (
       <div className="min-h-screen grid place-items-center text-white">
-        Loading...
+        {content?.global?.labels?.loading || "Loading..."}
       </div>
     );
   }
@@ -33,7 +51,7 @@ function Index() {
       <div className="max-w-7xl mx-auto grid relative z-10 min-h-[100dvh]  px-6 py-10 md:py-12 lg:py-0 lg:px-16">
         <div className="w-full flex flex-col lg:flex-row lg:items-center gap-16 lg:gap-10 lg:gap-15 page-enter">
           <div className="lg:w-1/2">
-            <div className="home-greeting animate-slide-up relative flex flex-wrap items-center gap-2.5 px-3 py-1.5 bg-white/[0.05] border border-white/10 rounded-full mb-6 lg:mb-0 w-fit backdrop-blur-md">
+            <div className="home-greeting animate-slide-up relative flex flex-wrap items-center gap-2.5 px-3 py-1.5 bg-black/[0.05] border border-white/10 rounded-full mb-6 lg:mb-0 w-fit backdrop-blur-md">
               <span className="flex h-2 w-2 relative">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
@@ -50,7 +68,9 @@ function Index() {
                 <span className="text-foreground text-8xl lg:text-9xl">
                   {home.name.first}
                 </span>
-                <span className="last-name text-5xl lg:text-6xl">{home.name.last}</span>
+                <span className="last-name text-5xl lg:text-6xl">
+                  {home.name.last}
+                </span>
               </h1>
             </div>
 
@@ -76,31 +96,85 @@ function Index() {
 
               <div className="mobile-sticky-bar">
                 <PrimaryButton
-                  href={`https://wa.me/${content.contact?.info?.find((i) => i.label === "Phone")?.value?.replace(/\D/g, "") || "919876543210"}`}
-                  theme={
-                    home.navigation.find((n) => n.page === "contact")?.theme ||
-                    "emerald"
-                  }
-                  containerClass="flex-1 lg:flex-none"
-                  icon={<Whatsapp className="w-4 h-4" />}
-                  tooltipTitle="Instant Connection"
-                  tooltipDesc="Opens a direct WhatsApp chat window to discuss project ideas or professional opportunities in real-time."
-                >
-                  Let's Connect
-                </PrimaryButton>
-                <PrimaryButton
                   href="/portfolio"
                   theme={
-                    home.navigation.find((n) => n.page === "portfolio")
-                      ?.theme || "violet"
+                    home.navigation.find((n) => n.page === "projects")?.theme ||
+                    "violet"
                   }
                   containerClass="flex-1 lg:flex-none"
                   icon={<ArrowRight className="w-4 h-4" />}
-                  tooltipTitle="Browse Portfolio"
-                  tooltipDesc="Explore my collection of full-stack projects, creative designs, and technical solutions built with modern technologies."
+                  tooltipTitle={home.cta.tooltipTitle}
+                  tooltipDesc={home.cta.tooltipDesc}
                 >
-                  My Projects
+                  {home.cta.label}
                 </PrimaryButton>
+
+                <div className="relative" ref={menuRef}>
+                  <IconButton
+                    icon={MoreVertical}
+                    theme="neutral"
+                    onClick={() => setIsSocialMenuOpen(!isSocialMenuOpen)}
+                    aria-label={global.labels.moreOptions}
+                    size="lg"
+                    className={
+                      isSocialMenuOpen ? "!bg-secondary !border-white/20" : ""
+                    }
+                  />
+
+                  {isSocialMenuOpen && (
+                    <div className="absolute bottom-full mb-3 right-0 lg:left-0 lg:right-auto min-w-[200px] bg-black/95 backdrop-blur-2xl border border-white/10 rounded-2xl p-4 shadow-[0_20px_50px_rgba(0,0,0,0.5)] animate-in fade-in slide-in-from-bottom-4 duration-300 z-[110]">
+                      <div className="flex flex-col gap-1">
+                        <div className="mb-2">
+                          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/30">
+                            {global.labels.quickLinks}
+                          </p>
+                        </div>
+                        <a
+                          href={global.resume.file}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-3 px-4 py-2 rounded-xl border border-white/6 lg:hover:border-red-500/15 bg-white/5 hover:!bg-red-300/10 transition-all group animate-in fade-in slide-in-from-right-2 duration-300 delay-75"
+                          onClick={() => setIsSocialMenuOpen(false)}
+                        >
+                          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-orange-500/10 text-orange-500 border border-orange-500/20 group-hover:scale-110 transition-transform">
+                            <Download size={18} />
+                          </div>
+                          <span className="text-[15px] font-semibold text-white/90 group-hover:text-white">
+                            {global.resume.label}
+                          </span>
+                        </a>
+
+                        <div className="h-px bg-white/5 my-2 mx-2" />
+
+                        <div className="mb-2">
+                          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/30">
+                            {global.labels.socialProfiles}
+                          </p>
+                        </div>
+                        <div className="grid grid-cols-3 gap-2 pb-2">
+                          {global.socialLinks.map((link, idx) => {
+                            const SocialIcon = getIcon(link.icon);
+                            return (
+                              <IconButton
+                                key={link.id}
+                                icon={SocialIcon}
+                                theme="neutral"
+                                href={link.url}
+                                aria-label={link.label}
+                                size="sm"
+                                className={`!w-12 !h-12 !rounded-xl !border-white/6 hover:!bg-white/10 animate-in fade-in zoom-in-75 duration-300`}
+                                style={{
+                                  animationDelay: `${150 + idx * 50}ms`,
+                                }}
+                                onClick={() => setIsSocialMenuOpen(false)}
+                              />
+                            );
+                          })}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
@@ -120,7 +194,7 @@ function Index() {
                     isDimmed = true;
                   }
                 }
-                const Icon = getIcon(item.icon);
+                const NavIcon = getIcon(item.icon);
 
                 return (
                   <div
@@ -136,12 +210,10 @@ function Index() {
                     <GlowCard
                       variant={item.theme}
                       letter={item.letter}
-                      title={
-                        item.page.charAt(0).toUpperCase() + item.page.slice(1)
-                      }
+                      title={item.label}
                       description={item.description}
                       to={item.route}
-                      icon={Icon}
+                      icon={NavIcon}
                       size={size}
                       isHovered={isHovered}
                       isDimmed={isDimmed}

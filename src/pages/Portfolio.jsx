@@ -36,7 +36,7 @@ function Portfolio() {
   if (loading) {
     return (
       <div className="min-h-screen grid place-items-center text-white">
-        Loading...
+        {content?.global?.labels?.loading || "Loading..."}
       </div>
     );
   }
@@ -76,9 +76,9 @@ function Portfolio() {
   const portfolioStrings = {
     ctaLabel: cta.label,
     ctaArrow: cta.arrow,
-    thumbsLabel: "Project thumbnails",
-    thumbLeftLabel: "Scroll thumbnails left",
-    thumbRightLabel: "Scroll thumbnails right",
+    thumbsLabel: portfolio.labels.projectThumbnails,
+    thumbLeftLabel: portfolio.labels.scrollLeft,
+    thumbRightLabel: portfolio.labels.scrollRight,
   };
 
   // Logic to find active project
@@ -138,7 +138,7 @@ function Portfolio() {
           }}
         />
 
-        <div className="relative z-10 grid lg:grid-cols-2 h-full">
+        <div className="relative z-10 grid lg:grid-cols-2 h-full min-h-[460px]">
           {/* Floating Navigation Arrows */}
           <button
             onClick={() => navigateProject(-1)}
@@ -149,7 +149,7 @@ function Portfolio() {
                   ? "none"
                   : `0 0 30px 2px ${activeProject.accent}44`,
             }}
-            aria-label="Previous project"
+            aria-label={portfolio.labels.prevProject}
           >
             <ChevronLeft className="w-6 h-6 group-hover/nav:-translate-x-0.5 transition-transform" />
           </button>
@@ -162,7 +162,7 @@ function Portfolio() {
                   ? "none"
                   : `0 0 30px 2px ${activeProject.accent}44`,
             }}
-            aria-label="Next project"
+            aria-label={portfolio.labels.nextProject}
           >
             <ChevronRight className="w-6 h-6 group-hover/nav:translate-x-0.5 transition-transform" />
           </button>
@@ -202,7 +202,13 @@ function Portfolio() {
             </div>
           </div>
 
-          <div className="relative group overflow-hidden bg-black/40 min-h-[300px] lg:min-h-full border-l border-white/5 rounded-tr-3xl rounded-br-3xl">
+          <div
+            className="relative group overflow-hidden rounded-3xl rounded-l-none isolate transition-all duration-500 bg-black/40 h-[300px] lg:min-h-full border-l border-white/5"
+            style={{
+              transform: "translateZ(0)",
+              WebkitMaskImage: "-webkit-radial-gradient(white, black)",
+            }}
+          >
             <img
               src={activeProject.thumbnail}
               alt={activeProject.title}
@@ -216,8 +222,8 @@ function Portfolio() {
               containerClass="absolute right-[1.6rem] bottom-[1.4rem] z-30"
               tooltipAlign="left"
               icon={portfolioStrings.ctaArrow}
-              tooltipTitle="Launch Application"
-              tooltipDesc="Opens the live, hosted version of this project in a new tab for you to explore the features and user experience firsthand."
+              tooltipTitle={cta.tooltipTitle}
+              tooltipDesc={cta.tooltipDesc}
             >
               {portfolioStrings.ctaLabel}
             </PrimaryButton>
@@ -243,7 +249,7 @@ function Portfolio() {
             className="snap-center shrink-0 w-[calc(100vw-3rem)] max-w-[400px] flex justify-center"
           >
             <div
-              className="portfolio-main-card h-full overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02] backdrop-blur-md flex flex-col"
+              className="portfolio-main-card h-full border border-white/10 bg-white/[0.02] backdrop-blur-md flex flex-col"
               style={{ "--accent": project.accent }}
             >
               <div className="relative h-56 sm:h-64 overflow-hidden shrink-0">
@@ -282,7 +288,7 @@ function Portfolio() {
                   ))}
                   {project.tags.length > 3 && (
                     <span className="text-[10px] text-white/30 self-center font-medium ml-1">
-                      + {project.tags.length - 3} More
+                      + {project.tags.length - 3} {portfolio.labels.moreTags}
                     </span>
                   )}
                 </div>
@@ -413,7 +419,7 @@ function Portfolio() {
         containerClass="flex-1"
         icon={<MessageSquare className="w-4 h-4" />}
       >
-        Connect
+        {portfolio.labels.connect}
       </PrimaryButton>
 
       <div className="flex gap-2">

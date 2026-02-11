@@ -28,8 +28,6 @@ const CertificationBadge = ({ name, issuer, date, url }) => {
         rel="noopener noreferrer"
         className="cert-badge group inline-flex"
       >
-        <div className="cert-shimmer" />
-
         {/* Icon Wrapper */}
         <div className="cert-icon-box flex-shrink-0">
           <MetaLogo className="w-5 h-5" />

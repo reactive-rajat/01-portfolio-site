@@ -1,7 +1,7 @@
 import React from "react";
 import { PageLayout } from "../components/PageLayout";
 import IconButton from "../components/IconButton";
-import { Download, Calendar } from "lucide-react";
+import { Download, Calendar, MoreVertical } from "lucide-react";
 import { useContent } from "../context/ContentContext";
 import { getIcon } from "../utils/iconMap";
 import PrimaryButton from "../components/PrimaryButton";
@@ -97,7 +97,9 @@ function TimelineItem(props) {
           </p>
           <p
             className={`${
-              percentage ? "text-sm leading-relaxed text-gray-400 mt-2 lg:mt-4" : ""
+              percentage
+                ? "text-sm leading-relaxed text-gray-400 mt-2 lg:mt-4"
+                : ""
             }`}
           >
             {percentage}
@@ -112,6 +114,19 @@ function About() {
   const { content, loading } = useContent();
   const [activeTab, setActiveTab] = React.useState("Experience");
   const [hoveredIndex, setHoveredIndex] = React.useState(null);
+  const [isSocialMenuOpen, setIsSocialMenuOpen] = React.useState(false);
+  const menuRef = React.useRef(null);
+
+  // Close menu when clicking outside
+  React.useEffect(() => {
+    function handleClickOutside(event) {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsSocialMenuOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   // Reset hovered state when tab changes
   React.useEffect(() => {
@@ -121,7 +136,7 @@ function About() {
   if (loading) {
     return (
       <div className="min-h-screen grid place-items-center text-white">
-        Loading...
+        {content?.global?.labels?.loading || "Loading..."}
       </div>
     );
   }
@@ -137,7 +152,7 @@ function About() {
     }
   }
 
-  const presentLabel = "Present";
+  const presentLabel = global.labels.present;
 
   const leftContent = (
     <div className="space-y-10">
@@ -153,24 +168,50 @@ function About() {
           target="_blank"
           containerClass="flex-1 lg:flex-none"
           icon={<Download size={18} />}
-          tooltipTitle="Download Portfolio PDF"
-          tooltipDesc="Provides a comprehensive version of my resume in a recruiter-friendly format, containing all key technical skills and contact details."
+          tooltipTitle={about.cvCta.tooltipTitle}
+          tooltipDesc={about.cvCta.tooltipDesc}
         >
-          {global.resume.label}
+          {about.cvCta.label}
         </PrimaryButton>
-        <div className="flex gap-3">
-          {global.socialLinks.map(function (link) {
-            const Icon = getIcon(link.icon);
-            return (
-              <IconButton
-                key={link.id}
-                icon={Icon}
-                theme="neutral"
-                href={link.url}
-                aria-label={link.label}
-              />
-            );
-          })}
+        <div className="relative" ref={menuRef}>
+          <IconButton
+            icon={MoreVertical}
+            theme="neutral"
+            onClick={() => setIsSocialMenuOpen(!isSocialMenuOpen)}
+            aria-label={global.labels.moreOptions}
+            size="lg"
+            className={isSocialMenuOpen ? "!bg-secondary !border-white/20" : ""}
+          />
+
+          {isSocialMenuOpen && (
+            <div className="absolute bottom-full mb-3 right-0 lg:left-0 lg:right-auto min-w-[200px] bg-black/95 backdrop-blur-2xl border border-white/10 rounded-2xl p-2 shadow-[0_20px_50px_rgba(0,0,0,0.5)] animate-in fade-in slide-in-from-bottom-4 duration-300 z-[110]">
+              <div className="flex flex-col gap-1">
+                <div className="px-3 py-2">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/30">
+                    {global.labels.socialProfiles}
+                  </p>
+                </div>
+                <div className="grid grid-cols-3 gap-2 px-2 pb-2">
+                  {global.socialLinks.map((link, idx) => {
+                    const SocialIcon = getIcon(link.icon);
+                    return (
+                      <IconButton
+                        key={link.id}
+                        icon={SocialIcon}
+                        theme="neutral"
+                        href={link.url}
+                        aria-label={link.label}
+                        size="sm"
+                        className={`!w-12 !h-12 !rounded-xl !border-white/6 hover:!bg-white/10 animate-in fade-in zoom-in-75 duration-300`}
+                        style={{ animationDelay: `${idx * 50}ms` }}
+                        onClick={() => setIsSocialMenuOpen(false)}
+                      />
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

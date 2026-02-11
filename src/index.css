@@ -601,7 +601,7 @@
   }
 
   .primary-btn {
-    @apply px-7 h-14 rounded-xl font-semibold text-[0.95rem] flex items-center justify-center gap-[0.6rem] text-foreground z-[3] transition-all whitespace-nowrap;
+    @apply relative overflow-hidden px-7 h-14 rounded-xl font-semibold text-[0.95rem] flex items-center justify-center gap-[0.6rem] text-foreground z-[3] transition-all whitespace-nowrap backdrop-blur-sm;
     transition-duration: 300ms;
     background: linear-gradient(130deg,
         color-mix(in srgb, var(--accent) 70%, transparent),
@@ -625,12 +625,88 @@
   }
 
   .primary-btn-icon {
-    @apply inline-flex items-center justify-center w-8 h-8 rounded-[0.5rem] bg-white/10 border border-white/20 transition-transform;
+    @apply inline-flex items-center justify-center w-8 h-8 rounded-full bg-white/10 border border-white/20 transition-transform;
     transition-duration: 250ms;
   }
 
   .primary-btn:hover .primary-btn-icon {
     transform: translateX(4px) translateY(-2px);
+  }
+
+  .btn-shine {
+    @apply absolute inset-0 -translate-x-full z-[1];
+    background: linear-gradient(90deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        rgba(255, 255, 255, 0.2),
+        rgba(255, 255, 255, 0.1),
+        transparent);
+    animation: btn-shine 4s infinite;
+  }
+
+  @keyframes btn-shine {
+    0% {
+      transform: translateX(-100%);
+    }
+
+    20% {
+      transform: translateX(100%);
+    }
+
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  /* Secondary Button Standard (Greyscale variant of Primary) */
+  .secondary-btn {
+    @apply relative overflow-hidden px-7 h-14 rounded-xl font-semibold text-[0.95rem] flex items-center justify-center gap-[0.6rem] text-white/90 z-[3] transition-all whitespace-nowrap backdrop-blur-md;
+    transition-duration: 300ms;
+    background: linear-gradient(130deg,
+        rgba(255, 255, 255, 0.12),
+        rgba(255, 255, 255, 0.05));
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow:
+      0 12px 30px -15px rgba(0, 0, 0, 0.5),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  }
+
+  .secondary-btn-icon {
+    @apply inline-flex items-center justify-center w-8 h-8 rounded-[0.5rem] bg-white/10 border border-white/20 transition-all;
+    transition-duration: 250ms;
+  }
+
+  .secondary-btn:hover {
+    @apply -translate-y-0.5 text-white;
+    background: linear-gradient(130deg,
+        rgba(255, 255, 255, 0.18),
+        rgba(255, 255, 255, 0.08));
+    border-color: rgba(255, 255, 255, 0.25);
+    box-shadow:
+      0 20px 40px -20px rgba(0, 0, 0, 0.6),
+      0 0 20px -5px rgba(255, 255, 255, 0.1);
+  }
+
+  .secondary-btn:hover .secondary-btn-icon {
+    transform: translateX(4px) translateY(-2px);
+    @apply bg-white/20 border-white/40;
+  }
+
+  .secondary-btn:active {
+    @apply scale-[0.98] blur-[0.2px];
+  }
+
+  /* Icon Button Standard (Neutral) */
+  .icon-btn-neutral {
+    @apply relative overflow-hidden bg-white/[0.05] border border-white/10 text-white/60 backdrop-blur-md transition-all duration-300;
+  }
+
+  .icon-btn-neutral:hover {
+    @apply bg-white/[0.12] border-white/30 text-white -translate-y-0.5 shadow-xl shadow-black/40;
+  }
+
+  .icon-btn-neutral:active {
+    @apply scale-95;
   }
 
   .cert-badge {

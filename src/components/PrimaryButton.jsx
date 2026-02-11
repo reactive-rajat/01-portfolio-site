@@ -18,17 +18,28 @@ function PrimaryButton(props) {
   const isPortfolioPage = location.pathname === "/portfolio";
 
   // Base classes for the button
-  const baseClasses = "primary-btn " + className;
+  const isSecondary = theme === "neutral";
+  const baseClasses =
+    (isSecondary ? "secondary-btn " : "primary-btn ") + className;
 
   const style = {};
-  if (theme && theme !== "neutral") {
+  if (theme && !isSecondary) {
     style["--accent"] = "hsl(var(--" + theme + "))";
   }
 
   const content = (
     <>
-      {children}
-      {Icon && <span className="primary-btn-icon">{Icon}</span>}
+      {!isSecondary && <div className="btn-shine" />}
+      <span className="relative z-[2] flex items-center justify-center gap-[0.85rem]">
+        {children}
+        {Icon && (
+          <span
+            className={isSecondary ? "secondary-btn-icon" : "primary-btn-icon"}
+          >
+            {Icon}
+          </span>
+        )}
+      </span>
     </>
   );
 

@@ -1,11 +1,21 @@
 import React from "react";
 import { PageLayout } from "../components/PageLayout";
 import IconButton from "../components/IconButton";
-import { Send, MessageCircle, ArrowRight, Mail } from "lucide-react";
+import {
+  Send,
+  MessageCircle,
+  ArrowRight,
+  Mail,
+  User,
+  Share2,
+  Copy,
+  Check,
+  Phone,
+} from "lucide-react";
 import { useContent } from "../context/ContentContext";
 import { getIcon } from "../utils/iconMap";
 import PrimaryButton from "../components/PrimaryButton";
-import Whatsapp from "../icons/icon_whatsapp.svg?react";
+import Icon from "../components/Icon";
 
 function Contact() {
   const { content, loading } = useContent();
@@ -17,11 +27,28 @@ function Contact() {
   });
 
   const [showForm, setShowForm] = React.useState(false);
+  const [copiedLabel, setCopiedLabel] = React.useState(null);
+  const [activeMobileMenu, setActiveMobileMenu] = React.useState(null); // 'Email' | 'Phone' | null
+
+  React.useEffect(() => {
+    if (activeMobileMenu) {
+      const timer = setTimeout(() => {
+        setActiveMobileMenu(null);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [activeMobileMenu]);
+
+  const handleCopy = (text, label) => {
+    navigator.clipboard.writeText(text);
+    setCopiedLabel(label);
+    setTimeout(() => setCopiedLabel(null), 2000);
+  };
 
   if (loading) {
     return (
       <div className="min-h-screen grid place-items-center text-white">
-        Loading...
+        {content?.global?.labels?.loading || "Loading..."}
       </div>
     );
   }
@@ -54,12 +81,11 @@ function Contact() {
             <>
               <div className="space-y-4">
                 <p className="text-white/50 max-w-lg leading-relaxed lg:mb-10 text-lg">
-                  The fastest way to get a response. Usually active during IST
-                  business hours for quick brainstorming or project talk.
+                  {contact.whatsapp.description}
                 </p>
               </div>
               <a
-                href={`https://wa.me/${info.find((i) => i.label === "Phone")?.value?.replace(/\D/g, "") || "919876543210"}?text=${encodeURIComponent("Hi Rajat, I visited your portfolio and would like to connect for a project.")}`}
+                href={`https://wa.me/${info.find((i) => i.label === "Phone")?.value?.replace(/\D/g, "") || "919876543210"}?text=${encodeURIComponent(contact.whatsapp.messageTemplate)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="whatsapp-btn group relative flex items-center justify-between gap-4 p-5 py-4 lg:p-6 rounded-3xl border border-green-500/20 bg-green-500/5 hover:bg-green-500/10 transition-all duration-500 overflow-hidden max-w-md shadow-2xl"
@@ -69,12 +95,14 @@ function Contact() {
 
                 <div className="flex items-center gap-5 relative z-10">
                   <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-green-500/20 text-green-500 shadow-[0_0_20px_-5px_rgba(34,197,94,0.5)] group-hover:scale-110 transition-transform">
-                    <Whatsapp className="w-7 h-7" />
+                    <Icon name="Whatsapp" className="w-7 h-7" />
                   </div>
                   <div>
-                    <p className="font-bold text-white text-xl">WhatsApp Me</p>
+                    <p className="font-bold text-white text-xl">
+                      {contact.whatsapp.label}
+                    </p>
                     <p className="text-sm text-green-500/60 font-medium tracking-wide">
-                      Click to open chat instantly
+                      {contact.whatsapp.hint}
                     </p>
                   </div>
                 </div>
@@ -89,8 +117,7 @@ function Contact() {
             <div className="animate-in fade-in slide-in-from-top-4 duration-500 space-y-8 mb-8">
               <div className="flex items-center justify-between">
                 <p className="text-white/50 max-w-lg leading-relaxed text-lg">
-                  The fastest way to get a response. Usually active during IST
-                  business hours for quick brainstorming or project talk.
+                  {contact.whatsapp.description}
                 </p>
               </div>
 
@@ -105,7 +132,7 @@ function Contact() {
                       htmlFor="name"
                       className="text-[10px] uppercase tracking-[0.2em] text-white/40 font-bold ml-1"
                     >
-                      Name
+                      {form.fields.name.label}
                     </label>
                     <input
                       id="name"
@@ -114,8 +141,8 @@ function Contact() {
                       required
                       value={formData.name}
                       onChange={handleInputChange}
-                      placeholder="Your name"
-                      className="form-field !bg-white/[0.03] !border-white/10 focus:!border-white/30"
+                      placeholder={form.fields.name.placeholder}
+                      className="form-field !bg-white/[0.03] !border-white/10 focus:!border-[hsl(var(--emerald)/0.4)] focus:!ring-[hsl(var(--emerald)/0.2)]"
                     />
                   </div>
                   <div className="space-y-2">
@@ -123,7 +150,7 @@ function Contact() {
                       htmlFor="email"
                       className="text-[10px] uppercase tracking-[0.2em] text-white/40 font-bold ml-1"
                     >
-                      Email
+                      {form.fields.email.label}
                     </label>
                     <input
                       id="email"
@@ -132,8 +159,8 @@ function Contact() {
                       required
                       value={formData.email}
                       onChange={handleInputChange}
-                      placeholder="your@email.com"
-                      className="form-field !bg-white/[0.03] !border-white/10 focus:!border-white/30"
+                      placeholder={form.fields.email.placeholder}
+                      className="form-field !bg-white/[0.03] !border-white/10 focus:!border-[hsl(var(--emerald)/0.4)] focus:!ring-[hsl(var(--emerald)/0.2)]"
                     />
                   </div>
                 </div>
@@ -143,7 +170,7 @@ function Contact() {
                     htmlFor="message"
                     className="text-[10px] uppercase tracking-[0.2em] text-white/40 font-bold ml-1"
                   >
-                    Message
+                    {form.fields.message.label}
                   </label>
                   <textarea
                     id="message"
@@ -152,8 +179,8 @@ function Contact() {
                     rows={4}
                     value={formData.message}
                     onChange={handleInputChange}
-                    placeholder="What can I help you with?"
-                    className="form-field !bg-white/[0.03] !border-white/10 focus:!border-white/30 resize-none"
+                    placeholder={form.fields.message.placeholder}
+                    className="form-field !bg-white/[0.03] !border-white/10 focus:!border-[hsl(var(--emerald)/0.4)] focus:!ring-[hsl(var(--emerald)/0.2)] resize-none"
                   />
                 </div>
 
@@ -164,7 +191,7 @@ function Contact() {
                     className="w-full lg:w-fit lg:px-12"
                     icon={<Send className="w-4 h-4" />}
                   >
-                    Send Inquiry
+                    {form.submitLabel}
                   </PrimaryButton>
                 </div>
               </form>
@@ -175,51 +202,103 @@ function Contact() {
           <div className="pt-2">
             {!showForm ? (
               <p className="text-white/30 text-sm">
-                Looking for a formal proposal?{" "}
+                {contact.prompts.formal}{" "}
                 <button
                   onClick={() => setShowForm(true)}
                   className="text-[hsl(var(--emerald))] hover:underline font-medium"
                 >
-                  Reach out via Email
+                  {contact.prompts.switchToEmail}
                 </button>
               </p>
             ) : (
               <p className="text-white/30 text-sm">
-                Need to brainstorm quickly?{" "}
+                {contact.prompts.informal}{" "}
                 <button
                   onClick={() => setShowForm(false)}
                   className="text-[hsl(var(--emerald))] hover:underline font-medium"
                 >
-                  Switch to WhatsApp
+                  {contact.prompts.switchToWhatsApp}
                 </button>
               </p>
             )}
           </div>
 
-          <div className="mobile-sticky-bar lg:hidden px-4 flex gap-3">
+          <div className="mobile-sticky-bar lg:hidden px-4 flex gap-3 pb-8">
             <PrimaryButton
-              href={`https://wa.me/${info.find((i) => i.label === "Phone")?.value?.replace(/\D/g, "") || "919876543210"}?text=${encodeURIComponent("Hi Rajat, I visited your portfolio and would like to connect for a project.")}`}
+              href={`https://wa.me/${info.find((i) => i.label === "Phone")?.value?.replace(/\D/g, "") || "919876543210"}?text=${encodeURIComponent(contact.whatsapp.messageTemplate)}`}
               target="_blank"
-              onClick={() => setShowForm(false)}
+              onClick={() => {
+                setShowForm(false);
+                setActiveMobileMenu(null);
+              }}
               theme="emerald"
               containerClass="flex-1"
-              className="!h-12 !px-4"
-              icon={<Whatsapp className="w-4 h-4" />}
+              className="!h-14 !px-4"
+              icon={
+                <Icon
+                  name="Whatsapp"
+                  className="w-5 h-5 transition-transform group-hover:scale-110"
+                />
+              }
             >
-              Say Hi on WhatsApp
+              {contact.labels.whatsAppShort}
             </PrimaryButton>
 
-            <button
-              onClick={() => setShowForm(!showForm)}
-              className="flex items-center gap-3 px-4 h-12 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-all"
-            >
-              <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-white/10">
-                <Mail className="w-4 h-4" />
-              </div>
-              <span className="text-sm font-bold whitespace-nowrap">
-                Email
-              </span>
-            </button>
+            {["Email", "Phone"].map((type) => {
+              const item = info.find((i) => i.label === type);
+              const IconComp = type === "Email" ? Mail : Phone;
+              const href =
+                type === "Email"
+                  ? `mailto:${item?.value}`
+                  : `tel:${item?.value?.replace(/\D/g, "")}`;
+              const isOpen = activeMobileMenu === type;
+
+              return (
+                <div key={type} className="relative">
+                  {isOpen && (
+                    <>
+                      <div
+                        className="fixed inset-0 z-[60]"
+                        onClick={() => setActiveMobileMenu(null)}
+                      />
+                      <div className="absolute bottom-full right-0 mb-4 bg-[#0a0a0a]/90 backdrop-blur-xl border border-white/10 rounded-2xl p-2 shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex flex-col gap-1 min-w-[200px] z-[70] animate-in fade-in slide-in-from-bottom-2 duration-300">
+                        <a
+                          href={href}
+                          className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 text-sm font-medium transition-all active:scale-95 group/item"
+                          onClick={() => setActiveMobileMenu(null)}
+                        >
+                          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[hsl(var(--emerald)/0.15)] text-[hsl(var(--emerald))] group-hover/item:bg-[hsl(var(--emerald)/0.25)] transition-colors">
+                            <ArrowRight size={16} />
+                          </div>
+                          {type === "Email"
+                            ? contact.labels.sendMail
+                            : contact.labels.callNow}
+                        </a>
+                        <button
+                          onClick={() => {
+                            handleCopy(item?.value, type);
+                            setActiveMobileMenu(null);
+                          }}
+                          className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 text-sm font-medium transition-all active:scale-95 group/item text-white/70"
+                        >
+                          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/5 text-white/40 group-hover/item:text-white transition-colors">
+                            <Copy size={16} />
+                          </div>
+                          {contact.labels.copy} {type}
+                        </button>
+                      </div>
+                    </>
+                  )}
+                  <IconButton
+                    icon={IconComp}
+                    theme="neutral"
+                    size="sm"
+                    className={`!h-14 !w-14 !rounded-xl transition-all duration-300 ${isOpen ? "!bg-white/10 !border-white/20" : ""}`}
+                    onClick={() => setActiveMobileMenu(isOpen ? null : type)}
+                  />
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
@@ -228,88 +307,159 @@ function Contact() {
 
   // Right Content
   const rightContent = (
-    <div className="space-y-6 mt-6 lg:mt-0">
-      <div className="glass-panel !p-5">
-        <h3 className="text-xs uppercase tracking-[0.2em] text-white/30 font-bold mb-4">
-          Connect Info
-        </h3>
-
-        <div className="grid gap-1">
-          {info.map(function (item) {
-            const Icon = getIcon(item.icon);
-            const isLocation = item.label === "Location";
-            let href = undefined;
-            if (item.label === "Phone")
-              href = `tel:${item.value.replace(/\D/g, "")}`;
-            if (item.label === "Email") href = `mailto:${item.value}`;
-
-            const badgeContent = (
-              <>
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white/5 border border-white/10 text-white/40 group-hover:text-[hsl(var(--emerald))] group-hover:border-[hsl(var(--emerald)/0.3)] group-hover:bg-[hsl(var(--emerald)/0.1)] transition-all">
-                  <Icon size={16} />
-                </div>
-                <div className="min-w-0">
-                  <p className="text-[14px] text-white/90 font-medium truncate">
-                    {item.value}
-                  </p>
-                </div>
-              </>
-            );
-
-            if (isLocation) {
-              return (
-                <div key={item.label} className="flex items-center gap-3 p-2">
-                  {badgeContent}
-                </div>
-              );
-            }
-
-            return (
-              <a
-                key={item.label}
-                href={href}
-                className="flex items-center gap-3 p-2 rounded-xl border border-transparent hover:bg-white/[0.03] transition-colors group"
-              >
-                {badgeContent}
-              </a>
-            );
-          })}
+    <div className="space-y-8 mt-6 mb-10 lg:my-0">
+      <section className="space-y-4">
+        <div className="flex items-center gap-3 text-foreground">
+          <User size={20} className="text-[hsl(var(--emerald))]" />
+          <h3 className="text-xl font-bold tracking-tight">
+            {contact.labels.connect}
+          </h3>
         </div>
-      </div>
 
-      <div className="glass-panel !p-5">
-        <h3 className="text-xs uppercase tracking-[0.2em] text-white/30 font-bold mb-4">
-          Follow Me
-        </h3>
+        <div className="rounded-2xl border border-[hsl(var(--emerald)/0.1)] bg-[hsl(var(--emerald)/0.02)] backdrop-blur-sm p-1  lg:p-3 shadow-xl shadow-black/20">
+          <div className="flex flex-col gap-1">
+            {/* Contact Details */}
+            <div className="p-2 lg:pr-4 pl-0">
+              {info
+                .filter((i) => i.label !== "Location")
+                .map(function (item) {
+                  const Icon = getIcon(item.icon);
+                  let href = undefined;
+                  if (item.label === "Phone")
+                    href = `tel:${item.value.replace(/\D/g, "")}`;
+                  if (item.label === "Email") href = `mailto:${item.value}`;
 
-        <div className="flex gap-3">
-          {global.socialLinks.map(function (item) {
-            const Icon = getIcon(item.icon);
-            return (
-              <IconButton
-                key={item.label}
-                icon={Icon}
-                theme="emerald"
-                href={item.url}
-                aria-label={item.label}
-                size="sm"
-              />
-            );
-          })}
+                  const content = (
+                    <div className="flex items-center gap-3 lg:gap-4 w-full min-w-0">
+                      <IconButton
+                        icon={Icon}
+                        theme="neutral"
+                        size="xs"
+                        className="shrink-0 pointer-events-none lg:w-12 lg:h-12 lg:rounded-xl"
+                      />
+                      <div className="min-w-0 pr-2 lg:pr-4">
+                        <p className="text-[14px] text-white/90 font-medium truncate">
+                          {item.value}
+                        </p>
+                      </div>
+                    </div>
+                  );
+
+                  return (
+                    <div
+                      key={item.label}
+                      className="flex items-center justify-between gap-2 lg:gap-4 min-w-0"
+                    >
+                      {/* Desktop Link: Entire row clickable */}
+                      <a
+                        href={href}
+                        className="hidden lg:flex flex-1 items-center justify-between p-3 rounded-xl hover:bg-green-500/10 border border-transparent hover:border-white/5 transition-all group/row min-w-0"
+                      >
+                        {content}
+                        <ArrowRight
+                          size={22}
+                          className="text-white/30 group-hover/row:text-[hsl(var(--emerald))] group-hover/row:translate-x-1 transition-all"
+                        />
+                      </a>
+
+                      {/* Mobile Container: Non-clickable row */}
+                      <div className="lg:hidden flex-1 flex items-center p-2 min-w-0">
+                        {content}
+                      </div>
+
+                      <div className="flex items-center gap-2 lg:gap-5 shrink-0 pr-1 lg:pr-0">
+                        {/* Arrow Action Button (Mobile Only) */}
+                        <IconButton
+                          icon={ArrowRight}
+                          href={href}
+                          theme="neutral"
+                          size="xs"
+                          className="lg:hidden !bg-white/5 !border-white/10"
+                        />
+
+                        {/* Copy Button */}
+                        <IconButton
+                          icon={copiedLabel === item.label ? Check : Copy}
+                          theme="neutral"
+                          size="xs"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            handleCopy(item.value, item.label);
+                          }}
+                          className={`!rounded-xl transition-all duration-300 lg:w-12 lg:h-12 ${
+                            copiedLabel === item.label
+                              ? "!bg-[hsl(var(--emerald)/0.2)] !text-[hsl(var(--emerald))] !border-[hsl(var(--emerald)/0.4)]"
+                              : "!bg-white/5 !border-white/10 text-white/40 hover:!text-white hover:!bg-white/10"
+                          }`}
+                        />
+                      </div>
+                    </div>
+                  );
+                })}
+            </div>
+
+            {/* Divider */}
+            <div className="h-px bg-white/5 mx-4 my-2" />
+
+            {/* Bottom Row: Socials & Location */}
+            <div className="grid lg:grid-cols-2 gap-4 p-4 pt-2">
+              {/* Social Links Column */}
+              <div className="space-y-4">
+                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/20 px-1">
+                  {contact.labels.socialProfiles}
+                </p>
+                <div className="flex flex-wrap gap-4">
+                  {global.socialLinks.map(function (item) {
+                    const Icon = getIcon(item.icon);
+                    return (
+                      <IconButton
+                        key={item.label}
+                        icon={Icon}
+                        theme="emerald"
+                        href={item.url}
+                        aria-label={item.label}
+                        size="sm"
+                        className="hover:scale-110"
+                      />
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Location Column */}
+              <div className="space-y-4">
+                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/20 px-1">
+                  {contact.labels.location}
+                </p>
+                {info
+                  .filter((i) => i.label === "Location")
+                  .map(function (item) {
+                    const Icon = getIcon(item.icon);
+                    return (
+                      <div
+                        key={item.label}
+                        className="flex items-center gap-3 px-1"
+                      >
+                        <IconButton
+                          icon={Icon}
+                          theme="neutral"
+                          size="xs"
+                          className="shrink-0 pointer-events-none lg:w-12 lg:h-12 lg:rounded-xl"
+                        />
+                        <div className="min-w-0 pr-4">
+                          <p className="text-[14px] text-white/90 font-medium truncate">
+                            {item.value}
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  })}
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-
-      <div className="glass-panel !p-5 border border-white/5 bg-white/[0.02]">
-        <div className="flex items-center gap-3">
-          <span className="relative flex h-2.5 w-2.5">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[hsl(var(--violet))] opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[hsl(var(--violet))]"></span>
-          </span>
-          <span className="text-sm text-white/90 font-medium">
-            {availability.title}
-          </span>
-        </div>
-      </div>
+      </section>
     </div>
   );
 
