@@ -47,7 +47,7 @@ function Index() {
       <div className="fixed inset-0 grid-bg opacity-30 pointer-events-none" />
 
       {/* Global Header / Role Switcher */}
-      <header className="fixed top-0 left-0 right-0 z-[100] px-6 py-4 lg:px-16 flex justify-end pointer-events-none">
+      <header className="fixed top-2 left-0 right-0 z-[100] px-6 py-4 lg:px-16 flex justify-center pointer-events-none">
         <div className="pointer-events-auto scale-90 lg:scale-100 origin-right">
           <RoleSwitcher />
         </div>
@@ -72,18 +72,18 @@ function Index() {
               </p>
             </div>
 
-            <div className="relative mb-4 lg:mb-8">
+            <div className="relative mb-4 lg:mb-6">
               <h1 className="type-hero">
-                <span className="text-foreground text-8xl lg:text-9xl">
+                <span className="text-foreground text-8xl lg:text-[7.25rem]">
                   {home.name.first}
                 </span>
-                <span className="last-name text-5xl lg:text-6xl">
+                <span className="last-name text-5xl">
                   {home.name.last}
                 </span>
               </h1>
             </div>
 
-            <h2 className="home-subtitle text-xl lg:text-2xl text-white/90 mt-12 lg:mt-6 mb-3 lg:mb-4 font-medium leading-tight">
+            <h2 className="home-subtitle text-xl lg:text-xl text-white/90 mt-12 lg:mt-0 mb-3 lg:mb-4">
               {home.subtitle.intro}
               <span className="block text-shimmer text-3xl font-bold mt-1">
                 {home.subtitle.highlight}
@@ -94,12 +94,19 @@ function Index() {
               {home.description}
             </p>
 
-            <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-2">
               {home.certifications && (
-                <div className="flex gap-3 animate-slide-up [animation-delay:400ms] opacity-0 [animation-fill-mode:forwards] mb-0 w-[calc(100svw-3rem)] lg:w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar">
-                  {home.certifications.map((cert) => (
-                    <CertificationBadge key={cert.id} {...cert} />
-                  ))}
+                <div className="relative overflow-hidden max-w-[calc(100svw-3rem)] lg:max-w-[calc(50svw-3rem)] mask-carousel mt-2 mb-2 animate-slide-up [animation-delay:400ms] opacity-0 [animation-fill-mode:forwards]">
+                  <div className="animate-infinite-scroll flex gap-3 py-2">
+                    {/* Duplicate items for seamless transition */}
+                    {[
+                      ...home.certifications,
+                      ...home.certifications,
+                      ...home.certifications,
+                    ].map((cert, idx) => (
+                      <CertificationBadge key={`${cert.id}-${idx}`} {...cert} />
+                    ))}
+                  </div>
                 </div>
               )}
 

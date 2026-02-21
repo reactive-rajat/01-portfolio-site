@@ -122,6 +122,7 @@ function Skills() {
       themeName={meta.theme}
       title={meta.title}
       letter={meta.letter}
+      icon={meta.icon}
       left={leftContent}
       right={rightContent}
     />

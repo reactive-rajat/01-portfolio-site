@@ -139,7 +139,7 @@
   }
 
   .type-hero .last-name {
-    @apply block font-normal tracking-[0.2em] uppercase text-white/40 -mt-2;
+    @apply block font-normal text-[2.75rem] tracking-[1.3rem] uppercase text-white/40 -mt-2;
     font-family: var(--font-mono, monospace);
   }
 
@@ -788,6 +788,39 @@
     .tooltip-panel {
       display: none !important;
     }
+  }
+
+  .animate-infinite-scroll {
+    display: flex;
+    width: max-content;
+    animation: infinite-scroll 30s linear infinite;
+  }
+
+  .animate-infinite-scroll:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes infinite-scroll {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .mask-carousel {
+    mask-image: linear-gradient(to right,
+        transparent,
+        black 10%,
+        black 90%,
+        transparent);
+    -webkit-mask-image: linear-gradient(to right,
+        transparent,
+        black 10%,
+        black 90%,
+        transparent);
   }
 
   /* Alignment Variants */

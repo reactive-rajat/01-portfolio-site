@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import IconButton from "./IconButton";
 import { themes } from "../theme";
 
@@ -59,27 +59,36 @@ export function GlowCard(props) {
           boxShadow: boxShadowValue,
         }}
       >
-        <span
+        <div
           className={
-            "absolute -right-4 -bottom-8 " +
-            "text-[8rem] sm:text-[10rem] md:text-[14rem] font-black leading-none " +
+            "absolute -right-8 top-2 " +
             "select-none pointer-events-none " +
-            "transition-all duration-700 ease-out " +
+            "transition-all duration-300 ease-out " +
+            "mix-blend-screen " +
             styles.letterColor
           }
+          style={{
+            filter: isHovered ? "drop-shadow(0 0 40px currentColor)" : "none",
+            opacity: isHovered ? 0.7 : 0.3,
+            transform: isHovered
+              ? "scale(1.15) rotate(-4deg) translateY(-4px)"
+              : "scale(1) rotate(0deg) translateY(0)",
+          }}
         >
-          {letter}
-        </span>
+          {Icon && <Icon className="w-[10rem] h-auto" strokeWidth={0.7} />}
+        </div>
 
-        <div className="flex justify-between items-center overflow-hidden">
+        <IconButton
+          icon={ArrowRight}
+          theme={variant}
+          className={
+            "absolute bottom-0 right-0 !rounded-tr-none !rounded-bl-none !rounded-tl-3xl border-t-0 border-r-0 z-20 " +
+            "opacity-0 scale-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-300"
+          }
+        />
+
+        <div className="relative overflow-hidden mb-4">
           <IconButton icon={Icon} theme={variant} isNavCard={true} />
-          <ArrowLeft
-            className={
-              "w-6 h-6 " +
-              styles.text +
-              " rotate-180 opacity-0 scale-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-300"
-            }
-          />
         </div>
 
         <div className="relative z-10">

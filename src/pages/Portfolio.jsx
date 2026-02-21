@@ -49,7 +49,25 @@ function Portfolio() {
   }
 
   const { portfolio, global, contact } = content;
-  const { meta, cta, projects } = portfolio;
+  const { meta, projects } = portfolio;
+
+  // Safe fallbacks for missing data
+  const cta = portfolio.cta || {
+    label: "Explore Project",
+    arrow: "↗",
+    tooltipTitle: "Production Build",
+    tooltipDesc: "View the live application or case study.",
+  };
+
+  const labels = portfolio.labels || {
+    projectThumbnails: "Project Previews",
+    scrollLeft: "Scroll left",
+    scrollRight: "Scroll right",
+    prevProject: "Previous",
+    nextProject: "Next",
+    moreTags: "More",
+    connect: "Connect",
+  };
 
   const handleScroll = () => {
     const container = carouselRef.current;
@@ -83,9 +101,9 @@ function Portfolio() {
   const portfolioStrings = {
     ctaLabel: cta.label,
     ctaArrow: cta.arrow,
-    thumbsLabel: portfolio.labels.projectThumbnails,
-    thumbLeftLabel: portfolio.labels.scrollLeft,
-    thumbRightLabel: portfolio.labels.scrollRight,
+    thumbsLabel: labels.projectThumbnails,
+    thumbLeftLabel: labels.scrollLeft,
+    thumbRightLabel: labels.scrollRight,
   };
 
   // Logic to find active project
@@ -156,7 +174,7 @@ function Portfolio() {
                   ? "none"
                   : `0 0 30px 2px ${activeProject.accent}44`,
             }}
-            aria-label={portfolio.labels.prevProject}
+            aria-label={labels.prevProject}
           >
             <ChevronLeft className="w-6 h-6 group-hover/nav:-translate-x-0.5 transition-transform" />
           </button>
@@ -169,7 +187,7 @@ function Portfolio() {
                   ? "none"
                   : `0 0 30px 2px ${activeProject.accent}44`,
             }}
-            aria-label={portfolio.labels.nextProject}
+            aria-label={labels.nextProject}
           >
             <ChevronRight className="w-6 h-6 group-hover/nav:translate-x-0.5 transition-transform" />
           </button>
@@ -295,7 +313,7 @@ function Portfolio() {
                   ))}
                   {project.tags.length > 3 && (
                     <span className="text-[10px] text-white/30 self-center font-medium ml-1">
-                      + {project.tags.length - 3} {portfolio.labels.moreTags}
+                      + {project.tags.length - 3} {labels.moreTags}
                     </span>
                   )}
                 </div>
@@ -426,7 +444,7 @@ function Portfolio() {
         containerClass="flex-1"
         icon={<MessageSquare className="w-4 h-4" />}
       >
-        {portfolio.labels.connect}
+        {labels.connect}
       </PrimaryButton>
 
       <div className="flex gap-2">
@@ -451,6 +469,7 @@ function Portfolio() {
       themeName={meta.theme}
       title={meta.title}
       letter={meta.letter}
+      icon={meta.icon}
       headerContent={footerContent}
     >
       {mainContent}

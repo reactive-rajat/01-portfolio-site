@@ -1,7 +1,7 @@
 import React from "react";
 import { ArrowUpRight } from "lucide-react";
-import { useLocation } from "react-router-dom";
 import { useIsDesktop } from "../hooks/useIsDesktop";
+import { getIcon } from "../utils/iconMap";
 
 const MetaLogo = ({ className }) => (
   <svg
@@ -17,8 +17,9 @@ const MetaLogo = ({ className }) => (
   </svg>
 );
 
-const CertificationBadge = ({ name, issuer, date, url }) => {
+const CertificationBadge = ({ name, issuer, date, url, icon }) => {
   const isDesktop = useIsDesktop();
+  const IconComponent = icon ? getIcon(icon) : null;
 
   return (
     <div className={(isDesktop ? "tooltip-wrapper " : "") + "relative"}>
@@ -30,7 +31,11 @@ const CertificationBadge = ({ name, issuer, date, url }) => {
       >
         {/* Icon Wrapper */}
         <div className="cert-icon-box flex-shrink-0">
-          <MetaLogo className="w-5 h-5" />
+          {IconComponent ? (
+            <IconComponent className="w-5 h-5" />
+          ) : (
+            <MetaLogo className="w-5 h-5" />
+          )}
         </div>
 
         {/* Content */}

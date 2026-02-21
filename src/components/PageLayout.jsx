@@ -3,10 +3,13 @@ import { ArrowLeft } from "lucide-react";
 import { themes } from "../theme";
 import RoleSwitcher from "./RoleSwitcher";
 
+import { getIcon } from "../utils/iconMap";
+
 export function PageLayout(props) {
   const themeName = props.themeName;
   const title = props.title;
   const letter = props.letter;
+  const icon = props.icon;
   const children = props.children;
   const left = props.left;
   const right = props.right;
@@ -27,6 +30,8 @@ export function PageLayout(props) {
     }
   }
 
+  const BackgroundIcon = icon ? getIcon(icon) : null;
+
   // Helper for mouse enter
   function handleMouseEnter(e) {
     e.currentTarget.style.boxShadow = "0 0 25px 2px var(--hover-glow)";
@@ -44,7 +49,7 @@ export function PageLayout(props) {
       <div className="fixed inset-0 grid-bg opacity-50 pointer-events-none" />
 
       {/* Global Role Switcher */}
-      <div className="fixed top-0 left-0 right-0 z-[100] px-6 py-4 lg:px-16 flex justify-end pointer-events-none">
+      <div className="fixed top-2 left-0 right-0 z-[100] px-6 py-4 lg:px-16 flex justify-center pointer-events-none">
         <div className="pointer-events-auto scale-90 lg:scale-100 origin-right">
           <RoleSwitcher />
         </div>
@@ -174,16 +179,22 @@ export function PageLayout(props) {
             </>
           )}
 
-          <div className="fixed right-0 -top-[100px] pointer-events-none select-none">
-            <span
-              className={
-                "page-letter text-[18rem] md:text-[30rem] font-black leading-none opacity-[0.03] " +
-                styles.text
-              }
-              style={{ opacity: 0.05 }}
-            >
-              {letter}
-            </span>
+          <div className="fixed w-[400px] h-[400px] right-[-6%] -top-[18%] pointer-events-none select-none mix-blend-screen opacity-[0.07]">
+            {BackgroundIcon ? (
+              <BackgroundIcon
+                className={"w-full h-full " + styles.text}
+                strokeWidth={0.6}
+              />
+            ) : (
+              <span
+                className={
+                  "page-letter text-[18rem] md:text-[30rem] font-black leading-none " +
+                  styles.text
+                }
+              >
+                {letter}
+              </span>
+            )}
           </div>
         </div>
       </div>
