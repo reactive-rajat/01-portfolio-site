@@ -111,7 +111,8 @@
   }
 
   .glass-panel {
-    @apply p-6 rounded-2xl border border-[hsl(240_8%_20%/0.5)] backdrop-blur-xl;
+    @apply p-6 rounded-2xl border backdrop-blur-xl;
+    border-color: hsl(240 8% 20% / 0.5);
     background: linear-gradient(135deg,
         hsl(240 10% 12% / 0.8),
         hsl(240 10% 8% / 0.6));
@@ -122,7 +123,8 @@
   }
 
   .primary-button {
-    @apply w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-[hsl(var(--violet))] to-[hsl(var(--violet-dark))] text-white font-semibold flex items-center justify-center gap-2 hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg shadow-[hsl(var(--violet)/0.3)];
+    @apply w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-[hsl(var(--violet))] to-[hsl(var(--violet-dark))] text-white font-semibold flex items-center justify-center gap-2 hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] transition-all;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05), 0 0 20px hsl(var(--violet)/0.3);
   }
 
   .portfolio-main-card {
@@ -181,6 +183,21 @@
     @apply text-[0.85rem] leading-[1.4] tracking-wide;
   }
 
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .tab-dot {
+    @apply absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-orange-500;
+    box-shadow: 0 0 8px rgba(249, 115, 22, 0.8);
+  }
+
+
   @media (min-width: 1024px) and (max-height: 820px) {
     .type-hero {
       font-size: clamp(2.75rem, 6vw, 5.25rem);
@@ -194,9 +211,6 @@
       padding-top: 2rem;
       padding-bottom: 2rem;
       align-items: start;
-    }
-
-    .page-shell {
       @apply pb-[140px] lg:pb-0;
     }
 
@@ -543,7 +557,13 @@
   }
 
   .portfolio-thumb-nav {
-    @apply w-[2.6rem] h-[2.6rem] rounded-full border border-[hsl(240_8%_25%/0.6)] bg-[hsl(240_10%_8%/0.7)] text-foreground inline-flex items-center justify-center transition-all duration-200 hover:-translate-y-0.5 hover:border-[hsl(240_8%_35%/0.9)] max-lg:hidden;
+    @apply w-[2.6rem] h-[2.6rem] rounded-full border text-foreground inline-flex items-center justify-center transition-all duration-200 hover:-translate-y-0.5 max-lg:hidden;
+    border-color: hsl(240 8% 25% / 0.6);
+    background-color: hsl(240 10% 8% / 0.7);
+  }
+
+  .portfolio-thumb-nav:hover {
+    border-color: hsl(240 8% 35% / 0.9);
   }
 
   .portfolio-thumbs {
@@ -714,7 +734,8 @@
   }
 
   .cert-badge:hover {
-    @apply border-[hsl(195_95%_60%/0.4)] bg-white/[0.07] -translate-y-0.5 shadow-[0_10px_20px_-10px_hsl(195_95%_60%/0.2)];
+    @apply border-[hsl(195_95%_60%/0.4)] bg-white/[0.07] -translate-y-0.5;
+    box-shadow: 0 10px 20px -10px hsl(195 95% 60% / 0.2);
   }
 
   .cert-icon-box {

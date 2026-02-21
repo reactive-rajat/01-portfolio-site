@@ -13,6 +13,8 @@ import {
   MessageSquare,
 } from "lucide-react";
 
+import RoleSwitcher from "../components/RoleSwitcher";
+
 function Index() {
   const [hoveredIndex, setHoveredIndex] = React.useState(null);
   const [isSocialMenuOpen, setIsSocialMenuOpen] = React.useState(false);
@@ -43,6 +45,13 @@ function Index() {
   return (
     <main className="min-h-[100svh] animated-gradient-bg noise-overlay lg:pb-0 pb-[80px]">
       <div className="fixed inset-0 grid-bg opacity-30 pointer-events-none" />
+
+      {/* Global Header / Role Switcher */}
+      <header className="fixed top-0 left-0 right-0 z-[100] px-6 py-4 lg:px-16 flex justify-end pointer-events-none">
+        <div className="pointer-events-auto scale-90 lg:scale-100 origin-right">
+          <RoleSwitcher />
+        </div>
+      </header>
 
       <div className="orb orb-coral w-[170px] h-[170px] lg:w-96 lg:h-96 -top-18 -left-8 lg:-top-48 lg:-left-48 animate-float-slow" />
       <div className="orb orb-violet w-[200px] h-[200px] lg:w-[500px] lg:h-[500px] top-1/3 -right-12 lg:-right-64 lg:-top-1/4 animate-float-delayed" />

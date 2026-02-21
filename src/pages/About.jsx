@@ -1,7 +1,17 @@
 import React from "react";
 import { PageLayout } from "../components/PageLayout";
 import IconButton from "../components/IconButton";
-import { Download, Calendar, MoreVertical } from "lucide-react";
+import {
+  Download,
+  Calendar,
+  MoreVertical,
+  ArrowUpRight,
+  ChevronRight,
+  ChevronDown,
+  ChevronUp,
+  CheckCircle2,
+  GraduationCap,
+} from "lucide-react";
 import { useContent } from "../context/ContentContext";
 import { getIcon } from "../utils/iconMap";
 import PrimaryButton from "../components/PrimaryButton";
@@ -11,14 +21,19 @@ function SimpleCard(props) {
   const children = props.children;
   const className = props.className || "";
   const isActive = props.isActive;
+  const isClickable = props.isClickable;
+  const onClick = props.onClick;
 
   return (
     <div
+      onClick={onClick}
       className={
-        `simple-card transition-all duration-300 hover:-translate-y-1 ${
+        `simple-card transition-all duration-500 ${
+          isClickable ? "cursor-pointer group/card" : ""
+        } ${
           isActive
             ? "border-orange-500/50 bg-orange-500/5 shadow-[0_0_30px_-10px_rgba(249,115,22,0.3)] translate-y-[-4px]"
-            : "border-white/10 hover:border-orange-500/30 hover:shadow-[0_0_20px_-10px_rgba(249,115,22,0.1)]"
+            : "border-white/10 hover:border-orange-500/30 hover:shadow-[0_0_20px_-10px_rgba(249,115,22,0.1)] hover:-translate-y-1"
         } ` + className
       }
     >
@@ -32,15 +47,18 @@ function TimelineItem(props) {
   const subtitle = props.subtitle;
   const date = props.date;
   const percentage = props.percentage;
+  const points = props.points;
+  const link = props.link;
   const isLast = props.isLast;
   const ItemIcon = props.itemIcon;
   const CalendarIcon = props.calendarIcon;
   const isActive = props.isActive;
   const onMouseEnter = props.onMouseEnter;
+  const [isExpanded, setIsExpanded] = React.useState(false);
 
   return (
     <div
-      className="group relative flex gap-4 lg:gap-6 pb-8 lg:pb-12 last:pb-0"
+      className="group relative flex gap-4 lg:gap-6 pb-5 last:pb-0"
       onMouseEnter={onMouseEnter}
     >
       <div className="flex flex-col items-center">
@@ -64,46 +82,121 @@ function TimelineItem(props) {
         )}
       </div>
       <div className="w-full pt-1">
-        <SimpleCard className="p-4 lg:p-6" isActive={isActive}>
-          <div className="flex flex-col-reverse justify-between gap-3 lg:gap-5 sm:flex-row sm:items-start">
-            <h3
-              className={`text-lg lg:text-xl font-semibold transition-colors duration-300 ${
-                isActive
-                  ? "text-[hsl(var(--coral))]"
-                  : "text-white group-hover:text-[hsl(var(--coral))]/80"
-              }`}
-            >
-              {title}
-            </h3>
+        <SimpleCard
+          className="p-4 lg:p-6 relative group/card overflow-hidden"
+          isActive={isActive}
+          isClickable={!!link}
+          onClick={
+            link
+              ? () => window.open(link, "_blank", "noopener,noreferrer")
+              : undefined
+          }
+        >
+          {/* Prominent Link Indicator */}
+          {link && (
             <div
-              className={`inline-flex w-fit items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium border transition-colors duration-300 ${
+              className={`absolute top-0 right-0 z-10 flex h-10 w-11 items-center justify-center rounded-[16px] rounded-bl-[24px] rounded-tl-none rounded-br-none border border-r-0 border-t-0 transition-all duration-500 ${
                 isActive
-                  ? "bg-orange-500/10 text-orange-200 border-orange-500/20"
-                  : "bg-white/5 text-gray-300 border-white/5 group-hover:border-white/10"
+                  ? "border-orange-500/50 bg-orange-500/20 text-orange-400"
+                  : "border-white/10 bg-white/5 text-gray-500 group-hover/card:border-orange-500/40 group-hover/card:bg-orange-500/10 group-hover/card:text-orange-400 group-hover/card:scale-110 group-hover/card:rotate-12"
               }`}
             >
-              <CalendarIcon
-                size={12}
-                className={`transition-colors duration-300 ${
-                  isActive ? "text-[hsl(var(--coral))]" : "text-gray-400"
-                }`}
-              />
-              <span className="text-nowrap">{date}</span>
+              <ArrowUpRight size={20} />
             </div>
-          </div>
+          )}
+
+          <h3
+            className={`text-lg lg:text-xl font-semibold transition-colors duration-300 pr-10 ${
+              isActive
+                ? "text-[hsl(var(--coral))]"
+                : "text-white group-hover/card:text-[hsl(var(--coral))]/80"
+            }`}
+          >
+            {title}
+          </h3>
 
           <p className="text-sm font-medium text-gray-400 mt-2 lg:mt-2 transition-colors duration-300 group-hover:text-gray-300">
             {subtitle}
           </p>
-          <p
-            className={`${
-              percentage
-                ? "text-sm leading-relaxed text-gray-400 mt-2 lg:mt-4"
-                : ""
-            }`}
-          >
-            {percentage}
-          </p>
+
+          {/* Information Row: Date & Percentage */}
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-3 mt-4">
+            <div className="inline-flex items-center gap-2.5 text-xs italic font-medium transition-colors duration-300">
+              <CalendarIcon
+                size={16}
+                className={`transition-colors duration-300 ${isActive ? "text-[hsl(var(--coral))]" : ""}`}
+              />
+              <span
+                className={`mt-[1px] ${isActive ? "text-[hsl(var(--coral))]" : ""}`}
+              >
+                {date}
+              </span>
+            </div>
+
+            {percentage && (
+              <div className="inline-flex items-center gap-2.5 text-xs italic font-medium transition-colors duration-300">
+                <GraduationCap
+                  size={16}
+                  className={`transition-colors duration-300 ${isActive ? "text-orange-500/70" : "text-gray-500"}`}
+                />
+                <span
+                  className={`${isActive ? "text-[hsl(var(--coral))]" : ""} mt-[1px]`}
+                >
+                  {percentage}
+                </span>
+              </div>
+            )}
+          </div>
+
+          {/* List highlights: hidden by default */}
+          {points && points.length > 0 && (
+            <div className="mt-5">
+              {isExpanded && (
+                <ul className="space-y-2.5 mb-6 pt-4 border-t border-white/5 animate-in fade-in slide-in-from-top-2 duration-300">
+                  {points.map((point, i) => (
+                    <li
+                      key={i}
+                      className="flex items-start gap-3 text-[14px] leading-relaxed text-gray-400"
+                    >
+                      <div className="mt-1 flex-shrink-0">
+                        <CheckCircle2
+                          size={16}
+                          className={
+                            isActive ? "text-orange-500/70" : "text-white/20"
+                          }
+                        />
+                      </div>
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsExpanded(!isExpanded);
+                }}
+                className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border text-[11px] font-bold uppercase tracking-wider transition-all duration-300 ${
+                  isActive
+                    ? "bg-orange-500/10 border-orange-500/20 text-orange-400 hover:bg-orange-500/20"
+                    : "bg-white/5 border-white/10 text-gray-400 hover:text-white hover:border-white/20"
+                }`}
+              >
+                {isExpanded ? (
+                  <>
+                    <span>Hide Highlights</span>
+                    <ChevronUp size={14} />
+                  </>
+                ) : (
+                  <>
+                    <span>View Highlights</span>
+                    <ChevronDown size={14} />
+                  </>
+                )}
+              </button>
+            </div>
+          )}
         </SimpleCard>
       </div>
     </div>
@@ -111,11 +204,18 @@ function TimelineItem(props) {
 }
 
 function About() {
-  const { content, loading } = useContent();
-  const [activeTab, setActiveTab] = React.useState("Experience");
+  const { content, loading, activeRole } = useContent();
+  const [activeTab, setActiveTab] = React.useState(null);
   const [hoveredIndex, setHoveredIndex] = React.useState(null);
   const [isSocialMenuOpen, setIsSocialMenuOpen] = React.useState(false);
   const menuRef = React.useRef(null);
+
+  // Reset activeTab when role changes or content loads
+  React.useEffect(() => {
+    if (content?.about?.tabs?.length > 0) {
+      setActiveTab(content.about.tabs[0].label);
+    }
+  }, [activeRole, content]);
 
   // Close menu when clicking outside
   React.useEffect(() => {
@@ -133,7 +233,7 @@ function About() {
     setHoveredIndex(null);
   }, [activeTab]);
 
-  if (loading) {
+  if (loading || !activeTab) {
     return (
       <div className="min-h-screen grid place-items-center text-white">
         {content?.global?.labels?.loading || "Loading..."}
@@ -219,15 +319,12 @@ function About() {
 
   const rightContent = (
     <div className="relative mt-6 lg:mt-0">
-      <div className="sticky top-4 z-10 mb-8 flex justify-center lg:justify-center">
-        <div className="flex w-full lg:w-auto gap-1 rounded-full border border-white/10 bg-black/60 p-1.5 backdrop-blur-xl shadow-xl">
+      <div className="sticky top-4 z-20 mb-10 flex justify-center">
+        <div className="grid w-full lg:w-2/3 grid-cols-[repeat(auto-fit,minmax(0,1fr))] justify-center gap-1.5 p-1 px-2 rounded-2xl border border-white/10 bg-black/60 backdrop-blur-xl shadow-2xl">
           {tabs.map(function (tab) {
             const TabIcon = getIcon(tab.icon);
-            let activeClass = "text-gray-400 hover:text-white";
-            if (activeTab === tab.label) {
-              activeClass =
-                "bg-orange-500/10 text-orange-500 ring-1 ring-orange-500/20";
-            }
+            const isActive = activeTab === tab.label;
+
             return (
               <button
                 key={tab.label}
@@ -235,12 +332,33 @@ function About() {
                   setActiveTab(tab.label);
                 }}
                 className={
-                  "flex w-full lg:w-auto lg:min-w-[160px] items-center justify-center gap-2 rounded-full px-5 py-2 text-sm font-medium transition-all duration-300 " +
-                  activeClass
+                  "relative group flex flex-col items-center justify-center gap-1.5 rounded-xl transition-all duration-300 " +
+                  "min-w-[85px] py-2 px-1 " +
+                  (isActive
+                    ? "text-orange-500 scale-105"
+                    : "text-gray-400 hover:text-white")
                 }
               >
-                {TabIcon && <TabIcon size={16} />}
-                {tab.label}
+                <div
+                  className={
+                    "flex items-center justify-center w-10 h-10 rounded-lg transition-colors " +
+                    (isActive ? "bg-orange-500/10" : "bg-white/5")
+                  }
+                >
+                  {TabIcon && (
+                    <TabIcon
+                      size={18}
+                      className={
+                        "transition-transform " +
+                        (isActive ? "scale-110" : "group-hover:scale-110")
+                      }
+                    />
+                  )}
+                </div>
+                <span className="text-[11px] font-semibold uppercase tracking-wider">
+                  {tab.label}
+                </span>
+                {isActive && <div className="tab-dot" />}
               </button>
             );
           })}
@@ -267,6 +385,8 @@ function About() {
                   subtitle={item.subtitle}
                   date={date}
                   percentage={item.percentage}
+                  points={item.points}
+                  link={item.link}
                   description={activeTabData.timelineDescription}
                   isLast={isLast}
                   itemIcon={ItemIcon}

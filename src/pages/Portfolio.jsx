@@ -15,10 +15,17 @@ import { useIsDesktop } from "../hooks/useIsDesktop";
 import { getIcon } from "../utils/iconMap";
 
 function Portfolio() {
-  const { content, loading } = useContent();
-  const [activeId, setActiveId] = React.useState(1);
+  const { content, loading, activeRole } = useContent();
+  const [activeId, setActiveId] = React.useState(null);
   const isDesktop = useIsDesktop();
   const carouselRef = useRef(null);
+
+  // Reset activeId when role changes or content loads
+  useEffect(() => {
+    if (content?.portfolio?.projects?.length > 0) {
+      setActiveId(content.portfolio.projects[0].id);
+    }
+  }, [activeRole, content]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -33,7 +40,7 @@ function Portfolio() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [content, activeId]);
 
-  if (loading) {
+  if (loading || activeId === null) {
     return (
       <div className="min-h-screen grid place-items-center text-white">
         {content?.global?.labels?.loading || "Loading..."}
@@ -123,7 +130,7 @@ function Portfolio() {
   // Desktop Left Content / Main Carousel Container for Mobile
   const mainContent = isDesktop ? (
     <div style={{ "--accent": activeProject.accent }}>
-      <div className="portfolio-main-card min-h-[400px]">
+      <div className="portfolio-main-card h-[490px]">
         <div
           className="absolute -top-24 -left-24 w-80 h-80 rounded-full blur-[100px] opacity-20 pointer-events-none transition-colors duration-500"
           style={{ background: activeProject.accent }}
