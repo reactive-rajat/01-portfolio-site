@@ -133,12 +133,12 @@
           "intro": "Hi, I'm"
         },
         "subtitle": {
-          "intro": "Bridging design and code as a",
-          "highlight": "Senior Product Engineer"
+          "highlight": "Senior UI Engineer — Design Systems & React",
+          "intro": "I design scalable interfaces and build them in React."
         },
-        "description": "The union of high-fidelity UX design and scalable React architecture. I build digital products at 3x speed using AI-native workflows, combining 6+ years of Design System expertise with advanced frontend logic.",
+        "description": "With 6+ years of experience across UI design and frontend engineering, I build structured component systems, translate Figma into clean production-ready React, and create scalable design systems that help teams ship faster.\n\nI focus on clarity, accessibility, performance, and maintainable architecture.",
         "cta": {
-          "label": "Explore Hybrid Work",
+          "label": "View Case Studies",
           "tooltipTitle": "End-to-End Delivery",
           "tooltipDesc": "See how I combine Figma, React, and tools like Cursor to ship pixel-perfect, accessible applications."
         },
@@ -205,7 +205,53 @@
             "icon": "Figma",
             "url": "#"
           }
-        ]
+        ],
+        "whatIDeliver": {
+          "title": "What I Deliver",
+          "blocks": [
+            {
+              "title": "Design Systems That Scale",
+              "description": "I build structured component libraries and token systems that reduce design–dev friction and speed up releases.",
+              "icon": "Layers"
+            },
+            {
+              "title": "Production-Ready Frontend",
+              "description": "Clean React architecture, reusable components, TypeScript safety, and maintainable codebases.",
+              "icon": "Code"
+            },
+            {
+              "title": "Design-to-Code Efficiency",
+              "description": "From Figma to deployed UI with precision. I reduce handoff gaps and improve shipping speed using AI-assisted workflows.",
+              "icon": "Zap"
+            }
+          ]
+        },
+        "experience": {
+          "title": "Experience",
+          "subtitle": "Worked across ResumeHelp, ResumeNerd, LiveCareer, Zety and other large-scale products with millions of users.",
+          "items": [
+            {
+              "title": "Independent Product Engineer",
+              "subtitle": "AI-driven product experiments and system development",
+              "date": "May 2025 – Present"
+            },
+            {
+              "title": "Senior UI Engineer & Designer",
+              "subtitle": "Bold Technology Systems",
+              "date": "2021 – 2025"
+            }
+          ]
+        },
+        "differentiator": {
+          "title": "Why I’m Different",
+          "points": [
+            "Most designers don’t understand code deeply.",
+            "Most engineers don’t understand design systems deeply.",
+            "I work in the overlap.",
+            "I don’t just build screens.",
+            "I build structured UI foundations that teams scale on."
+          ]
+        }
       },
       "about": {
         "meta": {

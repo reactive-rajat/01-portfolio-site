@@ -36,7 +36,7 @@ export const ContentProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    if (data && !data.roles[activeRole]) {
+    if (data && data.roles && !data.roles[activeRole]) {
       console.warn(
         `Invalid role "${activeRole}" found in localStorage. Resetting to default.`,
       );
@@ -51,46 +51,107 @@ export const ContentProvider = ({ children }) => {
   const content = useMemo(() => {
     if (!data) return null;
 
-    // Use a safe fallback for roleData
+    // Support both old schema (data.roles) and direct role access
+    const rolesMap = data.roles || data;
     const roleData =
-      data.roles[activeRole] ||
-      data.roles["product_engineer_hybrid"] ||
-      Object.values(data.roles)[0];
-    const common = data.common;
+      rolesMap[activeRole] ||
+      rolesMap["product_engineer_hybrid"] ||
+      Object.values(rolesMap)[0];
 
     if (!roleData) return null;
+
+    // The new JSON schema has no "common" block — all data lives in the role.
+    // Build a unified content object with safe fallbacks.
+    const globalDefaults = {
+      socialLinks: [],
+      resume: { label: "Download Resume", file: "#" },
+      labels: {
+        socialProfiles: "Social Profiles",
+        quickLinks: "Quick Links",
+        loading: "Loading...",
+        moreOptions: "More options",
+        present: "Present",
+      },
+    };
+
+    const contactDefaults = {
+      info: [],
+      whatsapp: { label: "WhatsApp Me", hint: "Quickest way to connect" },
+      form: {
+        fields: {
+          name: { label: "Name", placeholder: "Your full name" },
+          email: { label: "Email", placeholder: "your@email.com" },
+          message: {
+            label: "Message",
+            placeholder: "Tell me about the opportunity...",
+          },
+        },
+      },
+      prompts: {
+        formal: "Interested in discussing a formal opportunity?",
+        informal: "Want to connect quickly?",
+        switchToEmail: "Email Instead",
+        switchToWhatsApp: "Switch to WhatsApp",
+      },
+      labels: {
+        connect: "Connect",
+        socialProfiles: "Social Profiles",
+        location: "Location",
+        sendMail: "Send Mail",
+        callNow: "Call Now",
+        copy: "Copy",
+        whatsAppShort: "WhatsApp",
+      },
+    };
+
+    // Merge role-level global on top of defaults
+    const mergedGlobal = {
+      ...globalDefaults,
+      ...roleData.global,
+      labels: {
+        ...globalDefaults.labels,
+        ...roleData.global?.labels,
+      },
+    };
+
+    // Merge role-level contact on top of defaults
+    const mergedContact = {
+      ...contactDefaults,
+      ...roleData.contact,
+      whatsapp: {
+        ...contactDefaults.whatsapp,
+        ...roleData.contact?.whatsapp,
+      },
+      form: {
+        ...contactDefaults.form,
+        ...roleData.contact?.form,
+        fields: {
+          ...contactDefaults.form.fields,
+          ...roleData.contact?.form?.fields,
+        },
+      },
+      labels: {
+        ...contactDefaults.labels,
+        ...roleData.contact?.labels,
+      },
+    };
+
+    // Name — support in-role home.name or hardcoded fallback
+    const name = roleData.home?.name || { first: "Rajat", last: "Gulati" };
 
     return {
       ...roleData,
       home: {
         ...roleData.home,
-        name: data.common.name,
+        name,
       },
-      global: {
-        ...common.global,
-        ...roleData.global,
-        labels: {
-          ...common.global.labels,
-          ...roleData.global?.labels,
-        },
+      global: mergedGlobal,
+      contact: mergedContact,
+      notFound: roleData.notFound || {
+        title: "404",
+        message: "Oops! Page not found",
+        linkLabel: "Return to Home",
       },
-      contact: {
-        ...common.contact,
-        ...roleData.contact,
-        whatsapp: {
-          ...common.contact.whatsapp,
-          ...roleData.contact?.whatsapp,
-        },
-        form: {
-          ...common.contact.form,
-          ...roleData.contact?.form,
-          fields: {
-            ...common.contact.form.fields,
-            ...roleData.contact?.form?.fields,
-          },
-        },
-      },
-      notFound: data.common.notFound,
     };
   }, [data, activeRole]);
 
@@ -100,7 +161,7 @@ export const ContentProvider = ({ children }) => {
     error,
     activeRole,
     setActiveRole,
-    roles: data ? Object.keys(data.roles) : [],
+    roles: data ? Object.keys(data.roles || data) : [],
   };
 
   return (

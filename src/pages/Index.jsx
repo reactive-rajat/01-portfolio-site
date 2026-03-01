@@ -72,114 +72,57 @@ function Index() {
               </h1>
             </div>
 
-            <h2 className="home-subtitle text-xl lg:text-xl text-white/90 mt-12 lg:mt-0 mb-3 lg:mb-4">
-              {home.subtitle.intro}
-              <span className="block text-shimmer text-3xl font-bold mt-1">
+            <h2 className="home-subtitle text-xl lg:text-xl text-white/90 mt-12 lg:mt-0 mb-6 lg:mb-8">
+              <span className="block text-shimmer text-3xl lg:text-4xl font-bold mt-1 mb-2">
                 {home.subtitle.highlight}
               </span>
+              {home.subtitle.intro}
             </h2>
 
-            <p className="text-md lg:text-lg text-muted-foreground/80 mb-6 max-w-lg leading-relaxed">
-              {home.description}
-            </p>
+            <div className="text-md lg:text-lg text-muted-foreground/80 mb-6 max-w-lg leading-relaxed space-y-4">
+              {home.description
+                .split("\n")
+                .filter((p) => p.trim())
+                .map((para, i) => (
+                  <p key={i}>{para}</p>
+                ))}
+            </div>
 
-            <div className="flex flex-col gap-2">
-              {home.certifications && (
-                <div className="relative overflow-hidden max-w-[calc(100svw-3rem)] lg:max-w-[calc(50svw-3rem)] mask-carousel mt-2 mb-2 animate-slide-up [animation-delay:400ms] opacity-0 [animation-fill-mode:forwards]">
-                  <div className="animate-infinite-scroll flex gap-3 py-2">
-                    {/* Duplicate items for seamless transition */}
-                    {[
-                      ...home.certifications,
-                      ...home.certifications,
-                      ...home.certifications,
-                    ].map((cert, idx) => (
-                      <CertificationBadge key={`${cert.id}-${idx}`} {...cert} />
-                    ))}
-                  </div>
-                </div>
-              )}
+            <div className="flex flex-col gap-8 mt-2">
+              <div className="flex items-center gap-3 text-sm text-white/50 font-medium flex-wrap">
+                <span>Design Systems</span>
+                <span className="w-1 h-1 rounded-full bg-white/20" />
+                <span>React</span>
+                <span className="w-1 h-1 rounded-full bg-white/20" />
+                <span>TypeScript</span>
+                <span className="w-1 h-1 rounded-full bg-white/20" />
+                <span>Accessibility</span>
+                <span className="w-1 h-1 rounded-full bg-white/20" />
+                <span>AI-Assisted Workflows</span>
+              </div>
 
-              <div className="mobile-sticky-bar">
+              <div className="flex flex-col sm:flex-row gap-4 mb-4">
                 <PrimaryButton
-                  href="/portfolio"
+                  href={home.cta.route || "/portfolio"}
                   theme={
-                    home.navigation.find((n) => n.page === "projects")?.theme ||
-                    "violet"
+                    home.navigation?.find((n) => n.page === "projects")
+                      ?.theme || "violet"
                   }
                   containerClass="flex-1 lg:flex-none"
                   icon={<ArrowRight className="w-4 h-4" />}
-                  tooltipTitle={home.cta.tooltipTitle}
-                  tooltipDesc={home.cta.tooltipDesc}
                 >
                   {home.cta.label}
                 </PrimaryButton>
 
-                <div className="relative" ref={menuRef}>
-                  <IconButton
-                    icon={MoreVertical}
-                    theme="neutral"
-                    onClick={() => setIsSocialMenuOpen(!isSocialMenuOpen)}
-                    aria-label={global.labels.moreOptions}
-                    size="lg"
-                    className={
-                      isSocialMenuOpen ? "!bg-secondary !border-white/20" : ""
-                    }
-                  />
-
-                  {isSocialMenuOpen && (
-                    <div className="absolute bottom-full mb-3 right-0 lg:left-0 lg:right-auto min-w-[250px] bg-black/95 backdrop-blur-2xl border border-white/10 rounded-2xl p-4 shadow-[0_20px_50px_rgba(0,0,0,0.5)] animate-in fade-in slide-in-from-bottom-4 duration-300 z-[110]">
-                      <div className="flex flex-col gap-1">
-                        <div className="mb-2">
-                          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/30">
-                            {global.labels.quickLinks}
-                          </p>
-                        </div>
-                        <a
-                          href={global.resume.file}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-3 px-4 py-2 rounded-xl border border-white/6 lg:hover:border-red-500/15 bg-white/5 hover:!bg-red-300/10 transition-all group animate-in fade-in slide-in-from-right-2 duration-300 delay-75"
-                          onClick={() => setIsSocialMenuOpen(false)}
-                        >
-                          <div className="flex h-9 w-9 aspect-square items-center justify-center rounded-lg bg-orange-500/10 text-orange-500 border border-orange-500/20 group-hover:scale-110 transition-transform">
-                            <Download size={18} />
-                          </div>
-                          <span className="text-[15px] font-semibold text-white/90 group-hover:text-white">
-                            {global.resume.label}
-                          </span>
-                        </a>
-
-                        <div className="h-px bg-white/5 my-2 mx-2" />
-
-                        <div className="mb-2">
-                          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/30">
-                            {global.labels.socialProfiles}
-                          </p>
-                        </div>
-                        <div className="grid grid-cols-[repeat(auto-fill,minmax(48px,1fr))] gap-2 pb-2">
-                          {global.socialLinks.map((link, idx) => {
-                            const SocialIcon = getIcon(link.icon);
-                            return (
-                              <IconButton
-                                key={link.id}
-                                icon={SocialIcon}
-                                theme="neutral"
-                                href={link.url}
-                                aria-label={link.label}
-                                size="sm"
-                                className={`!w-12 !h-12 !rounded-xl !border-white/6 hover:!bg-white/10 animate-in fade-in zoom-in-75 duration-300`}
-                                style={{
-                                  animationDelay: `${150 + idx * 50}ms`,
-                                }}
-                                onClick={() => setIsSocialMenuOpen(false)}
-                              />
-                            );
-                          })}
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
+                <a
+                  href={global.resume?.file || "#"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 bg-white/5 hover:bg-white/10 transition-all font-semibold text-white/90 hover:text-white"
+                >
+                  <Download size={18} />
+                  <span>Download Resume</span>
+                </a>
               </div>
             </div>
           </div>
@@ -230,6 +173,87 @@ function Index() {
           </div>
         </div>
       </div>
+
+      {/* What I Deliver */}
+      {home.whatIDeliver && (
+        <div className="max-w-7xl mx-auto px-6 py-20 lg:px-16 relative z-10">
+          <h3 className="text-3xl font-bold mb-10 text-white">
+            {home.whatIDeliver.title}
+          </h3>
+          <div className="grid md:grid-cols-3 gap-6">
+            {home.whatIDeliver.blocks.map((block, i) => {
+              const BlockIcon = getIcon(block.icon);
+              return (
+                <div
+                  key={i}
+                  className="p-6 rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-sm hover:bg-white/[0.04] transition-colors"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-violet-500/10 flex items-center justify-center text-violet-400 mb-6">
+                    {BlockIcon && <BlockIcon size={24} />}
+                  </div>
+                  <h4 className="text-xl font-semibold text-white mb-3">
+                    {block.title}
+                  </h4>
+                  <p className="text-gray-400 leading-relaxed">
+                    {block.description}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* Experience Snapshot */}
+      {home.experience && (
+        <div className="max-w-7xl mx-auto px-6 py-20 lg:px-16 relative z-10 border-t border-white/5">
+          <div className="max-w-3xl">
+            <h3 className="text-3xl font-bold mb-4 text-white">
+              {home.experience.title}
+            </h3>
+            <p className="text-gray-400 text-lg mb-12">
+              {home.experience.subtitle}
+            </p>
+
+            <div className="space-y-8">
+              {home.experience.items.map((item, i) => (
+                <div
+                  key={i}
+                  className="flex flex-col md:flex-row md:items-baseline justify-between gap-2 border-l-2 border-emerald-500/30 pl-6"
+                >
+                  <div>
+                    <h4 className="text-xl font-semibold text-white">
+                      {item.title}
+                    </h4>
+                    <p className="text-emerald-400 mt-1">{item.subtitle}</p>
+                  </div>
+                  <span className="text-sm font-medium text-gray-500 shrink-0">
+                    {item.date}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Differentiator */}
+      {home.differentiator && (
+        <div className="max-w-7xl mx-auto px-6 py-20 lg:px-16 relative z-10 border-t border-white/5 mb-20">
+          <h3 className="text-3xl font-bold mb-10 text-white">
+            {home.differentiator.title}
+          </h3>
+          <div className="p-8 md:p-12 rounded-3xl bg-gradient-to-br from-sky-500/10 to-transparent border border-sky-500/20">
+            <div className="space-y-6 text-xl md:text-2xl text-white/90 font-medium leading-relaxed max-w-4xl">
+              {home.differentiator.points.map((pt, i) => (
+                <p key={i} className={i >= 3 ? "text-sky-400 font-bold" : ""}>
+                  {pt}
+                </p>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
