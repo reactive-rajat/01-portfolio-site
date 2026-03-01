@@ -13,8 +13,6 @@ import {
   MessageSquare,
 } from "lucide-react";
 
-import RoleSwitcher from "../components/RoleSwitcher";
-
 function Index() {
   const [hoveredIndex, setHoveredIndex] = React.useState(null);
   const [isSocialMenuOpen, setIsSocialMenuOpen] = React.useState(false);
@@ -46,13 +44,6 @@ function Index() {
     <main className="min-h-[100svh] animated-gradient-bg noise-overlay lg:pb-0 pb-[80px]">
       <div className="fixed inset-0 grid-bg opacity-30 pointer-events-none" />
 
-      {/* Global Header / Role Switcher */}
-      <header className="fixed top-2 left-0 right-0 z-[100] px-6 py-4 lg:px-16 flex justify-center pointer-events-none">
-        <div className="pointer-events-auto scale-90 lg:scale-100 origin-right">
-          <RoleSwitcher />
-        </div>
-      </header>
-
       <div className="orb orb-coral w-[170px] h-[170px] lg:w-96 lg:h-96 -top-18 -left-8 lg:-top-48 lg:-left-48 animate-float-slow" />
       <div className="orb orb-violet w-[200px] h-[200px] lg:w-[500px] lg:h-[500px] top-1/3 -right-12 lg:-right-64 lg:-top-1/4 animate-float-delayed" />
       <div className="orb orb-sky w-[200px] h-[200px] lg:w-72 lg:h-72 bottom-0 right-30 lg:bottom-1/4 lg:left-1/4 animate-float-delayed-2" />
@@ -65,7 +56,7 @@ function Index() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
               </span>
-              <p className="text-xs font-mono tracking-[0.2em] uppercase text-green-500/80">
+              <p className="text-xs font-mono tracking-[0.15em] uppercase text-green-500/80">
                 {home.greeting.label}
                 <span className="mx-2 text-white/30">/</span>
                 <span className="text-white/90">{home.greeting.intro}</span>
@@ -77,9 +68,7 @@ function Index() {
                 <span className="text-foreground text-8xl lg:text-[7.25rem]">
                   {home.name.first}
                 </span>
-                <span className="last-name text-5xl">
-                  {home.name.last}
-                </span>
+                <span className="last-name text-5xl">{home.name.last}</span>
               </h1>
             </div>
 
@@ -138,7 +127,7 @@ function Index() {
                   />
 
                   {isSocialMenuOpen && (
-                    <div className="absolute bottom-full mb-3 right-0 lg:left-0 lg:right-auto min-w-[200px] bg-black/95 backdrop-blur-2xl border border-white/10 rounded-2xl p-4 shadow-[0_20px_50px_rgba(0,0,0,0.5)] animate-in fade-in slide-in-from-bottom-4 duration-300 z-[110]">
+                    <div className="absolute bottom-full mb-3 right-0 lg:left-0 lg:right-auto min-w-[250px] bg-black/95 backdrop-blur-2xl border border-white/10 rounded-2xl p-4 shadow-[0_20px_50px_rgba(0,0,0,0.5)] animate-in fade-in slide-in-from-bottom-4 duration-300 z-[110]">
                       <div className="flex flex-col gap-1">
                         <div className="mb-2">
                           <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/30">
@@ -152,7 +141,7 @@ function Index() {
                           className="flex items-center gap-3 px-4 py-2 rounded-xl border border-white/6 lg:hover:border-red-500/15 bg-white/5 hover:!bg-red-300/10 transition-all group animate-in fade-in slide-in-from-right-2 duration-300 delay-75"
                           onClick={() => setIsSocialMenuOpen(false)}
                         >
-                          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-orange-500/10 text-orange-500 border border-orange-500/20 group-hover:scale-110 transition-transform">
+                          <div className="flex h-9 w-9 aspect-square items-center justify-center rounded-lg bg-orange-500/10 text-orange-500 border border-orange-500/20 group-hover:scale-110 transition-transform">
                             <Download size={18} />
                           </div>
                           <span className="text-[15px] font-semibold text-white/90 group-hover:text-white">
@@ -167,7 +156,7 @@ function Index() {
                             {global.labels.socialProfiles}
                           </p>
                         </div>
-                        <div className="grid grid-cols-3 gap-2 pb-2">
+                        <div className="grid grid-cols-[repeat(auto-fill,minmax(48px,1fr))] gap-2 pb-2">
                           {global.socialLinks.map((link, idx) => {
                             const SocialIcon = getIcon(link.icon);
                             return (

@@ -2,7 +2,12 @@
   "common": {
     "global": {
       "socialLinks": [
-        { "id": "github", "label": "GitHub", "url": "#", "icon": "Github" },
+        {
+          "id": "github",
+          "label": "GitHub",
+          "url": "#",
+          "icon": "Github"
+        },
         {
           "id": "linkedin",
           "label": "LinkedIn",
@@ -35,13 +40,27 @@
           "value": "rajat.designfolio@gmail.com",
           "icon": "Mail"
         },
-        { "label": "Phone", "value": "+91 9899321639", "icon": "Phone" },
-        { "label": "Location", "value": "New Delhi, India", "icon": "MapPin" }
+        {
+          "label": "Phone",
+          "value": "+91 9899321639",
+          "icon": "Phone"
+        },
+        {
+          "label": "Location",
+          "value": "New Delhi, India",
+          "icon": "MapPin"
+        }
       ],
       "form": {
         "fields": {
-          "name": { "label": "Name", "placeholder": "Your full name" },
-          "email": { "label": "Email", "placeholder": "your@email.com" },
+          "name": {
+            "label": "Name",
+            "placeholder": "Your full name"
+          },
+          "email": {
+            "label": "Email",
+            "placeholder": "your@email.com"
+          },
           "message": {
             "label": "Message",
             "placeholder": "Tell me about the opportunity..."
@@ -78,7 +97,12 @@
     "product_engineer_hybrid": {
       "global": {
         "socialLinks": [
-          { "id": "github", "label": "GitHub", "url": "#", "icon": "Github" },
+          {
+            "id": "github",
+            "label": "GitHub",
+            "url": "#",
+            "icon": "Github"
+          },
           {
             "id": "linkedin",
             "label": "LinkedIn",
@@ -237,22 +261,40 @@
           {
             "label": "Engineering",
             "skills": [
-              { "name": "React.js / Next.js", "percentage": 90 },
-              { "name": "TypeScript & Architecture", "percentage": 85 }
+              {
+                "name": "React.js / Next.js",
+                "percentage": 90
+              },
+              {
+                "name": "TypeScript & Architecture",
+                "percentage": 85
+              }
             ]
           },
           {
             "label": "Design",
             "skills": [
-              { "name": "Figma & Design Systems", "percentage": 95 },
-              { "name": "Interaction Design", "percentage": 90 }
+              {
+                "name": "Figma & Design Systems",
+                "percentage": 95
+              },
+              {
+                "name": "Interaction Design",
+                "percentage": 90
+              }
             ]
           },
           {
             "label": "AI & Quality",
             "skills": [
-              { "name": "Cursor & Bolt.ai", "percentage": 95 },
-              { "name": "WCAG 3.0 Accessibility", "percentage": 95 }
+              {
+                "name": "Cursor & Bolt.ai",
+                "percentage": 95
+              },
+              {
+                "name": "WCAG 3.0 Accessibility",
+                "percentage": 95
+              }
             ]
           }
         ],
@@ -287,7 +329,12 @@
             "id": "srfg-hybrid",
             "title": "Safer Roads for Gurugram (SRFG)",
             "description": "End-to-end delivery: Designed the high-density data UX in Figma and engineered the complex React dashboard engine, utilizing AI for 60% faster scaffolding.",
-            "tags": ["React", "Figma", "Design Systems", "AI-Native"],
+            "tags": [
+              "React",
+              "Figma",
+              "Design Systems",
+              "AI-Native"
+            ],
             "url": "#",
             "thumbnail": "src/assets/srfg-thumbnail.png",
             "accent": "#2DD4BF"
@@ -296,7 +343,11 @@
             "id": "flamingo-hybrid",
             "title": "Flamingo Design System",
             "description": "Architected the visual design language in Figma and implemented the fully accessible React component library at Bold Tech.",
-            "tags": ["Design Systems", "React", "Tokens"],
+            "tags": [
+              "Design Systems",
+              "React",
+              "Tokens"
+            ],
             "url": "#",
             "thumbnail": "src/assets/flamingo-thumbnail.png",
             "accent": "#FF5DA8"
@@ -317,459 +368,6 @@
         "availability": {
           "title": "Open to Senior Hybrid Roles",
           "description": "Ready to lead design-to-code pipelines for startups and enterprise product teams."
-        }
-      }
-    },
-    "frontend_engineer": {
-      "global": {
-        "socialLinks": [
-          { "id": "github", "label": "GitHub", "url": "#", "icon": "Github" },
-          {
-            "id": "linkedin",
-            "label": "LinkedIn",
-            "url": "https://www.linkedin.com/in/rajat-gulati-design/",
-            "icon": "LinkedIn"
-          }
-        ],
-        "resume": {
-          "label": "Download Tech Resume",
-          "file": "/rajat-gulati-frontend-engineer.pdf"
-        }
-      },
-      "home": {
-        "greeting": {
-          "label": "import { Senior } from 'Rajat';",
-          "intro": "I'm"
-        },
-        "subtitle": {
-          "intro": "Frontend Engineer focused on",
-          "highlight": "Scalable UI Architecture"
-        },
-        "description": "Senior Engineer with 6+ years of experience building high-performance, maintainable web applications. Expert in React, TypeScript, and state management, specializing in turning complex logic into clean codebases.",
-        "cta": {
-          "label": "View Production Code",
-          "tooltipTitle": "Clean Architecture",
-          "tooltipDesc": "Explore projects built with reusable component patterns, performance optimization, and semantic HTML."
-        },
-        "navigation": [
-          {
-            "page": "about",
-            "label": "Experience",
-            "description": "6+ years in tech",
-            "route": "/about",
-            "theme": "coral",
-            "letter": "A",
-            "icon": "Code"
-          },
-          {
-            "page": "skills",
-            "label": "Stack",
-            "description": "React & Ecosystem",
-            "route": "/skills",
-            "theme": "sky",
-            "letter": "S",
-            "icon": "Terminal"
-          },
-          {
-            "page": "projects",
-            "label": "Projects",
-            "description": "Production builds",
-            "route": "/portfolio",
-            "theme": "violet",
-            "letter": "P",
-            "icon": "Cpu"
-          },
-          {
-            "page": "contact",
-            "label": "Contact",
-            "description": "Technical discussion",
-            "route": "/contact",
-            "theme": "emerald",
-            "letter": "C",
-            "icon": "Mail"
-          }
-        ],
-        "certifications": [
-          {
-            "id": "meta-react",
-            "name": "React Specialization",
-            "issuer": "Meta (Coursera)",
-            "date": "2024",
-            "icon": "Code",
-            "url": "#"
-          },
-          {
-            "id": "meta-js",
-            "name": "Programming with JavaScript",
-            "issuer": "Meta (Coursera)",
-            "date": "2024",
-            "icon": "Code",
-            "url": "#"
-          }
-        ]
-      },
-      "about": {
-        "meta": {
-          "title": "technical background",
-          "letter": "A",
-          "theme": "coral",
-          "icon": "Code"
-        },
-        "description": [
-          "I am a Senior Frontend Engineer with over 6 years of experience delivering enterprise-grade user interfaces for global organizations.",
-          "My core expertise lies in React and TypeScript, where I focus on building scalable component systems, managing complex state, and optimizing frontend performance.",
-          "I leverage AI-native coding tools (Cursor, Bolt.ai) to accelerate logic implementation and unit testing, ensuring rapid and robust deployment."
-        ],
-        "cvCta": {
-          "label": "Download Engineering Resume",
-          "tooltipTitle": "Technical Detail",
-          "tooltipDesc": "Detailed breakdown of my tech stack, architecture patterns, and optimization metrics."
-        },
-        "tabs": [
-          {
-            "id": "experience",
-            "label": "Technical Career",
-            "icon": "Code",
-            "itemIcon": "Terminal",
-            "timelineDescription": "Building production-scale applications.",
-            "items": [
-              {
-                "title": "Independent Software Engineer",
-                "subtitle": "Modernizing Legacy React Architectures",
-                "date": "2025 - Present"
-              },
-              {
-                "title": "Senior UI Engineer",
-                "subtitle": "Bold Technology Systems (Codebase Architecture)",
-                "date": "2021 - 2025"
-              }
-            ]
-          }
-        ]
-      },
-      "skills": {
-        "meta": {
-          "title": "technical stack",
-          "letter": "S",
-          "theme": "sky",
-          "icon": "Terminal"
-        },
-        "labels": {
-          "tools": "Development Ecosystem",
-          "craft": "Core Engineering Strengths"
-        },
-        "levels": [
-          {
-            "label": "Core Tech",
-            "skills": [
-              { "name": "React.js / Next.js", "percentage": 95 },
-              { "name": "TypeScript", "percentage": 90 }
-            ]
-          },
-          {
-            "label": "Architecture",
-            "skills": [
-              { "name": "State Management (Redux/Context)", "percentage": 90 },
-              { "name": "Component Scalability", "percentage": 95 }
-            ]
-          },
-          {
-            "label": "Optimization",
-            "skills": [
-              { "name": "Performance Tuning", "percentage": 85 },
-              { "name": "Semantic DOM / A11y", "percentage": 95 }
-            ]
-          }
-        ],
-        "tools": [
-          "React.js",
-          "TypeScript",
-          "Next.js",
-          "JavaScript (ES6+)",
-          "Tailwind CSS",
-          "Git / GitHub",
-          "REST APIs",
-          "Cursor",
-          "Bolt.ai",
-          "Vite / Webpack"
-        ],
-        "craft": [
-          "Building scalable, reusable component-based React architectures",
-          "Implementing responsive layouts with high-performance Lighthouse metrics",
-          "Complex state management and API data hydration",
-          "Modernizing legacy jQuery/Vanilla JS codebases to modern frameworks"
-        ]
-      },
-      "portfolio": {
-        "meta": {
-          "title": "production work",
-          "letter": "P",
-          "theme": "violet",
-          "icon": "Cpu"
-        },
-        "projects": [
-          {
-            "id": "srfg-tech",
-            "title": "SRFG Dashboard Engine",
-            "description": "Architected the frontend logic for a data-heavy React dashboard. Handled complex API integrations, state management, and strict performance requirements.",
-            "tags": ["React", "TypeScript", "Performance", "APIs"],
-            "url": "#",
-            "thumbnail": "src/assets/srfg-thumbnail.png",
-            "accent": "#2DD4BF"
-          },
-          {
-            "id": "balsakha-dev",
-            "title": "Bal Sakha Platform",
-            "description": "Led the frontend engineering of a fast, accessible web experience using modern React component patterns and Tailwind CSS.",
-            "tags": ["React", "Next.js", "Tailwind CSS"],
-            "url": "https://docquity-webinar.netlify.app/",
-            "thumbnail": "src/assets/balsakha-thumbnail.png",
-            "accent": "#d42fd4"
-          }
-        ]
-      },
-      "contact": {
-        "meta": {
-          "title": "technical reach",
-          "letter": "C",
-          "theme": "emerald",
-          "icon": "Mail"
-        },
-        "whatsapp": {
-          "description": "Available for technical interviews or discussions on frontend architecture.",
-          "messageTemplate": "Hi Rajat, I saw your GitHub/portfolio and want to discuss a Frontend Engineering role..."
-        },
-        "availability": {
-          "title": "Open to Senior Engineering Roles",
-          "description": "Seeking opportunities to architect high-impact codebases."
-        }
-      }
-    },
-    "product_designer": {
-      "global": {
-        "socialLinks": [
-          {
-            "id": "linkedin",
-            "label": "LinkedIn",
-            "url": "https://www.linkedin.com/in/rajat-gulati-design/",
-            "icon": "LinkedIn"
-          },
-          {
-            "id": "dribbble",
-            "label": "Dribbble",
-            "url": "#",
-            "icon": "Dribbble"
-          }
-        ],
-        "resume": {
-          "label": "Download Design Portfolio",
-          "file": "/rajat-gulati-product-designer.pdf"
-        }
-      },
-      "home": {
-        "greeting": {
-          "label": "User-Centric Systems",
-          "intro": "I'm"
-        },
-        "subtitle": {
-          "intro": "Product Designer focused on",
-          "highlight": "Design Systems & Accessibility"
-        },
-        "description": "Senior Designer crafting intuitive, high-fidelity interfaces. I specialize in establishing robust Design Systems, Figma token architectures, and WCAG-compliant user experiences that scale flawlessly.",
-        "cta": {
-          "label": "View Case Studies",
-          "tooltipTitle": "System-Driven Design",
-          "tooltipDesc": "Explore my UI component libraries, UX flows, and accessibility audits."
-        },
-        "navigation": [
-          {
-            "page": "about",
-            "label": "Philosophy",
-            "description": "Design thinking",
-            "route": "/about",
-            "theme": "coral",
-            "letter": "A",
-            "icon": "User"
-          },
-          {
-            "page": "skills",
-            "label": "Toolkit",
-            "description": "Figma & Systems",
-            "route": "/skills",
-            "theme": "sky",
-            "letter": "S",
-            "icon": "PenTool"
-          },
-          {
-            "page": "projects",
-            "label": "Work",
-            "description": "UI/UX Case Studies",
-            "route": "/portfolio",
-            "theme": "violet",
-            "letter": "P",
-            "icon": "Layout"
-          },
-          {
-            "page": "contact",
-            "label": "Contact",
-            "description": "Let’s discuss UX",
-            "route": "/contact",
-            "theme": "emerald",
-            "letter": "C",
-            "icon": "Mail"
-          }
-        ],
-        "certifications": [
-          {
-            "id": "uxcel-accessibility",
-            "name": "Design Accessibility",
-            "issuer": "Uxcel",
-            "date": "2025",
-            "icon": "Award",
-            "url": "#"
-          },
-          {
-            "id": "uxcel-components",
-            "name": "UI Components",
-            "issuer": "Uxcel",
-            "date": "2024",
-            "icon": "Award",
-            "url": "#"
-          }
-        ]
-      },
-      "about": {
-        "meta": {
-          "title": "design approach",
-          "letter": "A",
-          "theme": "coral",
-          "icon": "User"
-        },
-        "description": [
-          "I am a Senior Product Designer who builds for visual scale and user inclusivity. I lead the creation of design systems that empower product teams to maintain perfect consistency.",
-          "I design with a deep understanding of developer constraints, ensuring my Figma files hand off perfectly without translation errors.",
-          "My focus is on Interaction Design, Typography, and strict adherence to WCAG 3.0 standards for accessibility."
-        ],
-        "cvCta": {
-          "label": "Download Design Resume",
-          "tooltipTitle": "Design Detail",
-          "tooltipDesc": "Detailed view of UX research patterns, Figma expertise, and system architecture."
-        },
-        "tabs": [
-          {
-            "id": "experience",
-            "label": "Design Journey",
-            "icon": "Figma",
-            "itemIcon": "PenTool",
-            "timelineDescription": "Leading UI systems across diverse platforms.",
-            "items": [
-              {
-                "title": "Independent Product Designer",
-                "subtitle": "UX Modernization & Prototyping",
-                "date": "2025 - Present"
-              },
-              {
-                "title": "Senior Product UI Designer",
-                "subtitle": "Bold Technology Systems (Design System Lead)",
-                "date": "2021 - 2025"
-              }
-            ]
-          }
-        ]
-      },
-      "skills": {
-        "meta": {
-          "title": "design toolkit",
-          "letter": "S",
-          "theme": "sky",
-          "icon": "PenTool"
-        },
-        "labels": {
-          "tools": "Design Ecosystem",
-          "craft": "Core Design Strengths"
-        },
-        "levels": [
-          {
-            "label": "Product Design",
-            "skills": [
-              { "name": "UI Design (Figma)", "percentage": 95 },
-              { "name": "Design Systems / Tokens", "percentage": 95 }
-            ]
-          },
-          {
-            "label": "UX Logic",
-            "skills": [
-              { "name": "Interaction Design", "percentage": 90 },
-              { "name": "User Flows & Wireframing", "percentage": 85 }
-            ]
-          },
-          {
-            "label": "Inclusivity",
-            "skills": [
-              { "name": "WCAG 3.0 Accessibility", "percentage": 95 },
-              { "name": "Typography & Color Theory", "percentage": 90 }
-            ]
-          }
-        ],
-        "tools": [
-          "Figma",
-          "FigJam",
-          "Design Tokens",
-          "Component Libraries",
-          "Variables & Auto Layout",
-          "Prototyping",
-          "Zeplin",
-          "Design Documentation"
-        ],
-        "craft": [
-          "Architecting comprehensive Design Systems and Figma Component Libraries",
-          "Conducting rigorous UI/UX Accessibility audits (WCAG 3.0)",
-          "Structuring User Flows and high-fidelity Interaction Design",
-          "Preparing pixel-perfect, developer-ready design handoffs"
-        ]
-      },
-      "portfolio": {
-        "meta": {
-          "title": "design work",
-          "letter": "P",
-          "theme": "violet",
-          "icon": "Layout"
-        },
-        "projects": [
-          {
-            "id": "flamingo-system",
-            "title": "Flamingo Design System",
-            "description": "Architected a multi-platform design system in Figma using advanced Variables and Tokens, reducing iteration cycles by 30%.",
-            "tags": ["Design Systems", "Figma", "UI Components", "Tokens"],
-            "url": "#",
-            "thumbnail": "src/assets/flamingo-thumbnail.png",
-            "accent": "#FF5DA8"
-          },
-          {
-            "id": "srfg-ux",
-            "title": "SRFG Data UX",
-            "description": "Designed intuitive, high-density data visualizations and wireframes to make complex government road-safety data accessible.",
-            "tags": ["UX Design", "Data Visualization", "Wireframing"],
-            "url": "#",
-            "thumbnail": "src/assets/srfg-thumbnail.png",
-            "accent": "#2DD4BF"
-          }
-        ]
-      },
-      "contact": {
-        "meta": {
-          "title": "discuss design",
-          "letter": "C",
-          "theme": "emerald",
-          "icon": "Mail"
-        },
-        "whatsapp": {
-          "description": "Available for Design System consulting or Product Design opportunities.",
-          "messageTemplate": "Hi Rajat, I loved your UI portfolio and want to discuss a Product Design role..."
-        },
-        "availability": {
-          "title": "Open to Senior Product Design Roles",
-          "description": "Looking to help teams build scalable, accessible, and beautiful interfaces."
         }
       }
     }

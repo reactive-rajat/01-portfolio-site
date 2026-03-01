@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { themes } from "../theme";
-import RoleSwitcher from "./RoleSwitcher";
-
 import { getIcon } from "../utils/iconMap";
 
 export function PageLayout(props) {
@@ -47,13 +45,6 @@ export function PageLayout(props) {
   return (
     <main className="min-h-[calc(100svh-20rem)] pb-10 lg:pb-0 pt-4 lg:pt-0 lg:min-h-[100svh] animated-gradient-bg noise-overlay overflow-x-hidden overflow-y-auto lg:overflow-hidden">
       <div className="fixed inset-0 grid-bg opacity-50 pointer-events-none" />
-
-      {/* Global Role Switcher */}
-      <div className="fixed top-2 left-0 right-0 z-[100] px-6 py-4 lg:px-16 flex justify-center pointer-events-none">
-        <div className="pointer-events-auto scale-90 lg:scale-100 origin-right">
-          <RoleSwitcher />
-        </div>
-      </div>
 
       <div
         className={

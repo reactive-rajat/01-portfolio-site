@@ -1,256 +1,375 @@
 {
-  "global": {
-    "socialLinks": [
-      { "id": "github", "label": "GitHub", "url": "#", "icon": "Github" },
-      { "id": "linkedin", "label": "LinkedIn", "url": "#", "icon": "Linkedin" },
-      { "id": "twitter", "label": "Twitter", "url": "#", "icon": "Twitter" }
-    ],
-    "resume": {
-      "label": "Resume",
-      "file": "/resume.pdf"
-    }
-  },
-
-  "home": {
-    "greeting": {
-      "label": "hello_world",
-      "intro": "I'm"
+  "common": {
+    "global": {
+      "socialLinks": [
+        {
+          "id": "github",
+          "label": "GitHub",
+          "url": "#",
+          "icon": "Github"
+        },
+        {
+          "id": "linkedin",
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/rajat-gulati-design/",
+          "icon": "Linkedin"
+        },
+        {
+          "id": "whatsapp",
+          "label": "WhatsApp",
+          "url": "#",
+          "icon": "Whatsapp"
+        }
+      ],
+      "labels": {
+        "socialProfiles": "Social Profiles",
+        "quickLinks": "Quick Links",
+        "loading": "Loading...",
+        "moreOptions": "More options",
+        "present": "Present"
+      }
+    },
+    "contact": {
+      "whatsapp": {
+        "label": "WhatsApp Me",
+        "hint": "Quickest way to connect"
+      },
+      "info": [
+        {
+          "label": "Email",
+          "value": "rajat.designfolio@gmail.com",
+          "icon": "Mail"
+        },
+        {
+          "label": "Phone",
+          "value": "+91 9899321639",
+          "icon": "Phone"
+        },
+        {
+          "label": "Location",
+          "value": "New Delhi, India",
+          "icon": "MapPin"
+        }
+      ],
+      "form": {
+        "fields": {
+          "name": {
+            "label": "Name",
+            "placeholder": "Your full name"
+          },
+          "email": {
+            "label": "Email",
+            "placeholder": "your@email.com"
+          },
+          "message": {
+            "label": "Message",
+            "placeholder": "Tell me about the opportunity..."
+          }
+        }
+      },
+      "prompts": {
+        "formal": "Interested in discussing a formal opportunity?",
+        "informal": "Want to connect quickly?",
+        "switchToEmail": "Email Instead",
+        "switchToWhatsApp": "Switch to WhatsApp"
+      },
+      "labels": {
+        "connect": "Connect",
+        "socialProfiles": "Social Profiles",
+        "location": "Location",
+        "sendMail": "Send Mail",
+        "callNow": "Call Now",
+        "copy": "Copy",
+        "whatsAppShort": "WhatsApp"
+      }
+    },
+    "notFound": {
+      "title": "404",
+      "message": "Oops! Page not found",
+      "linkLabel": "Return to Home"
     },
     "name": {
       "first": "Rajat",
       "last": "Gulati"
-    },
-    "subtitle": {
-      "intro": "Frontend Developer specializing in",
-      "highlight": "UI Engineering"
-    },
-    "description": "Building responsive, accessible, and high-performance web interfaces using HTML, CSS, JavaScript, and React.",
-
-    "navigation": [
-      {
-        "page": "about",
-        "description": "My journey & story",
-        "route": "/about",
-        "theme": "coral",
-        "letter": "A",
-        "icon": "User"
-      },
-      {
-        "page": "skills",
-        "description": "Tech & expertise",
-        "route": "/skills",
-        "theme": "sky",
-        "letter": "S",
-        "icon": "Zap"
-      },
-      {
-        "page": "portfolio",
-        "description": "Featured work",
-        "route": "/portfolio",
-        "theme": "emerald",
-        "letter": "P",
-        "icon": "Briefcase"
-      },
-      {
-        "page": "contact",
-        "description": "Let's connect",
-        "route": "/contact",
-        "theme": "violet",
-        "letter": "C",
-        "icon": "Mail"
-      }
-    ],
-    "certifications": [
-      {
-        "id": "meta-frontend",
-        "name": "Meta - Front-End Developer",
-        "issuer": "Coursera",
-        "date": "2024",
-        "icon": "Meta",
-        "url": "https://www.coursera.org/professional-certificates/meta-front-end-developer"
-      },
-      {
-        "id": "meta-react",
-        "name": "Meta - React Specialization",
-        "issuer": "Coursera",
-        "date": "2024",
-        "icon": "Meta",
-        "url": "https://www.coursera.org/specializations/meta-react-native"
-      }
-    ]
-  },
-
-  "about": {
-    "meta": {
-      "title": "about me",
-      "letter": "A",
-      "theme": "coral"
-    },
-
-    "description": [
-      "I’m a Front-end Developer with 6+ years of experience building scalable, accessible, and high-performance user interfaces.",
-      "My work focuses on writing clean, maintainable UI code and translating complex Figma designs into production-ready components.",
-      "I’ve worked closely with PMs, designers, and engineers to balance performance, accessibility, and visual precision."
-    ],
-
-    "tabs": [
-      {
-        "id": "experience",
-        "label": "Experience",
-        "icon": "Layers",
-        "itemIcon": "Briefcase",
-        "timelineDescription": "Brief overview of responsibilities and achievements in this role.",
-        "items": [
-          {
-            "title": "Senior Web Designer / Frontend Developer",
-            "subtitle": "Bold Technology Systems",
-            "date": "Sep 2022 - May 2025"
-          },
-          {
-            "title": "UI Developer",
-            "subtitle": "Avalon Infosys",
-            "date": "Jan 2019 - Sep 2022"
-          }
-        ]
-      },
-      {
-        "id": "education",
-        "label": "Education",
-        "icon": "BookOpen",
-        "itemIcon": "GraduationCap",
-        "timelineDescription": "Academic background and formal education.",
-        "items": [
-          {
-            "title": "Bachelor's in Technology (I.T.)",
-            "subtitle": "Guru Tegh Bahadur Institute of Technology (GGSIPU)",
-            "date": "2013-2017",
-            "percentage": "8.5 CGPA"
-          },
-          {
-            "title": "Higher Secondary (12th)",
-            "subtitle": "D.A.V. Public School, Pushpanjali, CBSE",
-            "date": "2012",
-            "percentage": "85%"
-          }
-        ]
-      }
-    ]
-  },
-
-  "skills": {
-    "meta": {
-      "title": "my skills",
-      "letter": "S",
-      "theme": "sky"
-    },
-
-    "levels": [
-      {
-        "label": "Advanced",
-        "skills": [
-          { "name": "HTML/CSS", "percentage": 90 },
-          { "name": "JavaScript", "percentage": 90 }
-        ]
-      },
-      {
-        "label": "Proficient",
-        "skills": [
-          { "name": "React", "percentage": 85 },
-          { "name": "TypeScript", "percentage": 80 }
-        ]
-      },
-      {
-        "label": "Working Knowledge",
-        "skills": [{ "name": "Angular", "percentage": 65 }]
-      }
-    ],
-
-    "tools": [
-      "VS Code",
-      "Git / GitHub",
-      "Browser DevTools",
-      "SCSS",
-      "Tailwind CSS",
-      "Bootstrap",
-      "Figma",
-      "Jira"
-    ],
-
-    "craft": [
-      "Build responsive, accessible interfaces with clean UI systems",
-      "Translate Figma into production UI with pixel precision",
-      "Optimize performance, WCAG compliance, and cross-browser consistency"
-    ]
-  },
-
-  "portfolio": {
-    "meta": {
-      "title": "my portfolio",
-      "letter": "P",
-      "theme": "emerald"
-    },
-
-    "cta": {
-      "label": "View Live Project",
-      "arrow": "↗"
-    },
-
-    "projects": [
-      {
-        "id": 1,
-        "title": "Docquity - Webinar Landing Page",
-        "description": "Developed a responsive webinar landing page as part of a front-end interview assignment",
-        "tags": ["Angular", "TypeScript", "HTML5", "CSS3", "Figma"],
-        "url": "https://docquity-webinar.netlify.app/",
-        "thumbnail": "https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&h=400&fit=crop",
-        "accent": "#2DD4BF"
-      },
-      {
-        "id": 2,
-        "title": "Docquity - Webinar Landing Page",
-        "description": "Developed a responsive webinar landing page as part of a front-end interview assignment",
-        "tags": ["Angular", "TypeScript", "HTML5", "CSS3", "Figma"],
-        "url": "https://docquity-webinar.netlify.app/",
-        "thumbnail": "https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&h=400&fit=crop",
-        "accent": "#d42fd4"
-      }
-    ]
-  },
-
-  "contact": {
-    "meta": {
-      "title": "get in touch",
-      "letter": "C",
-      "theme": "violet"
-    },
-
-    "form": {
-      "submitLabel": "Send Message",
-      "fields": {
-        "name": { "label": "Name", "placeholder": "Your name" },
-        "email": { "label": "Email", "placeholder": "your@email.com" },
-        "message": {
-          "label": "Message",
-          "placeholder": "Tell me about your project..."
-        }
-      }
-    },
-
-    "info": [
-      { "label": "Email", "value": "hello@rajatgulati.com", "icon": "Mail" },
-      { "label": "Phone", "value": "+91 98765 43210", "icon": "Phone" },
-      { "label": "Location", "value": "New Delhi, India", "icon": "MapPin" }
-    ],
-
-    "availability": {
-      "title": "Available for freelance work",
-      "description": "Currently taking on new projects. Let's discuss your ideas!"
     }
   },
-
-  "notFound": {
-    "title": "404",
-    "message": "Oops! Page not found",
-    "linkLabel": "Return to Home"
+  "roles": {
+    "product_engineer_hybrid": {
+      "global": {
+        "socialLinks": [
+          {
+            "id": "github",
+            "label": "GitHub",
+            "url": "#",
+            "icon": "Github"
+          },
+          {
+            "id": "linkedin",
+            "label": "LinkedIn",
+            "url": "https://www.linkedin.com/in/rajat-gulati-design/",
+            "icon": "LinkedIn"
+          },
+          {
+            "id": "whatsapp",
+            "label": "WhatsApp",
+            "url": "#",
+            "icon": "Whatsapp"
+          },
+          {
+            "id": "dribbble",
+            "label": "Dribbble",
+            "url": "#",
+            "icon": "Dribbble"
+          }
+        ],
+        "resume": {
+          "label": "Download Senior Profile",
+          "file": "/rajat-gulati-product-engineer.pdf"
+        }
+      },
+      "home": {
+        "greeting": {
+          "label": "design_code_ai_repeat",
+          "intro": "Hi, I'm"
+        },
+        "subtitle": {
+          "intro": "Bridging design and code as a",
+          "highlight": "Senior Product Engineer"
+        },
+        "description": "The union of high-fidelity UX design and scalable React architecture. I build digital products at 3x speed using AI-native workflows, combining 6+ years of Design System expertise with advanced frontend logic.",
+        "cta": {
+          "label": "Explore Hybrid Work",
+          "tooltipTitle": "End-to-End Delivery",
+          "tooltipDesc": "See how I combine Figma, React, and tools like Cursor to ship pixel-perfect, accessible applications."
+        },
+        "navigation": [
+          {
+            "page": "about",
+            "label": "Philosophy",
+            "description": "Design + Code",
+            "route": "/about",
+            "theme": "coral",
+            "letter": "A",
+            "icon": "User"
+          },
+          {
+            "page": "skills",
+            "label": "Toolkit",
+            "description": "Figma to React",
+            "route": "/skills",
+            "theme": "sky",
+            "letter": "S",
+            "icon": "Zap"
+          },
+          {
+            "page": "projects",
+            "label": "Work",
+            "description": "Hybrid case studies",
+            "route": "/portfolio",
+            "theme": "violet",
+            "letter": "P",
+            "icon": "Briefcase"
+          },
+          {
+            "page": "contact",
+            "label": "Hire Me",
+            "description": "Let’s start building",
+            "route": "/contact",
+            "theme": "emerald",
+            "letter": "C",
+            "icon": "Mail"
+          }
+        ],
+        "certifications": [
+          {
+            "id": "hybrid-seniority",
+            "name": "AI-Native Product Engineering R&D",
+            "issuer": "Independent",
+            "date": "2025 - Present",
+            "icon": "Zap",
+            "url": "#"
+          },
+          {
+            "id": "hybrid-meta",
+            "name": "React Specialization",
+            "issuer": "Meta",
+            "date": "2024",
+            "icon": "Code",
+            "url": "#"
+          },
+          {
+            "id": "hybrid-uxcel",
+            "name": "Design Accessibility Specialist",
+            "issuer": "Uxcel",
+            "date": "2025",
+            "icon": "Figma",
+            "url": "#"
+          }
+        ]
+      },
+      "about": {
+        "meta": {
+          "title": "the workflow",
+          "letter": "A",
+          "theme": "coral",
+          "icon": "User"
+        },
+        "description": [
+          "I am an AI-Native Product Engineer who eliminates the design-to-development gap. I translate complex Figma systems into accessible, production-ready React applications.",
+          "By uniting the aesthetic precision of a Product Designer with the architectural logic of a Frontend Engineer, I deliver cohesive user experiences.",
+          "Using tools like Cursor, Google AI Studio, and Antigravity, I execute this entire pipeline with 40% greater efficiency."
+        ],
+        "cvCta": {
+          "label": "Download Full CV",
+          "tooltipTitle": "Hybrid Capabilities",
+          "tooltipDesc": "Detailed breakdown of 6+ years merging Meta-certified code with Uxcel-certified design."
+        },
+        "tabs": [
+          {
+            "id": "experience",
+            "label": "Hybrid Journey",
+            "icon": "History",
+            "itemIcon": "Briefcase",
+            "timelineDescription": "6+ years of bridging the gap at Bold Tech, Avalon, and independently.",
+            "items": [
+              {
+                "title": "Independent Product Engineer",
+                "subtitle": "AI Research & Development",
+                "date": "May 2025 - Present"
+              },
+              {
+                "title": "Senior UI Engineer & Designer",
+                "subtitle": "Bold Technology Systems",
+                "date": "2021 - 2025"
+              }
+            ]
+          }
+        ]
+      },
+      "skills": {
+        "meta": {
+          "title": "hybrid toolkit",
+          "letter": "S",
+          "theme": "sky",
+          "icon": "Zap"
+        },
+        "labels": {
+          "tools": "Full-Stack UI Ecosystem",
+          "craft": "End-to-End Capabilities"
+        },
+        "levels": [
+          {
+            "label": "Engineering",
+            "skills": [
+              {
+                "name": "React.js / Next.js",
+                "percentage": 90
+              },
+              {
+                "name": "TypeScript & Architecture",
+                "percentage": 85
+              }
+            ]
+          },
+          {
+            "label": "Design",
+            "skills": [
+              {
+                "name": "Figma & Design Systems",
+                "percentage": 95
+              },
+              {
+                "name": "Interaction Design",
+                "percentage": 90
+              }
+            ]
+          },
+          {
+            "label": "AI & Quality",
+            "skills": [
+              {
+                "name": "Cursor & Bolt.ai",
+                "percentage": 95
+              },
+              {
+                "name": "WCAG 3.0 Accessibility",
+                "percentage": 95
+              }
+            ]
+          }
+        ],
+        "tools": [
+          "React.js",
+          "TypeScript",
+          "Next.js",
+          "Tailwind CSS",
+          "Figma",
+          "Design Tokens",
+          "Cursor",
+          "Bolt.ai",
+          "Google AI Studio",
+          "Antigravity/v0"
+        ],
+        "craft": [
+          "End-to-end delivery from Figma wireframes to React production code",
+          "Architecting scalable Component Libraries and Token Systems",
+          "AI-Native Design-to-Code Implementation",
+          "WCAG 3.0 Accessibility Auditing and Implementation"
+        ]
+      },
+      "portfolio": {
+        "meta": {
+          "title": "featured work",
+          "letter": "P",
+          "theme": "violet",
+          "icon": "Briefcase"
+        },
+        "projects": [
+          {
+            "id": "srfg-hybrid",
+            "title": "Safer Roads for Gurugram (SRFG)",
+            "description": "End-to-end delivery: Designed the high-density data UX in Figma and engineered the complex React dashboard engine, utilizing AI for 60% faster scaffolding.",
+            "tags": [
+              "React",
+              "Figma",
+              "Design Systems",
+              "AI-Native"
+            ],
+            "url": "#",
+            "thumbnail": "src/assets/srfg-thumbnail.png",
+            "accent": "#2DD4BF"
+          },
+          {
+            "id": "flamingo-hybrid",
+            "title": "Flamingo Design System",
+            "description": "Architected the visual design language in Figma and implemented the fully accessible React component library at Bold Tech.",
+            "tags": [
+              "Design Systems",
+              "React",
+              "Tokens"
+            ],
+            "url": "#",
+            "thumbnail": "src/assets/flamingo-thumbnail.png",
+            "accent": "#FF5DA8"
+          }
+        ]
+      },
+      "contact": {
+        "meta": {
+          "title": "hire a unicorn",
+          "letter": "C",
+          "theme": "emerald",
+          "icon": "Mail"
+        },
+        "whatsapp": {
+          "description": "Available for Senior Product roles or high-impact freelance collaborations.",
+          "messageTemplate": "Hi Rajat, I'm looking for a Product Engineer with your hybrid skills..."
+        },
+        "availability": {
+          "title": "Open to Senior Hybrid Roles",
+          "description": "Ready to lead design-to-code pipelines for startups and enterprise product teams."
+        }
+      }
+    }
   }
 }
