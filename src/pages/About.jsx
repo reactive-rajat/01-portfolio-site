@@ -15,6 +15,7 @@ import {
 import { useContent } from "../context/ContentContext";
 import { getIcon } from "../utils/iconMap";
 import PrimaryButton from "../components/PrimaryButton";
+import { motion, AnimatePresence } from "framer-motion";
 
 // Local component, renamed to avoid confusion
 function SimpleCard(props) {
@@ -365,39 +366,57 @@ function About() {
         </div>
       </div>
 
-      <div className="relative pb-10">
-        {activeTabData && (
-          <div
-            className="animate-in fade-in slide-in-from-bottom-4 duration-500"
-            onMouseLeave={() => setHoveredIndex(null)}
-          >
-            {activeTabData.items.map(function (item, index) {
-              const date = item.date || presentLabel;
-              const isLast = index === activeTabData.items.length - 1;
-              const ItemIcon = getIcon(activeTabData.itemIcon);
-              const isActive =
-                hoveredIndex === null ? index === 0 : hoveredIndex === index;
+      <div className="relative pb-10 min-h-[500px]">
+        <AnimatePresence mode="wait">
+          {activeTabData && (
+            <motion.div
+              key={activeTabData.label}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              onMouseLeave={() => setHoveredIndex(null)}
+            >
+              {activeTabData.timelineDescription && (
+                <div className="mb-8 p-5 rounded-2xl bg-white/5 border border-white/10 flex items-start gap-4 text-white/70">
+                  <div className="w-10 h-10 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-400 shrink-0">
+                    {React.createElement(getIcon(activeTabData.icon), {
+                      size: 20,
+                    })}
+                  </div>
+                  <p className="leading-relaxed mt-1">
+                    {activeTabData.timelineDescription}
+                  </p>
+                </div>
+              )}
+              {activeTabData.items.map(function (item, index) {
+                const date = item.date || presentLabel;
+                const isLast = index === activeTabData.items.length - 1;
+                const ItemIcon = getIcon(activeTabData.itemIcon);
+                const isActive =
+                  hoveredIndex === null ? index === 0 : hoveredIndex === index;
 
-              return (
-                <TimelineItem
-                  key={index}
-                  title={item.title}
-                  subtitle={item.subtitle}
-                  date={date}
-                  percentage={item.percentage}
-                  points={item.points}
-                  link={item.link}
-                  description={activeTabData.timelineDescription}
-                  isLast={isLast}
-                  itemIcon={ItemIcon}
-                  calendarIcon={Calendar}
-                  isActive={isActive}
-                  onMouseEnter={() => setHoveredIndex(index)}
-                />
-              );
-            })}
-          </div>
-        )}
+                return (
+                  <TimelineItem
+                    key={index}
+                    title={item.title}
+                    subtitle={item.subtitle}
+                    date={date}
+                    percentage={item.percentage}
+                    points={item.points}
+                    link={item.link}
+                    description={activeTabData.timelineDescription}
+                    isLast={isLast}
+                    itemIcon={ItemIcon}
+                    calendarIcon={Calendar}
+                    isActive={isActive}
+                    onMouseEnter={() => setHoveredIndex(index)}
+                  />
+                );
+              })}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );

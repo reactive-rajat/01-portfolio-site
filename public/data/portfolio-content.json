@@ -150,6 +150,48 @@
             "I don’t just build screens.",
             "I build structured UI foundations that teams scale on."
           ]
+        },
+        "featuredSkills": {
+          "title": "Core Technologies",
+          "subtitle": "The primary tools I use to build scalable frontends and design systems.",
+          "ctaLabel": "View All Skills"
+        },
+        "featuredProjects": {
+          "title": "Selected Work",
+          "subtitle": "Recent projects highlighting design system architecture and complex UI engineering.",
+          "ctaLabel": "View All Case Studies"
+        },
+        "testimonials": {
+          "title": "What People Say",
+          "subtitle": "Recommendations from colleagues and managers I've worked with.",
+          "items": [
+            {
+              "name": "John Doe",
+              "role": "Engineering Manager at TechCorp",
+              "text": "Rajat is a phenomenal UI engineer. His ability to bridge the gap between our design and engineering teams transformed how we ship features. Highly recommended.",
+              "linkedinUrl": "#",
+              "image": "https://i.pravatar.cc/150?u=john"
+            },
+            {
+              "name": "Jane Smith",
+              "role": "Lead Product Designer",
+              "text": "Working with Rajat is a designer's dream. He doesn't just implement Figma files; he understands the UX logic and builds robust, accessible components that scale flawlessly.",
+              "linkedinUrl": "#",
+              "image": "https://i.pravatar.cc/150?u=jane"
+            },
+            {
+              "name": "Alex Johnson",
+              "role": "Senior Frontend Engineer",
+              "text": "Rajat's expertise in React and Design Systems is top-tier. His code is clean, his components are reusable, and he always advocates for best practices in architecture.",
+              "linkedinUrl": "#",
+              "image": "https://i.pravatar.cc/150?u=alex"
+            }
+          ]
+        },
+        "finalCta": {
+          "title": "Let's Build Something Great",
+          "subtitle": "Currently open to new opportunities in Senior UI Engineering and Design Systems.",
+          "ctaLabel": "Start a Conversation"
         }
       },
       "about": {
@@ -186,6 +228,76 @@
                 "title": "Senior UI Engineer & Designer",
                 "subtitle": "Bold Technology Systems",
                 "date": "2021 - 2025"
+              }
+            ]
+          },
+          {
+            "label": "Education",
+            "icon": "GraduationCap",
+            "itemIcon": "Award",
+            "items": [
+              {
+                "title": "B.Tech in Computer Science",
+                "subtitle": "Dummy University, New Delhi",
+                "date": "Aug 2014 — May 2018",
+                "percentage": "CGPA: 8.5/10",
+                "points": [
+                  "Specialized in Human-Computer Interaction and Advanced Data Structures.",
+                  "Led the university's open-source programming club."
+                ]
+              },
+              {
+                "title": "Advanced React patterns & Performance",
+                "subtitle": "Frontend Masters Certification",
+                "date": "March 2022",
+                "points": [
+                  "Mastered concurrent rendering, custom hooks architecture, and state machines."
+                ],
+                "link": "#"
+              },
+              {
+                "title": "Google UX Design Professional Certificate",
+                "subtitle": "Coursera",
+                "date": "Sept 2021",
+                "points": [
+                  "Completed rigorous training in wireframing, prototyping, and user research methodologies."
+                ],
+                "link": "#"
+              }
+            ]
+          },
+          {
+            "label": "Beyond Code",
+            "icon": "Heart",
+            "itemIcon": "Star",
+            "timelineDescription": "Activities, leadership, and contributions outside of daily engineering work.",
+            "items": [
+              {
+                "title": "Open Source Contributor",
+                "subtitle": "Various UI/Component Libraries",
+                "date": "2020 — Present",
+                "points": [
+                  "Contributed accessibility improvements to major open-source React component libraries.",
+                  "Authored and maintain a popular Vite plugin for SVG optimization with 10k+ weekly downloads."
+                ],
+                "link": "#"
+              },
+              {
+                "title": "Engineering Mentor",
+                "subtitle": "Internal Company Initiative",
+                "date": "Jan 2023 — Present",
+                "points": [
+                  "Mentored 5 junior developers, guiding them from bug-fixing to leading feature development.",
+                  "Conducted weekly pairing sessions focusing on clean code and design system adoption."
+                ]
+              },
+              {
+                "title": "Tech Speaker",
+                "subtitle": "React India Meetup",
+                "date": "Nov 2022",
+                "points": [
+                  "Delivered a talk on 'Bridging Figma and Code: Building Scalable Design Tokens'."
+                ]
               }
             ]
           }
