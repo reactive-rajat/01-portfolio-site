@@ -11,7 +11,9 @@ import {
   Copy,
   Check,
   Phone,
+  MessageSquare,
 } from "lucide-react";
+import { motion } from "framer-motion";
 import { useContent } from "../context/ContentContext";
 import { getIcon } from "../utils/iconMap";
 import PrimaryButton from "../components/PrimaryButton";
@@ -53,7 +55,7 @@ function Contact() {
     );
   }
 
-  const { contact, global } = content;
+  const { contact, global, home } = content;
   const { meta, form, info, availability } = contact;
 
   function handleSubmit(e) {
@@ -463,6 +465,52 @@ function Contact() {
     </div>
   );
 
+  const letsBuildSection = home?.finalCta ? (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.95 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.7 }}
+      className="max-w-5xl mx-auto px-6 py-24 lg:px-16 relative z-10 mb-24"
+    >
+      <div className="relative rounded-[3rem] overflow-hidden border border-emerald-500/30 bg-emerald-500/[0.05] p-12 lg:p-20 text-center backdrop-blur-xl">
+        <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-transparent to-sky-500/10" />
+
+        <div className="relative z-10 flex flex-col items-center">
+          <div
+            className="w-20 h-20 rounded-2xl bg-gradient-to-tr from-emerald-500 to-sky-500 flex items-center justify-center text-white mb-8 shadow-2xl shadow-emerald-500/40 animate-bounce"
+            style={{ animationDuration: "3s" }}
+          >
+            <MessageSquare size={32} />
+          </div>
+
+          <h3 className="text-4xl lg:text-5xl font-bold text-white tracking-tight mb-6 max-w-2xl">
+            {home.finalCta.title}
+          </h3>
+          <p className="text-xl text-white/60 mb-10 max-w-xl">
+            {home.finalCta.subtitle}
+          </p>
+
+          <PrimaryButton
+            theme="emerald"
+            href="/contact"
+            icon={<ArrowRight className="w-5 h-5" />}
+            className="!px-10 !h-16 !text-lg !rounded-2xl"
+          >
+            {home.finalCta.ctaLabel}
+          </PrimaryButton>
+        </div>
+      </div>
+    </motion.div>
+  ) : null;
+
+  const rightWithCta = (
+    <div className="space-y-16">
+      {rightContent}
+      {letsBuildSection}
+    </div>
+  );
+
   return (
     <PageLayout
       themeName={meta.theme}
@@ -470,7 +518,7 @@ function Contact() {
       letter={meta.letter}
       icon={meta.icon}
       left={leftContent}
-      right={rightContent}
+      right={rightWithCta}
     />
   );
 }

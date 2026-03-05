@@ -11,8 +11,10 @@ import {
   MessageSquare,
   Phone,
 } from "lucide-react";
+import { motion } from "framer-motion";
 import { useIsDesktop } from "../hooks/useIsDesktop";
 import { getIcon } from "../utils/iconMap";
+import { fadeInUp, staggerContainer } from "../utils/motionVariants";
 
 function Portfolio() {
   const { content, loading, activeRole } = useContent();
@@ -48,7 +50,7 @@ function Portfolio() {
     );
   }
 
-  const { portfolio, global, contact } = content;
+  const { portfolio, global, contact, home } = content;
   const { meta, projects } = portfolio;
 
   // Safe fallbacks for missing data
@@ -464,6 +466,85 @@ function Portfolio() {
     </div>
   );
 
+  const selectedWorkSection =
+    home?.featuredProjects && projects ? (
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={staggerContainer}
+        className="max-w-7xl mx-auto px-6 py-24 lg:px-16 relative z-10 border-t border-white/5"
+      >
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+          <motion.div variants={fadeInUp} className="max-w-2xl">
+            <p className="text-sm font-mono tracking-widest text-violet-400 mb-2 uppercase">
+              Case Studies
+            </p>
+            <h3 className="text-4xl font-bold text-white tracking-tight mb-4">
+              {home.featuredProjects.title}
+            </h3>
+            <p className="text-lg text-white/50">
+              {home.featuredProjects.subtitle}
+            </p>
+          </motion.div>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-8">
+          {projects.slice(0, 2).map((project, i) => (
+            <motion.a
+              href={project.url || "#"}
+              key={project.id}
+              variants={fadeInUp}
+              whileHover={{ y: -8 }}
+              className="group relative rounded-3xl overflow-hidden border border-white/10 bg-black flex flex-col h-[400px]"
+            >
+              <div className="relative h-[65%] w-full overflow-hidden bg-white/5">
+                <div className="absolute inset-0 bg-violet-500/20 opacity-0 group-hover:opacity-100 transition-opacity z-10 mix-blend-overlay" />
+                <img
+                  src={project.thumbnail}
+                  alt={project.title}
+                  className="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105"
+                />
+              </div>
+
+              <div className="relative h-[35%] p-6 flex flex-col justify-center bg-white/[0.02] backdrop-blur-md border-t border-white/10">
+                <div className="flex justify-between items-center w-full">
+                  <div>
+                    <h4 className="text-2xl font-bold text-white mb-2">
+                      {project.title}
+                    </h4>
+                    <div className="flex gap-2">
+                      {project.tags.slice(0, 2).map((tag) => (
+                        <span
+                          key={tag}
+                          className="text-xs font-mono px-2 py-1 rounded bg-white/10 text-white/70"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white/50 group-hover:bg-violet-500 group-hover:border-violet-500 group-hover:text-white transition-all">
+                    <ArrowRight className="w-5 h-5 -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
+                  </div>
+                </div>
+              </div>
+            </motion.a>
+          ))}
+        </div>
+
+        <motion.div variants={fadeInUp} className="mt-12 flex justify-center">
+          <PrimaryButton
+            theme="violet"
+            href="/portfolio"
+            icon={<ArrowRight className="w-4 h-4" />}
+          >
+            {home.featuredProjects.ctaLabel}
+          </PrimaryButton>
+        </motion.div>
+      </motion.div>
+    ) : null;
+
   return (
     <PageLayout
       themeName={meta.theme}
@@ -473,6 +554,7 @@ function Portfolio() {
       headerContent={footerContent}
     >
       {mainContent}
+      {selectedWorkSection}
     </PageLayout>
   );
 }

@@ -11,11 +11,14 @@ import {
   ChevronUp,
   CheckCircle2,
   GraduationCap,
+  ArrowRight,
+  Quote,
 } from "lucide-react";
 import { useContent } from "../context/ContentContext";
 import { getIcon } from "../utils/iconMap";
 import PrimaryButton from "../components/PrimaryButton";
 import { motion, AnimatePresence } from "framer-motion";
+import { fadeInUp, staggerContainer } from "../utils/motionVariants";
 
 // Local component, renamed to avoid confusion
 function SimpleCard(props) {
@@ -242,7 +245,7 @@ function About() {
     );
   }
 
-  const { about, global } = content;
+  const { about, global, home } = content;
   const { meta, description, tabs } = about;
 
   // Logic to find active tab data
@@ -421,6 +424,224 @@ function About() {
     </div>
   );
 
+  const whatIDeliverSection = home?.whatIDeliver ? (
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
+      variants={staggerContainer}
+      className="max-w-7xl mx-auto px-6 py-24 lg:px-16 relative z-10 border-t border-white/5"
+    >
+      <motion.div variants={fadeInUp} className="flex justify-between items-end mb-12">
+        <div>
+          <p className="text-sm font-mono tracking-widest text-violet-400 mb-2 uppercase">
+            Core Principles
+          </p>
+          <h3 className="text-4xl font-bold text-white tracking-tight">
+            {home.whatIDeliver.title}
+          </h3>
+        </div>
+      </motion.div>
+
+      <div className="grid md:grid-cols-3 gap-6">
+        {home.whatIDeliver.blocks.map((block, i) => {
+          const BlockIcon = getIcon(block.icon);
+          return (
+            <motion.div
+              key={i}
+              variants={fadeInUp}
+              whileHover={{ y: -5 }}
+              className="group relative p-8 rounded-3xl border border-white/10 bg-white/[0.02] backdrop-blur-md overflow-hidden"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-violet-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+              <div className="relative z-10">
+                <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-violet-400 mb-6 group-hover:scale-110 group-hover:bg-violet-500/20 group-hover:text-violet-300 transition-all duration-300 shadow-[0_0_20px_transparent] group-hover:shadow-[0_0_20px_rgba(139,92,246,0.2)]">
+                  {BlockIcon && <BlockIcon size={26} />}
+                </div>
+                <h4 className="text-xl font-bold text-white mb-3 group-hover:text-violet-100 transition-colors">
+                  {block.title}
+                </h4>
+                <p className="text-white/60 leading-relaxed group-hover:text-white/80 transition-colors">
+                  {block.description}
+                </p>
+              </div>
+            </motion.div>
+          );
+        })}
+      </div>
+    </motion.div>
+  ) : null;
+
+  const experienceSection = home?.experience ? (
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
+      variants={staggerContainer}
+      className="max-w-7xl mx-auto px-6 py-24 lg:px-16 relative z-10 border-t border-white/5"
+    >
+      <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
+        <motion.div variants={fadeInUp} className="lg:w-1/3 flex-shrink-0">
+          <p className="text-sm font-mono tracking-widest text-emerald-400 mb-2 uppercase">
+            Background
+          </p>
+          <h3 className="text-4xl font-bold text-white tracking-tight mb-4">
+            {home.experience.title}
+          </h3>
+          <p className="text-lg text-white/50">{home.experience.subtitle}</p>
+        </motion.div>
+
+        <motion.div
+          variants={fadeInUp}
+          className="lg:w-2/3 flex-1 flex flex-col justify-center overflow-x-auto lg:overflow-visible pb-10 lg:pb-0"
+        >
+          <div className="relative flex justify-between min-w-[600px] lg:min-w-0 w-full">
+            <div className="absolute top-10 left-10 right-10 h-0.5 bg-gradient-to-r from-transparent via-white/10 to-transparent hidden sm:block" />
+
+            {home.experience.items.map((item, i) => (
+              <div key={i} className="relative flex flex-col items-center flex-1 group">
+                <div className="mb-6 font-mono text-xs text-emerald-400/90 bg-emerald-400/5 px-3 py-1 rounded-full border border-emerald-500/10">
+                  {item.date}
+                </div>
+                <div className="w-5 h-5 rounded-full border-4 border-[#0a0f16] bg-emerald-500 shadow-[0_0_0_2px_hsl(var(--emerald)/0.3)] relative z-10 group-hover:scale-125 transition-transform duration-300" />
+                <div className="mt-8 text-center px-4 w-full">
+                  <h4 className="font-bold text-white text-lg mb-2 group-hover:text-emerald-400 transition-colors">
+                    {item.title}
+                  </h4>
+                  <p className="text-sm text-white/50 leading-relaxed max-w-[240px] mx-auto">
+                    {item.subtitle}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+
+      <motion.div variants={fadeInUp} className="mt-16 flex justify-center w-full">
+        <PrimaryButton
+          theme="emerald"
+          href="/about"
+          icon={<ArrowRight className="w-4 h-4" />}
+        >
+          Read Full Journey
+        </PrimaryButton>
+      </motion.div>
+    </motion.div>
+  ) : null;
+
+  const differentiatorSection = home?.differentiator ? (
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
+      variants={staggerContainer}
+      className="max-w-7xl mx-auto px-6 py-24 lg:px-16 relative z-10 border-t border-white/5"
+    >
+      <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
+        <motion.div variants={fadeInUp} className="lg:w-1/3 flex-shrink-0">
+          <p className="text-sm font-mono tracking-widest text-emerald-400 mb-2 uppercase">
+            Secret Sauce
+          </p>
+          <h3 className="text-4xl font-bold text-white tracking-tight mb-4">
+            {home.differentiator.title}
+          </h3>
+        </motion.div>
+
+        <motion.div
+          variants={fadeInUp}
+          className="lg:w-2/3 flex-1 flex flex-col justify-center"
+        >
+          <div className="space-y-6 text-lg text-white/70 font-medium leading-relaxed">
+            {home.differentiator.points.map((pt, i) => (
+              <div key={i} className="flex gap-4 group">
+                <span className="text-emerald-500 mt-1 shrink-0 group-hover:scale-125 transition-transform">
+                  <ChevronRight className="w-5 h-5" />
+                </span>
+                <p className={i >= 3 ? "text-white" : ""}>{pt}</p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+
+      <motion.div variants={fadeInUp} className="mt-16 flex justify-center w-full">
+        <PrimaryButton
+          theme="emerald"
+          href="/about"
+          icon={<ArrowRight className="w-4 h-4" />}
+        >
+          Discover Philosophy
+        </PrimaryButton>
+      </motion.div>
+    </motion.div>
+  ) : null;
+
+  const testimonialsSection = home?.testimonials ? (
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
+      variants={staggerContainer}
+      className="max-w-7xl mx-auto px-6 py-24 lg:px-16 relative z-10 border-t border-white/5"
+    >
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        <motion.div variants={fadeInUp} className="max-w-2xl">
+          <p className="text-sm font-mono tracking-widest text-sky-400 mb-2 uppercase">
+            Recommendations
+          </p>
+          <h3 className="text-4xl font-bold text-white tracking-tight mb-4">
+            {home.testimonials.title}
+          </h3>
+          <p className="text-lg text-white/50">{home.testimonials.subtitle}</p>
+        </motion.div>
+      </div>
+
+      <div className="grid md:grid-cols-3 gap-6">
+        {home.testimonials.items.map((testimonial, i) => (
+          <motion.div
+            key={i}
+            variants={fadeInUp}
+            className="p-8 rounded-3xl border border-white/10 bg-white/[0.03] relative group hover:border-sky-500/30 transition-colors"
+          >
+            <div className="absolute top-6 right-6 text-white/10 group-hover:text-sky-500/20 transition-colors">
+              <Quote size={40} />
+            </div>
+
+            <p className="text-white/80 leading-relaxed mb-8 relative z-10 text-sm md:text-base">
+              "{testimonial.text}"
+            </p>
+
+            <div className="flex items-center gap-4 relative z-10">
+              <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-white/10">
+                <img
+                  src={testimonial.image}
+                  alt={testimonial.name}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div>
+                <h5 className="font-bold text-white">{testimonial.name}</h5>
+                <p className="text-xs text-sky-400">{testimonial.role}</p>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </motion.div>
+  ) : null;
+
+  const rightWithSections = (
+    <div className="space-y-16">
+      {rightContent}
+      {whatIDeliverSection}
+      {experienceSection}
+      {differentiatorSection}
+      {testimonialsSection}
+    </div>
+  );
+
   return (
     <PageLayout
       themeName={meta.theme}
@@ -428,7 +649,7 @@ function About() {
       letter={meta.letter}
       icon={meta.icon}
       left={leftContent}
-      right={rightContent}
+      right={rightWithSections}
     />
   );
 }
