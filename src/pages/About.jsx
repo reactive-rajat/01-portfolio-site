@@ -319,7 +319,7 @@ function About() {
   );
 
   const rightContent = (
-    <div className="relative mt-6 lg:mt-0">
+    <div className="relative mt-8">
       <div className="sticky top-4 z-20 mb-10 flex justify-center">
         <div className="grid w-full lg:w-2/3 grid-cols-[repeat(auto-fit,minmax(0,1fr))] justify-center gap-1.5 p-1 px-2 rounded-2xl border border-white/10 bg-black/60 backdrop-blur-xl shadow-2xl">
           {tabs.map(function (tab) {

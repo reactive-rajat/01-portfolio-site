@@ -139,7 +139,7 @@
   }
 
   .type-hero .last-name {
-    @apply block font-normal text-[2.75rem] tracking-[1.3rem] uppercase text-white/40 -mt-2;
+    @apply block text-white/40 -mt-2;
     font-family: var(--font-mono, monospace);
   }
 

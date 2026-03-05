@@ -69,28 +69,28 @@ export function PageLayout(props) {
       >
         <div className="max-w-6xl mx-auto page-enter w-full px-5">
           {hasSplit ? (
-            <div className="page-grid grid gap-6 lg:grid-cols-2 lg:gap-14 lg:items-start w-full">
-              <div className="page-left w-full min-w-0">
-                <div className="page-header flex items-center gap-6 mb-10 md:mb-12">
-                  <Link
-                    to="/"
-                    className={
-                      "page-back group flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-full border transition-all duration-300 hover:scale-110 " +
-                      styles.border +
-                      " " +
-                      styles.bg
-                    }
-                    style={{
-                      "--hover-glow": "hsl(var(--" + themeName + "))",
-                    }}
-                    onMouseEnter={handleMouseEnter}
-                    onMouseLeave={handleMouseLeave}
-                  >
-                    <ArrowLeft
-                      className={"w-6 h-6 transition-transform " + styles.text}
-                    />
-                  </Link>
+            <div className="page-stack flex flex-col gap-10 lg:gap-14 w-full">
+              <div className="page-header flex flex-col items-start gap-8 mb-4">
+                <Link
+                  to="/"
+                  className={
+                    "page-back group flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-full border transition-all duration-300 hover:scale-110 shrink-0 " +
+                    styles.border +
+                    " " +
+                    styles.bg
+                  }
+                  style={{
+                    "--hover-glow": "hsl(var(--" + themeName + "))",
+                  }}
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <ArrowLeft
+                    className={"w-6 h-6 transition-transform " + styles.text}
+                  />
+                </Link>
 
+                <div className="flex flex-col gap-6 w-full max-w-3xl">
                   <h1 className="type-page-title">
                     {titleWords.map(function (word, i) {
                       return (
@@ -108,14 +108,12 @@ export function PageLayout(props) {
                       );
                     })}
                   </h1>
+
+                  <div className="page-intro-content w-full">{left}</div>
                 </div>
-
-                <div className="page-left-content">{left}</div>
               </div>
 
-              <div className="page-content lg:pt-2 w-full min-w-0">
-                {rightContent}
-              </div>
+              <div className="page-main-content w-full">{rightContent}</div>
             </div>
           ) : (
             <>

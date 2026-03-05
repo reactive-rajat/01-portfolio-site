@@ -119,7 +119,7 @@ function Skills() {
   );
 
   const rightContent = (
-    <div className="space-y-8 mt-6 lg:mt-0">
+    <div className="space-y-8 mt-8">
       {tools.length > 0 && (
         <section className="space-y-4">
           <h3 className="text-xl font-bold tracking-tight text-foreground">

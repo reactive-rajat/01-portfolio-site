@@ -36,14 +36,13 @@
       },
       "home": {
         "greeting": {
-          "label": "design_code_repeat",
-          "intro": "Hi, I'm"
+          "label": "Hi, I'm"
         },
         "subtitle": {
           "highlight": "Senior UI Engineer — Design Systems & React",
           "intro": "I design scalable interfaces and build them in React."
         },
-        "description": "With 6+ years of experience across UI design and frontend engineering, I build structured component systems, translate Figma into clean production-ready React, and create scalable design systems that help teams ship faster.\n\nI focus on clarity, accessibility, performance, and maintainable architecture.",
+        "description": "6+ years building structured component systems and translating Figma into production-ready frontend architecture.",
         "cta": {
           "label": "View Case Studies",
           "tooltipTitle": "Design to Production",

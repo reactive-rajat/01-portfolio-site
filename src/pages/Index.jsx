@@ -6,7 +6,13 @@ import { getIcon } from "../utils/iconMap";
 import CertificationBadge from "../components/CertificationBadge";
 import PrimaryButton from "../components/PrimaryButton";
 import Icon from "../components/Icon";
-import { motion, useScroll, useTransform } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useMotionValueEvent,
+  AnimatePresence,
+} from "framer-motion";
 import {
   MoreVertical,
   ArrowRight,
@@ -48,8 +54,56 @@ function Index() {
   const menuRef = React.useRef(null);
   const { content, loading } = useContent();
 
-  const { scrollYProgress } = useScroll();
+  const { scrollY, scrollYProgress } = useScroll();
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+
+  const [isScrolled, setIsScrolled] = React.useState(false);
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    if (latest > 600) {
+      if (!isScrolled) setIsScrolled(true);
+    } else {
+      if (isScrolled) setIsScrolled(false);
+    }
+  });
+
+  // Unique animation for the dynamic sticky header
+  const headerVariants = {
+    hidden: { y: -80, opacity: 0, scale: 0.85, filter: "blur(10px)" },
+    visible: {
+      y: 0,
+      opacity: 1,
+      scale: 1,
+      filter: "blur(0px)",
+      transition: {
+        type: "spring",
+        stiffness: 400,
+        damping: 30,
+        staggerChildren: 0.1,
+        delayChildren: 0.15,
+      },
+    },
+    exit: {
+      y: -80,
+      opacity: 0,
+      scale: 0.85,
+      filter: "blur(10px)",
+      transition: {
+        duration: 0.3,
+        ease: "easeInOut",
+      },
+    },
+  };
+
+  const navItemVariants = {
+    hidden: { opacity: 0, y: -20, scale: 0.8 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { type: "spring", stiffness: 300, damping: 20 },
+    },
+  };
 
   React.useEffect(() => {
     function handleClickOutside(event) {
@@ -84,9 +138,77 @@ function Index() {
       <div className="orb orb-sky w-[200px] h-[200px] lg:w-72 lg:h-72 bottom-0 right-30 lg:bottom-1/4 lg:left-1/4 animate-float-delayed-2" />
 
       {/* ─────────────────────────────────────────────────────────
+          STICKY NAV (Dynamic Island inspired)
+          ───────────────────────────────────────────────────────── */}
+      <AnimatePresence>
+        {isScrolled && (
+          <motion.div
+            variants={headerVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4"
+          >
+            <div className="flex items-center gap-4 lg:gap-6 px-4 py-2.5 lg:px-6 lg:py-3 rounded-full bg-black/60 backdrop-blur-2xl border border-white/10 shadow-2xl shadow-violet-500/10 mix-blend-luminosity">
+              <motion.div
+                variants={navItemVariants}
+                className="text-white font-bold tracking-[0.2em] uppercase text-xs lg:text-sm border-r border-white/20 pr-4 lg:pr-6 mr-1 lg:mr-2 hidden md:block"
+              >
+                {home.name.first} {home.name.last}
+              </motion.div>
+
+              <div className="flex items-center gap-1 sm:gap-2">
+                {home.navigation.map((item, index) => {
+                  const NavIcon = getIcon(item.icon);
+                  const isHovered = hoveredIndex === `sticky-${index}`;
+
+                  return (
+                    <motion.a
+                      href={item.route}
+                      key={item.page}
+                      variants={navItemVariants}
+                      onMouseEnter={() => setHoveredIndex(`sticky-${index}`)}
+                      onMouseLeave={() => setHoveredIndex(null)}
+                      className={`relative flex items-center gap-2 px-3 py-2 rounded-xl transition-all duration-300 ${
+                        isHovered
+                          ? "text-white"
+                          : "text-white/60 hover:text-white"
+                      }`}
+                    >
+                      {NavIcon && (
+                        <NavIcon
+                          size={16}
+                          className={isHovered ? `text-${item.theme}-400` : ""}
+                        />
+                      )}
+                      <span className="text-sm font-medium hidden sm:block">
+                        {item.label}
+                      </span>
+
+                      {isHovered && (
+                        <motion.div
+                          layoutId="nav-pill"
+                          className={`absolute inset-0 rounded-xl bg-${item.theme}-500/20 shadow-[0_0_15px_var(--${item.theme}-500)] opacity-20 border border-${item.theme}-500/50 -z-10`}
+                          transition={{
+                            type: "spring",
+                            bounce: 0.2,
+                            duration: 0.6,
+                          }}
+                        />
+                      )}
+                    </motion.a>
+                  );
+                })}
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* ─────────────────────────────────────────────────────────
           HERO (First Fold)
           ───────────────────────────────────────────────────────── */}
-      <div className="max-w-7xl mx-auto grid relative z-10 min-h-[100dvh] px-6 py-20 lg:py-0 lg:px-16 items-center">
+      <div className="max-w-7xl mx-auto grid relative z-10 px-6 py-20 lg:py-24 lg:px-16 items-center">
         <motion.div
           initial="hidden"
           animate="visible"
@@ -104,8 +226,6 @@ function Index() {
               </span>
               <p className="text-xs font-mono tracking-[0.15em] uppercase text-green-400">
                 {home.greeting.label}
-                <span className="mx-2 text-white/30">/</span>
-                <span className="text-white/90">{home.greeting.intro}</span>
               </p>
             </motion.div>
 
@@ -114,13 +234,15 @@ function Index() {
                 <span className="text-foreground text-8xl lg:text-[7.25rem]">
                   {home.name.first}
                 </span>
-                <span className="last-name text-5xl">{home.name.last}</span>
+                <span className="last-name font-normal text-[2.15rem] uppercase tracking-[1.65rem] ml-1">
+                  {home.name.last}
+                </span>
               </h1>
             </motion.div>
 
             <motion.h2
               variants={fadeInUp}
-              className="home-subtitle text-xl lg:text-xl text-white/90 mt-12 lg:mt-0 mb-6 lg:mb-8"
+              className="home-subtitle text-xl lg:text-2xl text-white/90 mt-12 lg:mt-0 mb-6 lg:mb-8"
             >
               <span className="block text-shimmer text-3xl lg:text-4xl font-bold mt-1 mb-2">
                 {home.subtitle.highlight}
@@ -230,7 +352,7 @@ function Index() {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
-          className="max-w-7xl mx-auto px-6 py-24 lg:px-16 relative z-10"
+          className="max-w-7xl mx-auto px-6 py-24 lg:px-16 relative z-10 border-t border-white/5"
         >
           <motion.div
             variants={fadeInUp}
@@ -285,7 +407,7 @@ function Index() {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
-          className="max-w-7xl mx-auto px-6 py-24 lg:px-16 relative z-10"
+          className="max-w-7xl mx-auto px-6 py-24 lg:px-16 relative z-10 border-t border-white/5"
         >
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
             <motion.div variants={fadeInUp} className="max-w-2xl">
@@ -344,124 +466,132 @@ function Index() {
       )}
 
       {/* ─────────────────────────────────────────────────────────
-          EXPERIENCE SNAPSHOT & DIFFERENTIATOR (Combined Layout)
+          EXPERIENCE
           ───────────────────────────────────────────────────────── */}
-      <div className="max-w-7xl mx-auto px-6 py-24 lg:px-16 relative z-10 border-y border-white/5 bg-white/[0.01]">
-        <div className="grid lg:grid-cols-12 gap-16 lg:gap-8">
-          {/* Experience Column */}
-          {home.experience && (
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
-              variants={staggerContainer}
-              className="lg:col-span-5"
-            >
-              <motion.p
-                variants={fadeInUp}
-                className="text-sm font-mono tracking-widest text-emerald-400 mb-2 uppercase"
-              >
+      {home.experience && (
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+          className="max-w-7xl mx-auto px-6 py-24 lg:px-16 relative z-10 border-t border-white/5"
+        >
+          <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
+            {/* Left: Heading and Description */}
+            <motion.div variants={fadeInUp} className="lg:w-1/3 flex-shrink-0">
+              <p className="text-sm font-mono tracking-widest text-emerald-400 mb-2 uppercase">
                 Background
-              </motion.p>
-              <motion.h3
-                variants={fadeInUp}
-                className="text-3xl font-bold mb-4 text-white"
-              >
+              </p>
+              <h3 className="text-4xl font-bold text-white tracking-tight mb-4">
                 {home.experience.title}
-              </motion.h3>
-              <motion.p
-                variants={fadeInUp}
-                className="text-white/50 text-lg mb-10"
-              >
+              </h3>
+              <p className="text-lg text-white/50">
                 {home.experience.subtitle}
-              </motion.p>
+              </p>
+            </motion.div>
 
-              <div className="space-y-6 relative before:absolute before:inset-0 before:ml-2 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-white/10 before:to-transparent">
+            {/* Right: Horizontal Timeline */}
+            <motion.div
+              variants={fadeInUp}
+              className="lg:w-2/3 flex-1 flex flex-col justify-center overflow-x-auto lg:overflow-visible pb-10 lg:pb-0"
+            >
+              <div className="relative flex justify-between min-w-[600px] lg:min-w-0 w-full">
+                <div className="absolute top-10 left-10 right-10 h-0.5 bg-gradient-to-r from-transparent via-white/10 to-transparent hidden sm:block" />
+
                 {home.experience.items.map((item, i) => (
-                  <motion.div
+                  <div
                     key={i}
-                    variants={fadeInUp}
-                    className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active"
+                    className="relative flex flex-col items-center flex-1 group"
                   >
-                    <div className="flex items-center justify-center w-5 h-5 rounded-full border-4 border-black bg-emerald-500 shadow-[0_0_0_2px_hsl(var(--emerald)/0.3)] md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 relative z-10" />
-                    <div className="w-[calc(100%-2rem)] md:w-[calc(50%-1.5rem)] p-5 rounded-2xl border border-white/5 bg-white/5 group-hover:border-emerald-500/30 transition-colors">
-                      <div className="flex flex-col md:flex-row md:items-center justify-between gap-1 mb-2">
-                        <h4 className="font-bold text-white">{item.title}</h4>
-                        <time className="font-mono text-xs text-emerald-400">
-                          {item.date}
-                        </time>
-                      </div>
-                      <div className="text-sm text-white/50">
-                        {item.subtitle}
-                      </div>
+                    <div className="mb-6 font-mono text-xs text-emerald-400/90 bg-emerald-400/5 px-3 py-1 rounded-full border border-emerald-500/10">
+                      {item.date}
                     </div>
-                  </motion.div>
+                    <div className="w-5 h-5 rounded-full border-4 border-[#0a0f16] bg-emerald-500 shadow-[0_0_0_2px_hsl(var(--emerald)/0.3)] relative z-10 group-hover:scale-125 transition-transform duration-300" />
+                    <div className="mt-8 text-center px-4 w-full">
+                      <h4 className="font-bold text-white text-lg mb-2 group-hover:text-emerald-400 transition-colors">
+                        {item.title}
+                      </h4>
+                      <p className="text-sm text-white/50 leading-relaxed max-w-[240px] mx-auto">
+                        {item.subtitle}
+                      </p>
+                    </div>
+                  </div>
                 ))}
               </div>
-
-              <motion.div
-                variants={fadeInUp}
-                className="mt-10 flex justify-center"
-              >
-                <PrimaryButton
-                  theme="emerald"
-                  href="/about"
-                  icon={<ArrowRight className="w-4 h-4" />}
-                  className="w-full"
-                >
-                  Read Full Journey
-                </PrimaryButton>
-              </motion.div>
             </motion.div>
-          )}
+          </div>
 
-          {/* Spacer */}
-          <div className="hidden lg:block lg:col-span-1" />
-
-          {/* Differentiator Column */}
-          {home.differentiator && (
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
-              variants={staggerContainer}
-              className="lg:col-span-6 flex flex-col justify-center"
+          {/* Bottom Center: Button */}
+          <motion.div
+            variants={fadeInUp}
+            className="mt-16 flex justify-center w-full"
+          >
+            <PrimaryButton
+              theme="emerald"
+              href="/about"
+              icon={<ArrowRight className="w-4 h-4" />}
             >
-              <div className="p-8 md:p-12 rounded-3xl bg-white/[0.03] border border-white/10 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 rounded-full blur-[80px]" />
+              Read Full Journey
+            </PrimaryButton>
+          </motion.div>
+        </motion.div>
+      )}
 
-                <motion.p
-                  variants={fadeInUp}
-                  className="text-sm font-mono tracking-widest text-emerald-400 mb-2 uppercase relative z-10"
-                >
-                  Secret Sauce
-                </motion.p>
-                <motion.h3
-                  variants={fadeInUp}
-                  className="text-3xl font-bold mb-10 text-white relative z-10"
-                >
-                  {home.differentiator.title}
-                </motion.h3>
+      {/* ─────────────────────────────────────────────────────────
+          DIFFERENTIATOR (Secret Sauce)
+          ───────────────────────────────────────────────────────── */}
+      {home.differentiator && (
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+          className="max-w-7xl mx-auto px-6 py-24 lg:px-16 relative z-10 border-t border-white/5"
+        >
+          <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
+            {/* Left: Heading and Description */}
+            <motion.div variants={fadeInUp} className="lg:w-1/3 flex-shrink-0">
+              <p className="text-sm font-mono tracking-widest text-emerald-400 mb-2 uppercase">
+                Secret Sauce
+              </p>
+              <h3 className="text-4xl font-bold text-white tracking-tight mb-4">
+                {home.differentiator.title}
+              </h3>
+            </motion.div>
 
-                <div className="space-y-6 text-lg text-white/70 font-medium leading-relaxed relative z-10">
-                  {home.differentiator.points.map((pt, i) => (
-                    <motion.div
-                      key={i}
-                      variants={fadeInUp}
-                      className="flex gap-4"
-                    >
-                      <span className="text-emerald-500 mt-1">
-                        <ChevronRight className="w-5 h-5" />
-                      </span>
-                      <p className={i >= 3 ? "text-white" : ""}>{pt}</p>
-                    </motion.div>
-                  ))}
-                </div>
+            {/* Right: Points list */}
+            <motion.div
+              variants={fadeInUp}
+              className="lg:w-2/3 flex-1 flex flex-col justify-center"
+            >
+              <div className="space-y-6 text-lg text-white/70 font-medium leading-relaxed">
+                {home.differentiator.points.map((pt, i) => (
+                  <div key={i} className="flex gap-4 group">
+                    <span className="text-emerald-500 mt-1 shrink-0 group-hover:scale-125 transition-transform">
+                      <ChevronRight className="w-5 h-5" />
+                    </span>
+                    <p className={i >= 3 ? "text-white" : ""}>{pt}</p>
+                  </div>
+                ))}
               </div>
             </motion.div>
-          )}
-        </div>
-      </div>
+          </div>
+
+          {/* Bottom Center: Button */}
+          <motion.div
+            variants={fadeInUp}
+            className="mt-16 flex justify-center w-full"
+          >
+            <PrimaryButton
+              theme="emerald"
+              href="/about"
+              icon={<ArrowRight className="w-4 h-4" />}
+            >
+              Discover Philosophy
+            </PrimaryButton>
+          </motion.div>
+        </motion.div>
+      )}
 
       {/* ─────────────────────────────────────────────────────────
           FEATURED PROJECTS (New)
@@ -472,7 +602,7 @@ function Index() {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
-          className="max-w-7xl mx-auto px-6 py-24 lg:px-16 relative z-10"
+          className="max-w-7xl mx-auto px-6 py-24 lg:px-16 relative z-10 border-t border-white/5"
         >
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
             <motion.div variants={fadeInUp} className="max-w-2xl">
@@ -557,22 +687,18 @@ function Index() {
           variants={staggerContainer}
           className="max-w-7xl mx-auto px-6 py-24 lg:px-16 relative z-10 border-t border-white/5"
         >
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <motion.p
-              variants={fadeInUp}
-              className="text-sm font-mono tracking-widest text-sky-400 mb-2 uppercase"
-            >
-              Recommendations
-            </motion.p>
-            <motion.h3
-              variants={fadeInUp}
-              className="text-4xl font-bold text-white tracking-tight mb-4"
-            >
-              {home.testimonials.title}
-            </motion.h3>
-            <motion.p variants={fadeInUp} className="text-lg text-white/50">
-              {home.testimonials.subtitle}
-            </motion.p>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+            <motion.div variants={fadeInUp} className="max-w-2xl">
+              <p className="text-sm font-mono tracking-widest text-sky-400 mb-2 uppercase">
+                Recommendations
+              </p>
+              <h3 className="text-4xl font-bold text-white tracking-tight mb-4">
+                {home.testimonials.title}
+              </h3>
+              <p className="text-lg text-white/50">
+                {home.testimonials.subtitle}
+              </p>
+            </motion.div>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
