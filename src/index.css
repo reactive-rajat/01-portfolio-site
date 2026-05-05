@@ -193,8 +193,8 @@
   }
 
   .tab-dot {
-    @apply absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-orange-500;
-    box-shadow: 0 0 8px rgba(249, 115, 22, 0.8);
+    @apply absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[hsl(var(--theme-base))];
+    box-shadow: 0 0 8px hsl(var(--theme-base) / 0.8);
   }
 
 

@@ -36,8 +36,8 @@ function SimpleCard(props) {
           isClickable ? "cursor-pointer group/card" : ""
         } ${
           isActive
-            ? "border-orange-500/50 bg-orange-500/5 shadow-[0_0_30px_-10px_rgba(249,115,22,0.3)] translate-y-[-4px]"
-            : "border-white/10 hover:border-orange-500/30 hover:shadow-[0_0_20px_-10px_rgba(249,115,22,0.1)] hover:-translate-y-1"
+            ? "border-[hsl(var(--theme-base)/0.5)] bg-[hsl(var(--theme-base)/0.05)] shadow-[0_0_30px_-10px_hsl(var(--theme-base)/0.3)] translate-y-[-4px]"
+            : "border-white/10 hover:border-[hsl(var(--theme-base)/0.3)] hover:shadow-[0_0_20px_-10px_hsl(var(--theme-base)/0.1)] hover:-translate-y-1"
         } ` + className
       }
     >
@@ -69,8 +69,8 @@ function TimelineItem(props) {
         <div
           className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full border bg-[#0a0a0a] transition-all duration-300 shadow-lg ${
             isActive
-              ? "border-orange-500/50 text-orange-500 scale-110 shadow-orange-500/20"
-              : "border-white/10 text-gray-400 group-hover:border-orange-500/30 group-hover:text-orange-400"
+              ? "border-[hsl(var(--theme-base)/0.5)] text-[hsl(var(--theme-base))] scale-110 shadow-[hsl(var(--theme-base)/0.2)]"
+              : "border-white/10 text-gray-400 group-hover:border-[hsl(var(--theme-base)/0.3)] group-hover:text-[hsl(var(--theme-base))]"
           }`}
         >
           {ItemIcon && <ItemIcon size={18} />}
@@ -79,8 +79,8 @@ function TimelineItem(props) {
           <div
             className={`h-full w-px bg-gradient-to-b transition-colors duration-300 ${
               isActive
-                ? "from-orange-500/40 via-orange-500/10 to-transparent"
-                : "from-white/10 to-transparent group-hover:from-orange-500/20"
+                ? "from-[hsl(var(--theme-base)/0.4)] via-[hsl(var(--theme-base)/0.1)] to-transparent"
+                : "from-white/10 to-transparent group-hover:from-[hsl(var(--theme-base)/0.2)]"
             }`}
           />
         )}
@@ -101,8 +101,8 @@ function TimelineItem(props) {
             <div
               className={`absolute top-0 right-0 z-10 flex h-10 w-11 items-center justify-center rounded-[16px] rounded-bl-[24px] rounded-tl-none rounded-br-none border border-r-0 border-t-0 transition-all duration-500 ${
                 isActive
-                  ? "border-orange-500/50 bg-orange-500/20 text-orange-400"
-                  : "border-white/10 bg-white/5 text-gray-500 group-hover/card:border-orange-500/40 group-hover/card:bg-orange-500/10 group-hover/card:text-orange-400 group-hover/card:scale-110 group-hover/card:rotate-12"
+                  ? "border-[hsl(var(--theme-base)/0.5)] bg-[hsl(var(--theme-base)/0.2)] text-[hsl(var(--theme-base))]"
+                  : "border-white/10 bg-white/5 text-gray-500 group-hover/card:border-[hsl(var(--theme-base)/0.4)] group-hover/card:bg-[hsl(var(--theme-base)/0.1)] group-hover/card:text-[hsl(var(--theme-base))] group-hover/card:scale-110 group-hover/card:rotate-12"
               }`}
             >
               <ArrowUpRight size={20} />
@@ -112,8 +112,8 @@ function TimelineItem(props) {
           <h3
             className={`text-lg lg:text-xl font-semibold transition-colors duration-300 pr-10 ${
               isActive
-                ? "text-[hsl(var(--coral))]"
-                : "text-white group-hover/card:text-[hsl(var(--coral))]/80"
+                ? "text-[hsl(var(--theme-base))]"
+                : "text-white group-hover/card:text-[hsl(var(--theme-base)/0.8)]"
             }`}
           >
             {title}
@@ -128,10 +128,10 @@ function TimelineItem(props) {
             <div className="inline-flex items-center gap-2.5 text-xs italic font-medium transition-colors duration-300">
               <CalendarIcon
                 size={16}
-                className={`transition-colors duration-300 ${isActive ? "text-[hsl(var(--coral))]" : ""}`}
+                className={`transition-colors duration-300 ${isActive ? "text-[hsl(var(--theme-base))]" : ""}`}
               />
               <span
-                className={`mt-[1px] ${isActive ? "text-[hsl(var(--coral))]" : ""}`}
+                className={`mt-[1px] ${isActive ? "text-[hsl(var(--theme-base))]" : ""}`}
               >
                 {date}
               </span>
@@ -141,10 +141,10 @@ function TimelineItem(props) {
               <div className="inline-flex items-center gap-2.5 text-xs italic font-medium transition-colors duration-300">
                 <GraduationCap
                   size={16}
-                  className={`transition-colors duration-300 ${isActive ? "text-orange-500/70" : "text-gray-500"}`}
+                  className={`transition-colors duration-300 ${isActive ? "text-[hsl(var(--theme-base)/0.7)]" : "text-gray-500"}`}
                 />
                 <span
-                  className={`${isActive ? "text-[hsl(var(--coral))]" : ""} mt-[1px]`}
+                  className={`${isActive ? "text-[hsl(var(--theme-base))]" : ""} mt-[1px]`}
                 >
                   {percentage}
                 </span>
@@ -166,7 +166,7 @@ function TimelineItem(props) {
                         <CheckCircle2
                           size={16}
                           className={
-                            isActive ? "text-orange-500/70" : "text-white/20"
+                            isActive ? "text-[hsl(var(--theme-base)/0.7)]" : "text-white/20"
                           }
                         />
                       </div>
@@ -183,7 +183,7 @@ function TimelineItem(props) {
                 }}
                 className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border text-[11px] font-bold uppercase tracking-wider transition-all duration-300 ${
                   isActive
-                    ? "bg-orange-500/10 border-orange-500/20 text-orange-400 hover:bg-orange-500/20"
+                    ? "bg-[hsl(var(--theme-base)/0.1)] border-[hsl(var(--theme-base)/0.2)] text-[hsl(var(--theme-base))] hover:bg-[hsl(var(--theme-base)/0.2)]"
                     : "bg-white/5 border-white/10 text-gray-400 hover:text-white hover:border-white/20"
                 }`}
               >
@@ -322,9 +322,9 @@ function About() {
   );
 
   const rightContent = (
-    <div className="relative mt-8">
-      <div className="sticky top-4 z-20 mb-10 flex justify-center">
-        <div className="grid w-full lg:w-2/3 grid-cols-[repeat(auto-fit,minmax(0,1fr))] justify-center gap-1.5 p-1 px-2 rounded-2xl border border-white/10 bg-black/60 backdrop-blur-xl shadow-2xl">
+    <div className="relative mt-8 flex flex-col lg:flex-row gap-6 lg:gap-10 items-start">
+      <div className="sticky top-4 z-20 w-full lg:w-1/4 flex-shrink-0">
+        <div className="flex flex-row lg:flex-col gap-1.5 p-2 rounded-2xl border border-white/10 bg-black/60 backdrop-blur-xl shadow-2xl overflow-x-auto lg:overflow-visible hide-scrollbar">
           {tabs.map(function (tab) {
             const TabIcon = getIcon(tab.icon);
             const isActive = activeTab === tab.label;
@@ -336,17 +336,17 @@ function About() {
                   setActiveTab(tab.label);
                 }}
                 className={
-                  "relative group flex flex-col items-center justify-center gap-1.5 rounded-xl transition-all duration-300 " +
-                  "min-w-[85px] py-2 px-1 " +
+                  "relative group flex flex-col lg:flex-row items-center lg:items-start lg:justify-start justify-center gap-2 lg:gap-3 rounded-xl transition-all duration-300 " +
+                  "min-w-[85px] lg:min-w-0 w-full py-2 px-2 lg:px-3 lg:py-3 text-center lg:text-left " +
                   (isActive
-                    ? "text-orange-500 scale-105"
-                    : "text-gray-400 hover:text-white")
+                    ? "text-[hsl(var(--theme-base))] bg-white/5 scale-105 lg:scale-100 lg:bg-white/10"
+                    : "text-gray-400 hover:text-white hover:bg-white/5")
                 }
               >
                 <div
                   className={
-                    "flex items-center justify-center w-10 h-10 rounded-lg transition-colors " +
-                    (isActive ? "bg-orange-500/10" : "bg-white/5")
+                    "flex shrink-0 items-center justify-center w-10 h-10 rounded-lg transition-colors " +
+                    (isActive ? "bg-[hsl(var(--theme-base))/0.1]" : "bg-white/5")
                   }
                 >
                   {TabIcon && (
@@ -359,17 +359,18 @@ function About() {
                     />
                   )}
                 </div>
-                <span className="text-[11px] font-semibold uppercase tracking-wider">
+                <span className="text-[11px] font-semibold uppercase tracking-wider mt-1 lg:mt-0 lg:self-center">
                   {tab.label}
                 </span>
-                {isActive && <div className="tab-dot" />}
+                {isActive && <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-[hsl(var(--theme-base))] rounded-l-full hidden lg:block" />}
+                {isActive && <div className="tab-dot lg:hidden" />}
               </button>
             );
           })}
         </div>
       </div>
 
-      <div className="relative pb-10 min-h-[500px]">
+      <div className="relative pb-10 min-h-[500px] flex-1 w-full">
         <AnimatePresence mode="wait">
           {activeTabData && (
             <motion.div
@@ -382,7 +383,7 @@ function About() {
             >
               {activeTabData.timelineDescription && (
                 <div className="mb-8 p-5 rounded-2xl bg-white/5 border border-white/10 flex items-start gap-4 text-white/70">
-                  <div className="w-10 h-10 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-400 shrink-0">
+                  <div className="w-10 h-10 rounded-full bg-[hsl(var(--theme-base)/0.1)] flex items-center justify-center text-[hsl(var(--theme-base))] shrink-0">
                     {React.createElement(getIcon(activeTabData.icon), {
                       size: 20,
                     })}
@@ -434,7 +435,7 @@ function About() {
     >
       <motion.div variants={fadeInUp} className="flex justify-between items-end mb-12">
         <div>
-          <p className="text-sm font-mono tracking-widest text-violet-400 mb-2 uppercase">
+          <p className="text-sm font-mono tracking-widest text-[hsl(var(--theme-base))] mb-2 uppercase">
             Core Principles
           </p>
           <h3 className="text-4xl font-bold text-white tracking-tight">
@@ -453,13 +454,13 @@ function About() {
               whileHover={{ y: -5 }}
               className="group relative p-8 rounded-3xl border border-white/10 bg-white/[0.02] backdrop-blur-md overflow-hidden"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-violet-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--theme-base)/0.1)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
               <div className="relative z-10">
-                <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-violet-400 mb-6 group-hover:scale-110 group-hover:bg-violet-500/20 group-hover:text-violet-300 transition-all duration-300 shadow-[0_0_20px_transparent] group-hover:shadow-[0_0_20px_rgba(139,92,246,0.2)]">
+                <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-[hsl(var(--theme-base))] mb-6 group-hover:scale-110 group-hover:bg-[hsl(var(--theme-base)/0.2)] group-hover:text-[hsl(var(--theme-base)/0.8)] transition-all duration-300 shadow-[0_0_20px_transparent] group-hover:shadow-[0_0_20px_hsl(var(--theme-base)/0.2)]">
                   {BlockIcon && <BlockIcon size={26} />}
                 </div>
-                <h4 className="text-xl font-bold text-white mb-3 group-hover:text-violet-100 transition-colors">
+                <h4 className="text-xl font-bold text-white mb-3 group-hover:text-[hsl(var(--theme-base)/0.9)] transition-colors">
                   {block.title}
                 </h4>
                 <p className="text-white/60 leading-relaxed group-hover:text-white/80 transition-colors">
@@ -483,7 +484,7 @@ function About() {
     >
       <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
         <motion.div variants={fadeInUp} className="lg:w-1/3 flex-shrink-0">
-          <p className="text-sm font-mono tracking-widest text-emerald-400 mb-2 uppercase">
+          <p className="text-sm font-mono tracking-widest text-[hsl(var(--theme-base))] mb-2 uppercase">
             Background
           </p>
           <h3 className="text-4xl font-bold text-white tracking-tight mb-4">
@@ -501,12 +502,12 @@ function About() {
 
             {home.experience.items.map((item, i) => (
               <div key={i} className="relative flex flex-col items-center flex-1 group">
-                <div className="mb-6 font-mono text-xs text-emerald-400/90 bg-emerald-400/5 px-3 py-1 rounded-full border border-emerald-500/10">
+                <div className="mb-6 font-mono text-xs text-[hsl(var(--theme-base)/0.9)] bg-[hsl(var(--theme-base)/0.05)] px-3 py-1 rounded-full border border-[hsl(var(--theme-base)/0.1)]">
                   {item.date}
                 </div>
-                <div className="w-5 h-5 rounded-full border-4 border-[#0a0f16] bg-emerald-500 shadow-[0_0_0_2px_hsl(var(--emerald)/0.3)] relative z-10 group-hover:scale-125 transition-transform duration-300" />
+                <div className="w-5 h-5 rounded-full border-4 border-[#0a0f16] bg-[hsl(var(--theme-base))] shadow-[0_0_0_2px_hsl(var(--theme-base)/0.3)] relative z-10 group-hover:scale-125 transition-transform duration-300" />
                 <div className="mt-8 text-center px-4 w-full">
-                  <h4 className="font-bold text-white text-lg mb-2 group-hover:text-emerald-400 transition-colors">
+                  <h4 className="font-bold text-white text-lg mb-2 group-hover:text-[hsl(var(--theme-base))] transition-colors">
                     {item.title}
                   </h4>
                   <p className="text-sm text-white/50 leading-relaxed max-w-[240px] mx-auto">
@@ -521,7 +522,6 @@ function About() {
 
       <motion.div variants={fadeInUp} className="mt-16 flex justify-center w-full">
         <PrimaryButton
-          theme="emerald"
           href="/about"
           icon={<ArrowRight className="w-4 h-4" />}
         >
@@ -541,7 +541,7 @@ function About() {
     >
       <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
         <motion.div variants={fadeInUp} className="lg:w-1/3 flex-shrink-0">
-          <p className="text-sm font-mono tracking-widest text-emerald-400 mb-2 uppercase">
+          <p className="text-sm font-mono tracking-widest text-[hsl(var(--theme-base))] mb-2 uppercase">
             Secret Sauce
           </p>
           <h3 className="text-4xl font-bold text-white tracking-tight mb-4">
@@ -556,7 +556,7 @@ function About() {
           <div className="space-y-6 text-lg text-white/70 font-medium leading-relaxed">
             {home.differentiator.points.map((pt, i) => (
               <div key={i} className="flex gap-4 group">
-                <span className="text-emerald-500 mt-1 shrink-0 group-hover:scale-125 transition-transform">
+                <span className="text-[hsl(var(--theme-base))] mt-1 shrink-0 group-hover:scale-125 transition-transform">
                   <ChevronRight className="w-5 h-5" />
                 </span>
                 <p className={i >= 3 ? "text-white" : ""}>{pt}</p>
@@ -568,7 +568,6 @@ function About() {
 
       <motion.div variants={fadeInUp} className="mt-16 flex justify-center w-full">
         <PrimaryButton
-          theme="emerald"
           href="/about"
           icon={<ArrowRight className="w-4 h-4" />}
         >
@@ -588,7 +587,7 @@ function About() {
     >
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
         <motion.div variants={fadeInUp} className="max-w-2xl">
-          <p className="text-sm font-mono tracking-widest text-sky-400 mb-2 uppercase">
+          <p className="text-sm font-mono tracking-widest text-[hsl(var(--theme-base))] mb-2 uppercase">
             Recommendations
           </p>
           <h3 className="text-4xl font-bold text-white tracking-tight mb-4">
@@ -603,9 +602,9 @@ function About() {
           <motion.div
             key={i}
             variants={fadeInUp}
-            className="p-8 rounded-3xl border border-white/10 bg-white/[0.03] relative group hover:border-sky-500/30 transition-colors"
+            className="p-8 rounded-3xl border border-white/10 bg-white/[0.03] relative group hover:border-[hsl(var(--theme-base)/0.3)] transition-colors"
           >
-            <div className="absolute top-6 right-6 text-white/10 group-hover:text-sky-500/20 transition-colors">
+            <div className="absolute top-6 right-6 text-white/10 group-hover:text-[hsl(var(--theme-base)/0.2)] transition-colors">
               <Quote size={40} />
             </div>
 
@@ -623,7 +622,7 @@ function About() {
               </div>
               <div>
                 <h5 className="font-bold text-white">{testimonial.name}</h5>
-                <p className="text-xs text-sky-400">{testimonial.role}</p>
+                <p className="text-xs text-[hsl(var(--theme-base))]">{testimonial.role}</p>
               </div>
             </div>
           </motion.div>

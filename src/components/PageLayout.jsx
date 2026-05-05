@@ -65,6 +65,7 @@ export function PageLayout(props) {
         className="page-shell relative z-10 min-h-[calc(100svh-20rem)] lg:min-h-[100svh] px-1 py-10 md:py-12 lg:px-16 grid items-center"
         style={{
           "--accent": "hsl(var(--" + themeName + "))",
+          "--theme-base": "var(--" + themeName + ")",
         }}
       >
         <div className="max-w-6xl mx-auto page-enter w-full px-5">
