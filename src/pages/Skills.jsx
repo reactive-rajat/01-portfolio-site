@@ -1,16 +1,90 @@
 import React from "react";
 import { PageLayout } from "../components/PageLayout";
-import { CheckCircle, ArrowRight } from "lucide-react";
+import { Code2, Layers, Palette, Bot, CheckCircle } from "lucide-react";
 import { useContent } from "../context/ContentContext";
-import PrimaryButton from "../components/PrimaryButton";
-import Icon from "../components/Icon";
 import { motion } from "framer-motion";
 import { fadeInUp, staggerContainer } from "../utils/motionVariants";
 
-function SimpleCard(props) {
-  const children = props.children;
-  const className = props.className || "";
-  return <div className={"simple-card " + className}>{children}</div>;
+// Map category titles to their icon and a decorative label
+const CATEGORY_META = {
+  "Frontend Engineering": {
+    Icon: Code2,
+    label: "Frontend",
+    decorSize: "w-28 h-28",
+  },
+  "Design Systems": {
+    Icon: Layers,
+    label: "Systems",
+    decorSize: "w-28 h-28",
+  },
+  "UI & Interaction Design": {
+    Icon: Palette,
+    label: "Design",
+    decorSize: "w-28 h-28",
+  },
+  "AI & Workflow Tools": {
+    Icon: Bot,
+    label: "AI Tools",
+    decorSize: "w-28 h-28",
+  },
+};
+
+// Fallback for any unrecognised category
+function getIconForCategory(title) {
+  return CATEGORY_META[title]?.Icon || Code2;
+}
+
+function SkillPill({ item }) {
+  return (
+    <span
+      className={[
+        "px-3.5 py-1.5 rounded-full border text-sm font-medium",
+        "border-white/15 bg-white/5 text-white/80",
+        "hover:border-[hsl(var(--theme-base)/0.55)] hover:bg-[hsl(var(--theme-base)/0.12)] hover:text-[hsl(var(--theme-base))]",
+        "transition-all duration-250 cursor-default select-none",
+      ].join(" ")}
+    >
+      {item}
+    </span>
+  );
+}
+
+function CategoryCard({ cat, index }) {
+  const CategoryIcon = getIconForCategory(cat.title);
+
+  return (
+    <motion.div
+      variants={fadeInUp}
+      className="relative rounded-2xl border border-white/8 bg-white/[0.025] backdrop-blur-md overflow-hidden group hover:border-[hsl(var(--theme-base)/0.35)] transition-colors duration-300"
+    >
+      {/* Hover glow overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--theme-base)/0.06)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+      {/* Decorative large icon — top right */}
+      <div className="absolute top-4 right-4 opacity-[0.06] group-hover:opacity-[0.12] transition-opacity duration-500 pointer-events-none">
+        <CategoryIcon className="w-28 h-28 text-[hsl(var(--theme-base))]" />
+      </div>
+
+      <div className="relative z-10 p-6 lg:p-7">
+        {/* Category header */}
+        <div className="flex items-center gap-3 mb-5">
+          <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-[hsl(var(--theme-base)/0.1)] border border-[hsl(var(--theme-base)/0.2)] text-[hsl(var(--theme-base))] group-hover:bg-[hsl(var(--theme-base)/0.18)] transition-colors duration-300 shrink-0">
+            <CategoryIcon size={18} />
+          </div>
+          <h3 className="text-sm font-bold uppercase tracking-[0.14em] text-[hsl(var(--theme-base))]">
+            {cat.title}
+          </h3>
+        </div>
+
+        {/* Skill pills */}
+        <div className="flex flex-wrap gap-2">
+          {cat.items.map((item) => (
+            <SkillPill key={item} item={item} />
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  );
 }
 
 function Skills() {
@@ -24,149 +98,72 @@ function Skills() {
     );
   }
 
-  const { skills: skillsData, home } = content;
+  const { skills: skillsData } = content;
   const { meta } = skillsData;
 
-  // Support new schema (categories) and old schema (levels + tools + craft)
-  const hasCategories = Array.isArray(skillsData.categories);
-  const hasLevels = Array.isArray(skillsData.levels);
-
-  const coreTechnologiesSection =
-    home?.featuredSkills && skillsData.categories ? (
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={staggerContainer}
-        className="max-w-7xl mx-auto px-6 py-24 lg:px-16 relative z-10 border-t border-white/5"
-        style={{
-          "--theme-base": "var(--" + meta.theme + ")",
-          "--accent": "hsl(var(--" + meta.theme + "))"
-        }}
-      >
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-          <motion.div variants={fadeInUp} className="max-w-2xl">
-            <p className="text-sm font-mono tracking-widest text-[hsl(var(--theme-base))] mb-2 uppercase">
-              Technical Arsenal
-            </p>
-            <h3 className="text-4xl font-bold text-white tracking-tight mb-4">
-              {home.featuredSkills.title}
-            </h3>
-            <p className="text-lg text-white/50">{home.featuredSkills.subtitle}</p>
-          </motion.div>
-          <motion.div variants={fadeInUp}>
-            <PrimaryButton
-              href="/skills"
-              icon={<ArrowRight className="w-4 h-4" />}
-            >
-              {home.featuredSkills.ctaLabel}
-            </PrimaryButton>
-          </motion.div>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-6">
-          {skillsData.categories.slice(0, 2).map((cat, idx) => (
-            <motion.div
-              key={cat.title}
-              variants={fadeInUp}
-              className="p-8 rounded-3xl border border-[hsl(var(--theme-base)/0.2)] bg-[hsl(var(--theme-base)/0.03)] backdrop-blur-md relative overflow-hidden group hover:border-[hsl(var(--theme-base)/0.4)] transition-colors"
-            >
-              <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
-                <Icon
-                  name={idx === 0 ? "Zap" : "Wrench"}
-                  className="w-32 h-32 text-[hsl(var(--theme-base))]"
-                />
-              </div>
-
-              <h4 className="text-lg font-bold uppercase tracking-[0.15em] text-[hsl(var(--theme-base))] mb-6 relative z-10">
-                {cat.title}
-              </h4>
-              <div className="flex flex-wrap gap-2.5 relative z-10">
-                {cat.items.map((item) => (
-                  <span
-                    key={item}
-                    className="px-4 py-2 rounded-xl border border-white/10 bg-white/5 text-sm font-medium text-white/90 hover:bg-[hsl(var(--theme-base)/0.2)] hover:border-[hsl(var(--theme-base)/0.5)] hover:text-[hsl(var(--theme-base)/0.9)] transition-all cursor-default"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </motion.div>
-    ) : null;
-
-  // --- NEW SCHEMA: categories ---
-  if (hasCategories) {
+  // ── New schema: categories ──
+  if (Array.isArray(skillsData.categories)) {
     const categories = skillsData.categories;
     const closingNote = skillsData.closingNote;
 
-    return (
-      <>
-        {coreTechnologiesSection}
-        <PageLayout
-          themeName={meta.theme}
-          title={meta.title}
-          letter={meta.letter}
-          icon={meta.icon}
-        >
-          <div className="grid md:grid-cols-2 gap-6">
-            {categories.map((cat) => (
-              <SimpleCard key={cat.title} className="p-6">
-                <h3 className="text-base font-bold uppercase tracking-[0.15em] text-[hsl(var(--theme-base))] mb-5">
-                  {cat.title}
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {cat.items.map((item) => (
-                    <span
-                      key={item}
-                      className="px-3 py-1.5 rounded-lg border border-[hsl(var(--theme-base)/0.2)] bg-[hsl(var(--theme-base)/0.05)] text-sm font-medium text-[hsl(var(--theme-base))] hover:bg-[hsl(var(--theme-base)/0.12)] hover:border-[hsl(var(--theme-base)/0.4)] transition-all cursor-default"
-                    >
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </SimpleCard>
-            ))}
-          </div>
+    const mainContent = (
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={staggerContainer}
+        className="space-y-6"
+      >
+        <div className="grid md:grid-cols-2 gap-5">
+          {categories.map((cat, index) => (
+            <CategoryCard key={cat.title} cat={cat} index={index} />
+          ))}
+        </div>
 
-          {closingNote && (
-            <div className="mt-8 flex items-start gap-3 px-6 py-5 rounded-2xl border border-[hsl(var(--theme-base)/0.15)] bg-[hsl(var(--theme-base)/0.04)]">
-              <CheckCircle className="w-5 h-5 text-[hsl(var(--theme-base))] shrink-0 mt-0.5" />
-              <p className="text-muted-foreground leading-relaxed italic">
-                {closingNote}
-              </p>
-            </div>
-          )}
-        </PageLayout>
-      </>
+        {closingNote && (
+          <motion.div
+            variants={fadeInUp}
+            className="flex items-start gap-3 px-5 py-4 rounded-2xl border border-[hsl(var(--theme-base)/0.15)] bg-[hsl(var(--theme-base)/0.04)]"
+          >
+            <CheckCircle className="w-5 h-5 text-[hsl(var(--theme-base))] shrink-0 mt-0.5" />
+            <p className="text-white/50 leading-relaxed italic text-sm">
+              {closingNote}
+            </p>
+          </motion.div>
+        )}
+      </motion.div>
+    );
+
+    return (
+      <PageLayout
+        themeName={meta.theme}
+        title={meta.title}
+        letter={meta.letter}
+        icon={meta.icon}
+        right={mainContent}
+      />
     );
   }
 
-  // --- OLD SCHEMA: levels + tools + craft ---
+  // ── Legacy schema: levels + tools + craft ──
   const levels = skillsData.levels || [];
   const tools = skillsData.tools || [];
   const craft = skillsData.craft || [];
 
-  const leftContent = (
-    <div className="space-y-10">
+  const legacyContent = (
+    <div className="space-y-8">
       {levels.map(function (category) {
         return (
-          <div key={category.label} className="space-y-6">
-            <div className="flex items-center gap-3">
-              <span className="text-sm font-bold uppercase tracking-[0.2em] text-[hsl(var(--theme-base))]">
-                {category.label}
-              </span>
-            </div>
-
-            <div
-              className="grid sm:grid-cols-2 gap-4"
-              style={{ marginTop: "0.8rem" }}
-            >
+          <div key={category.label} className="space-y-4">
+            <span className="text-sm font-bold uppercase tracking-[0.2em] text-[hsl(var(--theme-base))]">
+              {category.label}
+            </span>
+            <div className="grid sm:grid-cols-2 gap-4" style={{ marginTop: "0.8rem" }}>
               {category.skills.map(function (skill) {
                 return (
-                  <SimpleCard key={skill.name} className="p-5 pt-3.5">
+                  <div
+                    key={skill.name}
+                    className="simple-card p-5 pt-3.5"
+                  >
                     <div className="flex justify-between items-center mb-3">
                       <span className="text-base font-semibold text-foreground">
                         {skill.name}
@@ -181,74 +178,55 @@ function Skills() {
                         style={{ width: skill.percentage + "%" }}
                       />
                     </div>
-                  </SimpleCard>
+                  </div>
                 );
               })}
             </div>
           </div>
         );
       })}
-    </div>
-  );
 
-  const rightContent = (
-    <div className="space-y-8 mt-8">
       {tools.length > 0 && (
-        <section className="space-y-4">
-          <h3 className="text-xl font-bold tracking-tight text-foreground">
+        <div className="space-y-3 pt-4 border-t border-white/5">
+          <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-[hsl(var(--theme-base))]">
             {skillsData.labels?.tools || "Tools"}
           </h3>
-          <div className="rounded-2xl border border-[hsl(var(--theme-base)/0.1)] bg-[hsl(var(--theme-base)/0.02)] p-6">
-            <div className="flex flex-wrap gap-2">
-              {tools.map(function (tool) {
-                return (
-                  <span
-                    key={tool}
-                    className="px-3 py-1.5 rounded-lg border border-[hsl(var(--theme-base)/0.2)] bg-[hsl(var(--theme-base)/0.05)] text-sm font-medium text-[hsl(var(--theme-base))] hover:bg-[hsl(var(--theme-base)/0.1)] transition-all cursor-default"
-                  >
-                    {tool}
-                  </span>
-                );
-              })}
-            </div>
+          <div className="flex flex-wrap gap-2">
+            {tools.map(function (tool) {
+              return <SkillPill key={tool} item={tool} />;
+            })}
           </div>
-        </section>
+        </div>
       )}
 
       {craft.length > 0 && (
-        <section className="space-y-4 pt-1">
-          <h3 className="text-xl font-bold tracking-tight text-foreground">
+        <div className="space-y-4 pt-4 border-t border-white/5">
+          <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-[hsl(var(--theme-base))]">
             {skillsData.labels?.craft || "Capabilities"}
           </h3>
-          <div className="rounded-2xl border border-[hsl(var(--theme-base)/0.1)] bg-[hsl(var(--theme-base)/0.02)] p-6 grid gap-4">
+          <div className="grid gap-3">
             {craft.map(function (item, i) {
               return (
-                <div key={i} className="flex gap-4 items-start">
-                  <CheckCircle className="w-6 h-6 text-[hsl(var(--theme-base))] drop-shadow-[0_0_5px_hsl(var(--theme-base)/0.5)]" />
-                  <span className="text-muted-foreground leading-normal">
-                    {item}
-                  </span>
+                <div key={i} className="flex gap-3 items-start">
+                  <CheckCircle className="w-5 h-5 text-[hsl(var(--theme-base))] shrink-0 mt-0.5" />
+                  <span className="text-white/60 leading-normal">{item}</span>
                 </div>
               );
             })}
           </div>
-        </section>
+        </div>
       )}
     </div>
   );
 
   return (
-    <>
-      {coreTechnologiesSection}
-      <PageLayout
-        themeName={meta.theme}
-        title={meta.title}
-        letter={meta.letter}
-        icon={meta.icon}
-        left={leftContent}
-        right={rightContent}
-      />
-    </>
+    <PageLayout
+      themeName={meta.theme}
+      title={meta.title}
+      letter={meta.letter}
+      icon={meta.icon}
+      right={legacyContent}
+    />
   );
 }
 

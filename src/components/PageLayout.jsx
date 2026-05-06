@@ -11,6 +11,8 @@ export function PageLayout(props) {
   const children = props.children;
   const left = props.left;
   const right = props.right;
+  const description = props.description;
+  const action = props.action;
 
   if (!themeName) {
     return null;
@@ -71,7 +73,9 @@ export function PageLayout(props) {
         <div className="max-w-6xl mx-auto page-enter w-full px-5">
           {hasSplit ? (
             <div className="page-stack flex flex-col gap-10 lg:gap-14 w-full">
-              <div className="page-header flex flex-col items-start gap-8 mb-4">
+              {/* ── Hero Header ── */}
+              <div className="page-header flex flex-col items-start gap-6 mb-4">
+                {/* Row: back button + title */}
                 <div className="flex items-center gap-6">
                   <Link
                     to="/"
@@ -110,21 +114,39 @@ export function PageLayout(props) {
                   </h1>
                 </div>
 
-                <div className="flex flex-col gap-6 w-full max-w-3xl">
-                  <div className="page-intro-content w-full">{left}</div>
-                </div>
+                {/* Optional simple description paragraph */}
+                {description && (
+                  <p className="text-base lg:text-lg leading-relaxed text-white/60 max-w-2xl">
+                    {description}
+                  </p>
+                )}
+
+                {/* Optional action row (buttons / social links etc.) */}
+                {action && (
+                  <div className="flex flex-wrap items-center gap-3">
+                    {action}
+                  </div>
+                )}
+
+                {/* Complex left-column intro (About page style) */}
+                {left && (
+                  <div className="flex flex-col gap-6 w-full max-w-3xl">
+                    <div className="page-intro-content w-full">{left}</div>
+                  </div>
+                )}
               </div>
 
               <div className="page-main-content w-full">{rightContent}</div>
             </div>
           ) : (
             <>
-              <div className="page-header flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-10 md:mb-12">
+              <div className="page-header flex flex-col gap-6 mb-10 md:mb-12">
+                {/* Row: back button + title */}
                 <div className="flex items-center gap-6">
                   <Link
                     to="/"
                     className={
-                      "page-back group flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-full border transition-all duration-300 hover:scale-110 " +
+                      "page-back group flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-full border transition-all duration-300 hover:scale-110 shrink-0 " +
                       styles.border +
                       " " +
                       styles.bg
@@ -159,8 +181,23 @@ export function PageLayout(props) {
                   </h1>
                 </div>
 
+                {/* Optional description */}
+                {description && (
+                  <p className="text-base lg:text-lg leading-relaxed text-white/60 max-w-2xl">
+                    {description}
+                  </p>
+                )}
+
+                {/* Optional action */}
+                {action && (
+                  <div className="flex flex-wrap items-center gap-3">
+                    {action}
+                  </div>
+                )}
+
+                {/* headerContent (Portfolio page thumbnail bar etc.) */}
                 {props.headerContent && (
-                  <div className="w-full lg:w-auto mt-4 lg:mt-0">
+                  <div className="w-full mt-2">
                     {props.headerContent}
                   </div>
                 )}
