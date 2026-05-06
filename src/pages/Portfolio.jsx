@@ -6,6 +6,7 @@ import {
   ChevronLeft,
   ChevronRight,
   ArrowUpRight,
+  ArrowRight,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useIsDesktop } from "../hooks/useIsDesktop";
@@ -19,8 +20,8 @@ function ProjectCard({ project }) {
       target={project.url && project.url !== "#" ? "_blank" : undefined}
       rel="noopener noreferrer"
       variants={fadeInUp}
-      whileHover={{ y: -6 }}
-      className="group relative rounded-2xl overflow-hidden border border-white/8 bg-white/[0.02] backdrop-blur-md hover:border-[hsl(var(--theme-base)/0.4)] transition-colors duration-300 flex flex-col"
+      whileHover={{ y: -4 }}
+      className="group relative flex flex-col rounded-2xl border border-white/10 hover:border-[hsl(var(--theme-base)/0.3)] hover:shadow-[0_8px_30px_-12px_hsl(var(--theme-base)/0.2)] bg-white/[0.02] backdrop-blur-md overflow-hidden transition-all duration-500"
     >
       {/* Thumbnail */}
       <div className="relative h-44 overflow-hidden bg-white/5 shrink-0">
@@ -36,14 +37,11 @@ function ProjectCard({ project }) {
       {/* Info */}
       <div className="p-5 flex flex-col flex-1 gap-3">
         <div className="flex items-start justify-between gap-3">
-          <h4 className="text-base font-bold text-white leading-snug group-hover:text-[hsl(var(--theme-base)/0.9)] transition-colors">
+          <h4 className="type-card-title text-white group-hover:text-[hsl(var(--theme-base)/0.9)] transition-colors pr-6">
             {project.title}
           </h4>
-          <div className="shrink-0 w-8 h-8 rounded-full border border-white/15 flex items-center justify-center text-white/40 group-hover:bg-[hsl(var(--theme-base)/0.2)] group-hover:border-[hsl(var(--theme-base)/0.5)] group-hover:text-[hsl(var(--theme-base))] transition-all">
-            <ArrowUpRight size={14} />
-          </div>
         </div>
-        <p className="text-sm text-white/50 leading-relaxed line-clamp-2 flex-1">
+        <p className="type-body-sm text-white/50 line-clamp-2 flex-1">
           {project.description}
         </p>
         <div className="flex flex-wrap gap-1.5 pt-1">
@@ -56,6 +54,11 @@ function ProjectCard({ project }) {
             </span>
           ))}
         </div>
+      </div>
+      
+      {/* Bottom Right Cutout Arrow Button */}
+      <div className="absolute bottom-0 right-0 w-12 h-12 rounded-xl !rounded-tr-none !rounded-bl-none !rounded-tl-3xl border border-[hsl(var(--theme-base)/0.4)] border-t-0 border-r-0 bg-[hsl(var(--theme-base)/0.15)] text-[hsl(var(--theme-base))] flex items-center justify-center opacity-0 scale-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-300 z-20">
+        <ArrowRight size={20} />
       </div>
     </motion.a>
   );
@@ -78,11 +81,11 @@ function WorkSection({ section, projects }) {
         <p className="text-xs font-mono tracking-widest text-[hsl(var(--theme-base))] uppercase mb-1">
           {section.type.replace(/_/g, " ")}
         </p>
-        <h2 className="text-2xl lg:text-3xl font-bold text-white tracking-tight">
+        <h2 className="type-section-title text-white">
           {section.heading}
         </h2>
         {section.subtitle && (
-          <p className="text-white/50 mt-2 text-sm lg:text-base leading-relaxed max-w-xl">
+          <p className="type-body text-white/50 mt-2 max-w-xl">
             {section.subtitle}
           </p>
         )}

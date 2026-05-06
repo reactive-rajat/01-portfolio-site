@@ -19,23 +19,16 @@ import PrimaryButton from "../components/PrimaryButton";
 import { AnimatePresence, motion } from "framer-motion";
 import { fadeInUp, staggerContainer } from "../utils/motionVariants";
 
-function SimpleCard(props) {
-  const children = props.children;
-  const className = props.className || "";
-  const isActive = props.isActive;
-  const isClickable = props.isClickable;
-  const onClick = props.onClick;
-
+// ── Card wrapper ─────────────────────────────────────────────────────────────
+function SimpleCard({ children, className = "", isActive, isClickable, onClick }) {
   return (
     <div
       onClick={onClick}
       className={
-        `simple-card transition-all duration-500 ${
-          isClickable ? "cursor-pointer group/card" : ""
-        } ${
+        `simple-card transition-all duration-500 ${isClickable ? "cursor-pointer group/card" : ""} ${
           isActive
-            ? "border-[hsl(var(--theme-base)/0.5)] bg-[hsl(var(--theme-base)/0.05)] shadow-[0_0_30px_-10px_hsl(var(--theme-base)/0.3)] translate-y-[-4px]"
-            : "border-white/10 hover:border-[hsl(var(--theme-base)/0.3)] hover:shadow-[0_0_20px_-10px_hsl(var(--theme-base)/0.1)] hover:-translate-y-1"
+            ? "border-[hsl(var(--theme-base)/0.5)] bg-[hsl(var(--theme-base)/0.05)] shadow-[0_0_30px_-10px_hsl(var(--theme-base)/0.3)] -translate-y-1"
+            : "border-white/10 hover:border-[hsl(var(--theme-base)/0.3)] hover:-translate-y-0.5"
         } ` + className
       }
     >
@@ -44,14 +37,12 @@ function SimpleCard(props) {
   );
 }
 
-function TimelineItem(props) {
-  const { title, subtitle, date, percentage, points, link, isLast, itemIcon: ItemIcon, calendarIcon: CalendarIcon, isActive, onMouseEnter } = props;
-  const [isExpanded, setIsExpanded] = React.useState(false);
-
+function TimelineItem({ title, subtitle, date, percentage, points, link, isLast, itemIcon: ItemIcon, isActive, onMouseEnter }) {
   return (
-    <div className="group relative flex gap-4 lg:gap-6 pb-5 last:pb-0" onMouseEnter={onMouseEnter}>
-      <div className="flex flex-col items-center">
-        <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full border bg-[#0a0a0a] transition-all duration-300 shadow-lg ${
+    <div className="group relative flex gap-4 lg:gap-6 pb-8 last:pb-0" onMouseEnter={onMouseEnter}>
+      {/* Dot + connector line */}
+      <div className="flex flex-col items-center mt-1">
+        <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full border bg-black transition-all duration-300 shadow-lg ${
           isActive
             ? "border-[hsl(var(--theme-base)/0.5)] text-[hsl(var(--theme-base))] scale-110"
             : "border-white/10 text-gray-400 group-hover:border-[hsl(var(--theme-base)/0.3)] group-hover:text-[hsl(var(--theme-base))]"
@@ -59,76 +50,138 @@ function TimelineItem(props) {
           {ItemIcon && <ItemIcon size={18} />}
         </div>
         {!isLast && (
-          <div className={`h-full w-px bg-gradient-to-b transition-colors duration-300 ${
+          <div className={`h-full w-px mt-2 bg-gradient-to-b transition-colors duration-300 ${
             isActive
-              ? "from-[hsl(var(--theme-base)/0.4)] via-[hsl(var(--theme-base)/0.1)] to-transparent"
-              : "from-white/10 to-transparent group-hover:from-[hsl(var(--theme-base)/0.2)]"
+              ? "from-[hsl(var(--theme-base)/0.4)] via-[hsl(var(--theme-base)/0.3)] to-transparent"
+              : "from-white/20 to-transparent group-hover:from-[hsl(var(--theme-base)/0.2)]"
           }`} />
         )}
       </div>
-      <div className="w-full pt-1">
-        <SimpleCard
-          className="p-4 lg:p-6 relative group/card overflow-hidden"
-          isActive={isActive}
-          isClickable={!!link}
-          onClick={link ? () => window.open(link, "_blank", "noopener,noreferrer") : undefined}
-        >
-          {link && (
-            <div className={`absolute top-0 right-0 z-10 flex h-10 w-11 items-center justify-center rounded-[16px] rounded-bl-[24px] rounded-tl-none rounded-br-none border border-r-0 border-t-0 transition-all duration-500 ${
-              isActive
-                ? "border-[hsl(var(--theme-base)/0.5)] bg-[hsl(var(--theme-base)/0.2)] text-[hsl(var(--theme-base))]"
-                : "border-white/10 bg-white/5 text-gray-500 group-hover/card:border-[hsl(var(--theme-base)/0.4)] group-hover/card:bg-[hsl(var(--theme-base)/0.1)] group-hover/card:text-[hsl(var(--theme-base))] group-hover/card:scale-110 group-hover/card:rotate-12"
-            }`}>
-              <ArrowUpRight size={20} />
-            </div>
-          )}
-          <h3 className={`text-lg lg:text-xl font-semibold transition-colors duration-300 pr-10 ${
-            isActive ? "text-[hsl(var(--theme-base))]" : "text-white group-hover/card:text-[hsl(var(--theme-base)/0.8)]"
+
+      {/* Content (No Card UI) */}
+      <div className={`w-full pt-1 relative ${isClickable(link) ? "cursor-pointer group/content" : ""}`}
+           onClick={link ? () => window.open(link, "_blank", "noopener,noreferrer") : undefined}>
+        
+        {/* Link badge (moved to sit inline with title if link exists, or just subtle icon) */}
+        <div className="flex items-start justify-between gap-4">
+          <h3 className={`type-card-title transition-colors duration-300 ${
+            isActive ? "text-[hsl(var(--theme-base))]" : "text-white group-hover/content:text-[hsl(var(--theme-base)/0.8)]"
           }`}>{title}</h3>
-          <p className="text-sm font-medium text-gray-400 mt-2 transition-colors duration-300 group-hover:text-gray-300">{subtitle}</p>
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-3 mt-4">
-            <div className="inline-flex items-center gap-2.5 text-xs italic font-medium">
-              <CalendarIcon size={16} className={isActive ? "text-[hsl(var(--theme-base))]" : ""} />
-              <span className={`mt-[1px] ${isActive ? "text-[hsl(var(--theme-base))]" : ""}`}>{date}</span>
-            </div>
-            {percentage && (
-              <div className="inline-flex items-center gap-2.5 text-xs italic font-medium">
-                <GraduationCap size={16} className={isActive ? "text-[hsl(var(--theme-base)/0.7)]" : "text-gray-500"} />
-                <span className={`mt-[1px] ${isActive ? "text-[hsl(var(--theme-base))]" : ""}`}>{percentage}</span>
-              </div>
-            )}
-          </div>
-          {points && points.length > 0 && (
-            <div className="mt-5">
-              {isExpanded && (
-                <ul className="space-y-2.5 mb-6 pt-4 border-t border-white/5 animate-in fade-in slide-in-from-top-2 duration-300">
-                  {points.map((point, i) => (
-                    <li key={i} className="flex items-start gap-3 text-[14px] leading-relaxed text-gray-400">
-                      <div className="mt-1 flex-shrink-0">
-                        <CheckCircle2 size={16} className={isActive ? "text-[hsl(var(--theme-base)/0.7)]" : "text-white/20"} />
-                      </div>
-                      <span>{point}</span>
-                    </li>
-                  ))}
-                </ul>
-              )}
-              <button
-                onClick={(e) => { e.stopPropagation(); setIsExpanded(!isExpanded); }}
-                className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border text-[11px] font-bold uppercase tracking-wider transition-all duration-300 ${
-                  isActive
-                    ? "bg-[hsl(var(--theme-base)/0.1)] border-[hsl(var(--theme-base)/0.2)] text-[hsl(var(--theme-base))] hover:bg-[hsl(var(--theme-base)/0.2)]"
-                    : "bg-white/5 border-white/10 text-gray-400 hover:text-white hover:border-white/20"
-                }`}
-              >
-                {isExpanded ? <><span>Hide Highlights</span><ChevronUp size={14} /></> : <><span>View Highlights</span><ChevronDown size={14} /></>}
-              </button>
+          
+          {link && (
+            <div className={`shrink-0 w-8 h-8 rounded-full border border-white/15 flex items-center justify-center text-white/40 transition-all ${
+              isActive ? "bg-[hsl(var(--theme-base)/0.2)] border-[hsl(var(--theme-base)/0.5)] text-[hsl(var(--theme-base))]" : "group-hover/content:bg-[hsl(var(--theme-base)/0.2)] group-hover/content:border-[hsl(var(--theme-base)/0.5)] group-hover/content:text-[hsl(var(--theme-base))]"
+            }`}>
+              <ArrowUpRight size={14} />
             </div>
           )}
-        </SimpleCard>
+        </div>
+
+        {/* Row 2: Subtitle · Date · Percentage */}
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-2 mt-2">
+          <span className="type-body-sm text-gray-400 transition-colors duration-300 group-hover:text-gray-300">{subtitle}</span>
+          
+          {(date || percentage) && <span className="text-white/15 hidden sm:inline px-1">·</span>}
+          
+          {date && (
+            <div className={`inline-flex items-center gap-2 type-caption italic font-medium ${isActive ? "text-[hsl(var(--theme-base))]" : "text-gray-500"}`}>
+              <Calendar size={14} />
+              <span className="mt-[1px]">{date}</span>
+            </div>
+          )}
+          
+          {percentage && (
+            <>
+              <span className="text-white/15 hidden sm:inline px-1">·</span>
+              <div className={`inline-flex items-center gap-2 type-caption italic font-medium ${isActive ? "text-[hsl(var(--theme-base)/0.7)]" : "text-gray-500"}`}>
+                <GraduationCap size={14} />
+                <span className="mt-[1px]">{percentage}</span>
+              </div>
+            </>
+          )}
+        </div>
+
+        {/* Points */}
+        {points && points.length > 0 && (
+          <ul className="mt-5 space-y-2.5">
+            {points.map((point, i) => (
+              <li key={i} className="flex items-start gap-3 type-body-sm text-gray-400/90">
+                <div className="mt-1 flex-shrink-0">
+                  <CheckCircle2 size={16} className={isActive ? "text-[hsl(var(--theme-base)/0.7)]" : "text-white/20"} />
+                </div>
+                <span className="leading-relaxed">{point}</span>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );
 }
+
+function isClickable(link) {
+  return !!link;
+}
+
+// ── Tab-level collapsible wrapper ─────────────────────────────────────────────
+const COLLAPSE_HEIGHT = 600; // px — if content shorter, no collapse shown
+
+function CollapsibleTabContent({ children, label, bottomNote, icon }) {
+  const [expanded, setExpanded] = React.useState(false);
+  const [needsCollapse, setNeedsCollapse] = React.useState(false);
+  const contentRef = React.useRef(null);
+
+  React.useLayoutEffect(() => {
+    if (contentRef.current) {
+      setNeedsCollapse(contentRef.current.scrollHeight > COLLAPSE_HEIGHT);
+    }
+  });
+
+  return (
+    <div className="relative rounded-3xl border border-white/10 bg-black/60 backdrop-blur-xl shadow-2xl p-6 lg:p-8">
+      <div
+        ref={contentRef}
+        style={{ maxHeight: needsCollapse && !expanded ? COLLAPSE_HEIGHT + "px" : "none" }}
+        className="transition-[max-height] duration-500 ease-in-out"
+      >
+        {children}
+      </div>
+
+      {/* Fade mask + expand button */}
+      {needsCollapse && (
+        <div className="relative mt-4 flex justify-center">
+          {!expanded && (
+            <div className="absolute bottom-full left-0 right-0 h-40 bg-gradient-to-t from-[rgb(10,10,10)] via-[rgba(10,10,10,0.8)] to-transparent pointer-events-none" style={{ background: "linear-gradient(to top, rgba(15, 15, 15, 1) 0%, rgba(15, 15, 15, 0.8) 50%, transparent 100%)" }} />
+          )}
+          <button
+            onClick={() => setExpanded(!expanded)}
+            className="relative z-10 inline-flex items-center gap-2 text-sm font-semibold text-[hsl(var(--theme-base))] hover:opacity-80 transition-opacity"
+          >
+            {expanded ? (
+              <><ChevronUp size={16} /><span>View Less</span></>
+            ) : (
+              <><ChevronDown size={16} /><span>View More</span></>
+            )}
+          </button>
+        </div>
+      )}
+
+      {/* Bottom Note */}
+      {bottomNote && (
+        <div className="mt-8 pt-5 border-t border-white/10 flex items-start gap-3 text-white/50 relative z-10">
+          {icon && (
+            <div className="w-8 h-8 rounded-full bg-[hsl(var(--theme-base)/0.1)] flex items-center justify-center text-[hsl(var(--theme-base))] shrink-0 mt-0.5">
+              {React.createElement(icon, { size: 16 })}
+            </div>
+          )}
+          <p className="type-body-sm mt-1">{bottomNote}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 
 function About() {
   const { content, loading, activeRole } = useContent();
@@ -138,16 +191,12 @@ function About() {
   const menuRef = React.useRef(null);
 
   React.useEffect(() => {
-    if (content?.about?.tabs?.length > 0) {
-      setActiveTab(content.about.tabs[0].label);
-    }
+    if (content?.about?.tabs?.length > 0) setActiveTab(content.about.tabs[0].label);
   }, [activeRole, content]);
 
   React.useEffect(() => {
-    function handleClickOutside(event) {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setIsSocialMenuOpen(false);
-      }
+    function handleClickOutside(e) {
+      if (menuRef.current && !menuRef.current.contains(e.target)) setIsSocialMenuOpen(false);
     }
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
@@ -156,11 +205,7 @@ function About() {
   React.useEffect(() => { setHoveredIndex(null); }, [activeTab]);
 
   if (loading || !activeTab) {
-    return (
-      <div className="min-h-screen grid place-items-center text-white">
-        {content?.global?.labels?.loading || "Loading..."}
-      </div>
-    );
+    return <div className="min-h-screen grid place-items-center text-white">{content?.global?.labels?.loading || "Loading..."}</div>;
   }
 
   const { about, global, home } = content;
@@ -173,51 +218,31 @@ function About() {
 
   const presentLabel = global.labels.present;
 
-  // ── Hero: CV download + social menu ──
+  // ── Hero action ──────────────────────────────────────────────────────────
   const heroAction = (
     <>
-      <PrimaryButton
-        href={global.resume.file}
-        target="_blank"
-        icon={<Download size={18} />}
-        tooltipTitle={about.cvCta.tooltipTitle}
-        tooltipDesc={about.cvCta.tooltipDesc}
-      >
+      <PrimaryButton href={global.resume.file} target="_blank" icon={<Download size={18} />}
+        tooltipTitle={about.cvCta.tooltipTitle} tooltipDesc={about.cvCta.tooltipDesc}>
         {about.cvCta.label}
       </PrimaryButton>
       <div className="relative" ref={menuRef}>
-        <IconButton
-          icon={MoreVertical}
-          theme="neutral"
-          onClick={() => setIsSocialMenuOpen(!isSocialMenuOpen)}
-          aria-label={global.labels.moreOptions}
-          size="lg"
-          className={isSocialMenuOpen ? "!bg-secondary !border-white/20" : ""}
-        />
+        <IconButton icon={MoreVertical} theme="neutral" onClick={() => setIsSocialMenuOpen(!isSocialMenuOpen)}
+          aria-label={global.labels.moreOptions} size="lg"
+          className={isSocialMenuOpen ? "!bg-secondary !border-white/20" : ""} />
         {isSocialMenuOpen && (
           <div className="absolute bottom-full mb-3 left-0 min-w-[200px] bg-black/95 backdrop-blur-2xl border border-white/10 rounded-2xl p-2 shadow-[0_20px_50px_rgba(0,0,0,0.5)] animate-in fade-in slide-in-from-bottom-4 duration-300 z-[110]">
-            <div className="flex flex-col gap-1">
-              <div className="px-3 py-2">
-                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/30">{global.labels.socialProfiles}</p>
-              </div>
-              <div className="grid grid-cols-3 gap-2 px-2 pb-2">
-                {global.socialLinks.map((link, idx) => {
-                  const SocialIcon = getIcon(link.icon);
-                  return (
-                    <IconButton
-                      key={link.id}
-                      icon={SocialIcon}
-                      theme="neutral"
-                      href={link.url}
-                      aria-label={link.label}
-                      size="sm"
-                      className={`!w-12 !h-12 !rounded-xl !border-white/6 hover:!bg-white/10 animate-in fade-in zoom-in-75 duration-300`}
-                      style={{ animationDelay: `${idx * 50}ms` }}
-                      onClick={() => setIsSocialMenuOpen(false)}
-                    />
-                  );
-                })}
-              </div>
+            <div className="px-3 py-2">
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/30">{global.labels.socialProfiles}</p>
+            </div>
+            <div className="grid grid-cols-3 gap-2 px-2 pb-2">
+              {global.socialLinks.map((link, idx) => {
+                const SocialIcon = getIcon(link.icon);
+                return (
+                  <IconButton key={link.id} icon={SocialIcon} theme="neutral" href={link.url} aria-label={link.label} size="social"
+                    className="animate-in fade-in zoom-in-75 duration-300"
+                    style={{ animationDelay: `${idx * 50}ms` }} onClick={() => setIsSocialMenuOpen(false)} />
+                );
+              })}
             </div>
           </div>
         )}
@@ -225,31 +250,32 @@ function About() {
     </>
   );
 
-  // ── Timeline tabs ──
+  // ── Timeline tabs ────────────────────────────────────────────────────────
   const timelineTabs = (
-    <div className="relative flex flex-col lg:flex-row gap-6 lg:gap-10 items-start">
-      <div className="sticky top-4 z-20 w-full lg:w-1/4 flex-shrink-0">
-        <div className="flex flex-row lg:flex-col gap-1.5 p-2 rounded-2xl border border-white/10 bg-black/60 backdrop-blur-xl shadow-2xl overflow-x-auto lg:overflow-visible hide-scrollbar">
-          {tabs.map(function (tab) {
+    <motion.div initial="hidden" animate="visible"
+      variants={staggerContainer} className="w-full py-16 border-t border-white/5">
+      <motion.div variants={fadeInUp} className="mb-10">
+        <p className="text-xs font-mono tracking-widest text-[hsl(var(--theme-base))] mb-2 uppercase">Background</p>
+        <h3 className="type-section-title text-white mb-6">Experience & Education</h3>
+      </motion.div>
+      <div className="flex flex-col lg:flex-row gap-6 lg:gap-10 items-start">
+      {/* Sidebar */}
+      <div className="sticky top-4 z-20 w-full lg:w-[260px] flex-shrink-0">
+        <div className="flex flex-row lg:flex-col gap-1.5 p-2 rounded-2xl border border-white/10 backdrop-blur-xl shadow-2xl overflow-x-auto lg:overflow-visible hide-scrollbar">
+          {tabs.map((tab) => {
             const TabIcon = getIcon(tab.icon);
             const isActive = activeTab === tab.label;
             return (
-              <button
-                key={tab.label}
-                onClick={() => setActiveTab(tab.label)}
-                className={
-                  "relative group flex flex-col lg:flex-row items-center lg:items-start lg:justify-start justify-center gap-2 lg:gap-3 rounded-xl transition-all duration-300 " +
-                  "min-w-[85px] lg:min-w-0 w-full py-2 px-2 lg:px-3 lg:py-3 text-center lg:text-left " +
-                  (isActive
-                    ? "text-[hsl(var(--theme-base))] bg-white/5 scale-105 lg:scale-100 lg:bg-white/10"
-                    : "text-gray-400 hover:text-white hover:bg-white/5")
-                }
+              <button key={tab.label} onClick={() => setActiveTab(tab.label)}
+                className={`relative group flex flex-col lg:flex-row items-center lg:items-center gap-2 lg:gap-3 rounded-xl transition-all duration-300 min-w-[80px] lg:min-w-0 w-full py-2 px-2 lg:px-3 lg:py-2.5 text-center lg:text-left ${
+                  isActive ? "text-[hsl(var(--theme-base))] bg-black/60" : "text-gray-400 hover:text-white hover:bg-black/60"
+                }`}
               >
-                <div className={"flex shrink-0 items-center justify-center w-10 h-10 rounded-lg transition-colors " + (isActive ? "bg-[hsl(var(--theme-base))/0.1]" : "bg-white/5")}>
-                  {TabIcon && <TabIcon size={18} className={"transition-transform " + (isActive ? "scale-110" : "group-hover:scale-110")} />}
+                <div className={`flex shrink-0 items-center justify-center w-9 h-9 rounded-lg transition-colors ${isActive ? "bg-[hsl(var(--theme-base)/0.15)]" : "bg-white/5"}`}>
+                  {TabIcon && <TabIcon size={16} />}
                 </div>
-                <span className="text-[11px] font-semibold uppercase tracking-wider mt-1 lg:mt-0 lg:self-center">{tab.label}</span>
-                {isActive && <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-[hsl(var(--theme-base))] rounded-l-full hidden lg:block" />}
+                <span className="text-[11px] font-semibold uppercase tracking-wider mt-0.5 lg:mt-0">{tab.label}</span>
+                {isActive && <div className="absolute right-0 top-1/2 -translate-y-1/2 w-0.5 h-6 bg-[hsl(var(--theme-base))] rounded-l-full hidden lg:block" />}
                 {isActive && <div className="tab-dot lg:hidden" />}
               </button>
             );
@@ -257,84 +283,64 @@ function About() {
         </div>
       </div>
 
-      <div className="relative pb-10 min-h-[500px] flex-1 w-full">
+      {/* Tab content with collapse */}
+      <div className="flex-1 w-full min-w-0">
         <AnimatePresence mode="wait">
           {activeTabData && (
-            <motion.div
-              key={activeTabData.label}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
+            <motion.div key={activeTabData.label}
+              initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.25, ease: "easeInOut" }}
               onMouseLeave={() => setHoveredIndex(null)}
             >
-              {activeTabData.timelineDescription && (
-                <div className="mb-8 p-5 rounded-2xl bg-white/5 border border-white/10 flex items-start gap-4 text-white/70">
-                  <div className="w-10 h-10 rounded-full bg-[hsl(var(--theme-base)/0.1)] flex items-center justify-center text-[hsl(var(--theme-base))] shrink-0">
-                    {React.createElement(getIcon(activeTabData.icon), { size: 20 })}
-                  </div>
-                  <p className="leading-relaxed mt-1">{activeTabData.timelineDescription}</p>
-                </div>
-              )}
-              {activeTabData.items.map(function (item, index) {
-                const date = item.date || presentLabel;
-                const isLast = index === activeTabData.items.length - 1;
-                const ItemIcon = getIcon(activeTabData.itemIcon);
-                const isActive = hoveredIndex === null ? index === 0 : hoveredIndex === index;
-                return (
-                  <TimelineItem
-                    key={index}
-                    title={item.title}
-                    subtitle={item.subtitle}
-                    date={date}
-                    percentage={item.percentage}
-                    points={item.points}
-                    link={item.link}
-                    isLast={isLast}
-                    itemIcon={ItemIcon}
-                    calendarIcon={Calendar}
-                    isActive={isActive}
-                    onMouseEnter={() => setHoveredIndex(index)}
-                  />
-                );
-              })}
+              <CollapsibleTabContent 
+                label={activeTabData.label} 
+                bottomNote={activeTabData.timelineDescription}
+                icon={activeTabData.icon ? getIcon(activeTabData.icon) : null}
+              >
+                {activeTabData.items.map((item, index) => {
+                  const isActive = hoveredIndex === null ? index === 0 : hoveredIndex === index;
+                  return (
+                    <TimelineItem key={index}
+                      title={item.title} subtitle={item.subtitle}
+                      date={item.date || presentLabel} percentage={item.percentage}
+                      points={item.points} link={item.link}
+                      isLast={index === activeTabData.items.length - 1}
+                      itemIcon={getIcon(activeTabData.itemIcon)}
+                      isActive={isActive} onMouseEnter={() => setHoveredIndex(index)}
+                    />
+                  );
+                })}
+              </CollapsibleTabContent>
             </motion.div>
           )}
         </AnimatePresence>
       </div>
-    </div>
+      </div>
+    </motion.div>
   );
 
-  // ── What I Deliver section (restored — this is core About content) ──
+  // ── What I Deliver ───────────────────────────────────────────────────────
+  // All sections use w-full py-16 — horizontal alignment is handled by PageLayout's px-5 wrapper
   const whatIDeliverSection = home?.whatIDeliver ? (
-    <motion.div
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-100px" }}
-      variants={staggerContainer}
-      className="max-w-7xl mx-auto px-6 py-20 lg:px-16 relative z-10 border-t border-white/5"
-    >
-      <motion.div variants={fadeInUp} className="mb-12">
-        <p className="text-sm font-mono tracking-widest text-[hsl(var(--theme-base))] mb-2 uppercase">Core Principles</p>
-        <h3 className="text-4xl font-bold text-white tracking-tight">{home.whatIDeliver.title}</h3>
+    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}
+      variants={staggerContainer} className="w-full py-16 border-t border-white/5">
+      <motion.div variants={fadeInUp} className="mb-10">
+        <p className="text-xs font-mono tracking-widest text-[hsl(var(--theme-base))] mb-2 uppercase">Core Principles</p>
+        <h3 className="type-section-title text-white mb-6">{home.whatIDeliver.title}</h3>
       </motion.div>
-      <div className="grid md:grid-cols-3 gap-6">
+      <div className="grid md:grid-cols-3 gap-5">
         {home.whatIDeliver.blocks.map((block, i) => {
           const BlockIcon = getIcon(block.icon);
           return (
-            <motion.div
-              key={i}
-              variants={fadeInUp}
-              whileHover={{ y: -5 }}
-              className="group relative p-8 rounded-3xl border border-white/10 bg-white/[0.02] backdrop-blur-md overflow-hidden"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--theme-base)/0.1)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <motion.div key={i} variants={fadeInUp} whileHover={{ y: -4 }}
+              className="group relative p-7 rounded-2xl border border-white/10 hover:border-[hsl(var(--theme-base)/0.3)] hover:shadow-[0_8px_30px_-12px_hsl(var(--theme-base)/0.2)] bg-white/[0.02] backdrop-blur-md overflow-hidden transition-all duration-500">
+              <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--theme-base)/0.08)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="relative z-10">
-                <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-[hsl(var(--theme-base))] mb-6 group-hover:scale-110 group-hover:bg-[hsl(var(--theme-base)/0.2)] transition-all duration-300 shadow-[0_0_20px_transparent] group-hover:shadow-[0_0_20px_hsl(var(--theme-base)/0.2)]">
-                  {BlockIcon && <BlockIcon size={26} />}
+                <div className="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[hsl(var(--theme-base))] mb-5 group-hover:scale-110 group-hover:bg-[hsl(var(--theme-base)/0.15)] group-hover:border-[hsl(var(--theme-base)/0.3)] transition-all duration-300">
+                  {BlockIcon && <BlockIcon size={22} />}
                 </div>
-                <h4 className="text-xl font-bold text-white mb-3 group-hover:text-[hsl(var(--theme-base)/0.9)] transition-colors">{block.title}</h4>
-                <p className="text-white/60 leading-relaxed group-hover:text-white/80 transition-colors">{block.description}</p>
+                <h4 className="type-card-title text-white mb-3 group-hover:text-[hsl(var(--theme-base)/0.9)] transition-colors">{block.title}</h4>
+                <p className="type-body-sm text-white/55">{block.description}</p>
               </div>
             </motion.div>
           );
@@ -343,28 +349,21 @@ function About() {
     </motion.div>
   ) : null;
 
-  // ── Why I'm Different section (restored) ──
+  // ── Why I'm Different ────────────────────────────────────────────────────
   const differentiatorSection = home?.differentiator ? (
-    <motion.div
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-100px" }}
-      variants={staggerContainer}
-      className="max-w-7xl mx-auto px-6 py-20 lg:px-16 relative z-10 border-t border-white/5"
-    >
-      <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
-        <motion.div variants={fadeInUp} className="lg:w-1/3 flex-shrink-0">
-          <p className="text-sm font-mono tracking-widest text-[hsl(var(--theme-base))] mb-2 uppercase">Secret Sauce</p>
-          <h3 className="text-4xl font-bold text-white tracking-tight mb-4">{home.differentiator.title}</h3>
+    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}
+      variants={staggerContainer} className="w-full py-16 border-t border-white/5">
+      <div className="flex flex-col lg:flex-row gap-10 lg:gap-16">
+        <motion.div variants={fadeInUp} className="lg:w-[240px] flex-shrink-0">
+          <p className="text-xs font-mono tracking-widest text-[hsl(var(--theme-base))] mb-2 uppercase">Secret Sauce</p>
+          <h3 className="type-section-title text-white">{home.differentiator.title}</h3>
         </motion.div>
-        <motion.div variants={fadeInUp} className="lg:w-2/3 flex-1 flex flex-col justify-center">
-          <div className="space-y-6 text-lg text-white/70 font-medium leading-relaxed">
+        <motion.div variants={fadeInUp} className="flex-1">
+          <div className="space-y-4">
             {home.differentiator.points.map((pt, i) => (
-              <div key={i} className="flex gap-4 group">
-                <span className="text-[hsl(var(--theme-base))] mt-1 shrink-0 group-hover:scale-125 transition-transform">
-                  <ChevronRight className="w-5 h-5" />
-                </span>
-                <p className={i >= 3 ? "text-white" : ""}>{pt}</p>
+              <div key={i} className="flex gap-3 group">
+                <ChevronRight className="w-4 h-4 text-[hsl(var(--theme-base))] mt-1 shrink-0 group-hover:translate-x-0.5 transition-transform" />
+                <p className="type-body text-white/65">{pt}</p>
               </div>
             ))}
           </div>
@@ -373,42 +372,34 @@ function About() {
     </motion.div>
   ) : null;
 
-  // ── Testimonials section (restored) ──
+  // ── Testimonials ─────────────────────────────────────────────────────────
   const testimonialsSection = home?.testimonials ? (
-    <motion.div
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-100px" }}
-      variants={staggerContainer}
-      className="max-w-7xl mx-auto px-6 py-20 lg:px-16 relative z-10 border-t border-white/5"
-    >
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-        <motion.div variants={fadeInUp} className="max-w-2xl">
-          <p className="text-sm font-mono tracking-widest text-[hsl(var(--theme-base))] mb-2 uppercase">Recommendations</p>
-          <h3 className="text-4xl font-bold text-white tracking-tight mb-4">{home.testimonials.title}</h3>
-          <p className="text-lg text-white/50">{home.testimonials.subtitle}</p>
-        </motion.div>
-      </div>
-      <div className="grid md:grid-cols-3 gap-6">
+    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}
+      variants={staggerContainer} className="w-full py-16 border-t border-white/5">
+      <motion.div variants={fadeInUp} className="mb-10">
+        <p className="text-xs font-mono tracking-widest text-[hsl(var(--theme-base))] mb-2 uppercase">Recommendations</p>
+        <h3 className="type-section-title text-white mb-3">{home.testimonials.title}</h3>
+        <p className="type-body text-white/45">{home.testimonials.subtitle}</p>
+      </motion.div>
+      <div className="grid md:grid-cols-3 gap-5">
         {home.testimonials.items.map((testimonial, i) => (
-          <motion.div
-            key={i}
-            variants={fadeInUp}
-            className="p-8 rounded-3xl border border-white/10 bg-white/[0.03] relative group hover:border-[hsl(var(--theme-base)/0.3)] transition-colors"
-          >
-            <div className="absolute top-6 right-6 text-white/10 group-hover:text-[hsl(var(--theme-base)/0.2)] transition-colors">
-              <Quote size={40} />
-            </div>
-            <p className="text-white/80 leading-relaxed mb-8 relative z-10 text-sm md:text-base">
-              "{testimonial.text}"
-            </p>
-            <div className="flex items-center gap-4 relative z-10">
-              <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-white/10">
-                <img src={testimonial.image} alt={testimonial.name} className="w-full h-full object-cover" />
+          <motion.div key={i} variants={fadeInUp} whileHover={{ y: -4 }}
+            className="group relative p-7 rounded-2xl border border-white/10 hover:border-[hsl(var(--theme-base)/0.3)] hover:shadow-[0_8px_30px_-12px_hsl(var(--theme-base)/0.2)] bg-white/[0.02] backdrop-blur-md overflow-hidden transition-all duration-500">
+            <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--theme-base)/0.08)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+            
+            <div className="relative z-10">
+              <div className="absolute -top-2 -right-2 text-white/10 group-hover:text-[hsl(var(--theme-base))] group-hover:scale-110 transition-all duration-300">
+                <Quote size={40} />
               </div>
-              <div>
-                <h5 className="font-bold text-white">{testimonial.name}</h5>
-                <p className="text-xs text-[hsl(var(--theme-base))]">{testimonial.role}</p>
+              <p className="type-body-sm text-white/70 mb-6 relative z-10 mt-2 pr-4">"{testimonial.text}"</p>
+              <div className="flex items-center gap-3 relative z-10">
+                <div className="w-10 h-10 rounded-full overflow-hidden border border-white/10 group-hover:border-[hsl(var(--theme-base)/0.3)] transition-colors shrink-0">
+                  <img src={testimonial.image} alt={testimonial.name} className="w-full h-full object-cover" />
+                </div>
+                <div>
+                  <h5 className="type-label font-bold text-white group-hover:text-[hsl(var(--theme-base)/0.9)] transition-colors">{testimonial.name}</h5>
+                  <p className="type-caption text-[hsl(var(--theme-base)/0.7)]">{testimonial.role}</p>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -416,15 +407,6 @@ function About() {
       </div>
     </motion.div>
   ) : null;
-
-  const allSections = (
-    <div className="space-y-0">
-      {timelineTabs}
-      {whatIDeliverSection}
-      {differentiatorSection}
-      {testimonialsSection}
-    </div>
-  );
 
   return (
     <PageLayout
@@ -434,7 +416,14 @@ function About() {
       icon={meta.icon}
       description={description.join(" ")}
       action={heroAction}
-      right={allSections}
+      right={
+        <div>
+          {timelineTabs}
+          {whatIDeliverSection}
+          {differentiatorSection}
+          {testimonialsSection}
+        </div>
+      }
     />
   );
 }

@@ -402,7 +402,7 @@
             ],
             "url": "#",
             "thumbnail": "src/assets/srfg-thumbnail.png",
-            "accent": "#2DD4BF"
+            "accent": "#8F1FB0"
           },
           {
             "id": "flamingo-system",
@@ -416,7 +416,7 @@
             ],
             "url": "#",
             "thumbnail": "src/assets/flamingo-thumbnail.png",
-            "accent": "#FF5DA8"
+            "accent": "#8F1FB0"
           }
         ]
       },

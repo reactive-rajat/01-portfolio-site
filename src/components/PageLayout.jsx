@@ -64,7 +64,7 @@ export function PageLayout(props) {
       />
 
       <div
-        className="page-shell relative z-10 min-h-[calc(100svh-20rem)] lg:min-h-[100svh] px-1 py-10 md:py-12 lg:px-16 grid items-center"
+        className="page-shell relative z-10 min-h-[calc(100svh-20rem)] lg:min-h-[100svh] px-1 py-16 md:py-20 lg:px-16 grid items-center"
         style={{
           "--accent": "hsl(var(--" + themeName + "))",
           "--theme-base": "var(--" + themeName + ")",
@@ -74,9 +74,9 @@ export function PageLayout(props) {
           {hasSplit ? (
             <div className="page-stack flex flex-col gap-10 lg:gap-14 w-full">
               {/* ── Hero Header ── */}
-              <div className="page-header flex flex-col items-start gap-6 mb-4">
+              <div className="page-header flex-col items-start flex gap-6 mb-4">
                 {/* Row: back button + title */}
-                <div className="flex items-center gap-6">
+                <div className="relative inline-flex w-fit items-center gap-6">
                   <Link
                     to="/"
                     className={
@@ -112,6 +112,27 @@ export function PageLayout(props) {
                       );
                     })}
                   </h1>
+
+                  {/* ── Fixed decorative page icon — perfectly aligned behind heading ── */}
+                  <div className="absolute left-[105%] -top-5 pointer-events-none -z-10 flex justify-center">
+                    <div className="w-24 h-24 mix-blend-screen opacity-[0.10]">
+                      {BackgroundIcon ? (
+                        <BackgroundIcon
+                          className={"w-full h-full " + styles.text}
+                          strokeWidth={1.1}
+                        />
+                      ) : (
+                        <span
+                          className={
+                            "page-letter text-[6rem] lg:text-[8rem] font-black leading-none block " +
+                            styles.text
+                          }
+                        >
+                          {letter}
+                        </span>
+                      )}
+                    </div>
+                  </div>
                 </div>
 
                 {/* Optional simple description paragraph */}
@@ -179,6 +200,27 @@ export function PageLayout(props) {
                       );
                     })}
                   </h1>
+
+                  {/* ── Fixed decorative page icon — perfectly aligned behind heading ── */}
+                  <div className="absolute left-full -top-5 pointer-events-none -z-10 flex justify-center">
+                    <div className="w-20 h-20 lg:w-28 lg:h-28 mix-blend-screen opacity-[0.055]">
+                      {BackgroundIcon ? (
+                        <BackgroundIcon
+                          className={"w-full h-full " + styles.text}
+                          strokeWidth={1}
+                        />
+                      ) : (
+                        <span
+                          className={
+                            "page-letter text-[6rem] lg:text-[8rem] font-black leading-none block " +
+                            styles.text
+                          }
+                        >
+                          {letter}
+                        </span>
+                      )}
+                    </div>
+                  </div>
                 </div>
 
                 {/* Optional description */}
@@ -197,33 +239,13 @@ export function PageLayout(props) {
 
                 {/* headerContent (Portfolio page thumbnail bar etc.) */}
                 {props.headerContent && (
-                  <div className="w-full mt-2">
-                    {props.headerContent}
-                  </div>
+                  <div className="w-full mt-2">{props.headerContent}</div>
                 )}
               </div>
 
               <div className="page-content">{children}</div>
             </>
           )}
-
-          <div className="fixed w-[400px] h-[400px] right-[-6%] -top-[18%] pointer-events-none select-none mix-blend-screen opacity-[0.07]">
-            {BackgroundIcon ? (
-              <BackgroundIcon
-                className={"w-full h-full " + styles.text}
-                strokeWidth={0.6}
-              />
-            ) : (
-              <span
-                className={
-                  "page-letter text-[18rem] md:text-[30rem] font-black leading-none " +
-                  styles.text
-                }
-              >
-                {letter}
-              </span>
-            )}
-          </div>
         </div>
       </div>
     </main>

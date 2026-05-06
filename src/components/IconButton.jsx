@@ -5,12 +5,14 @@ const sizeStyles = {
   xs: "w-9 h-9 rounded-lg",
   sm: "w-12 h-12 rounded-xl",
   lg: "w-[56px] h-[56px] rounded-2xl",
+  social: "w-11 h-11 rounded-xl hover:scale-110 hover:border-[hsl(var(--theme-base)/0.4)] hover:bg-[hsl(var(--theme-base)/0.05)] hover:text-[hsl(var(--theme-base))] hover:shadow-[0_8px_20px_-8px_hsl(var(--theme-base)/0.4)] transition-all",
 };
 
 const iconSizeStyles = {
   xs: "w-4 h-4",
   sm: "w-5 h-5",
   lg: "w-6 h-6",
+  social: "w-4 h-4",
 };
 
 // Default styles for neutral since it's not in the main theme file

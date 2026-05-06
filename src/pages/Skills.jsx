@@ -55,17 +55,18 @@ function CategoryCard({ cat, index }) {
   return (
     <motion.div
       variants={fadeInUp}
-      className="relative rounded-2xl border border-white/8 bg-white/[0.025] backdrop-blur-md overflow-hidden group hover:border-[hsl(var(--theme-base)/0.35)] transition-colors duration-300"
+      whileHover={{ y: -4 }}
+      className="group relative p-7 rounded-2xl border border-white/10 hover:border-[hsl(var(--theme-base)/0.3)] hover:shadow-[0_8px_30px_-12px_hsl(var(--theme-base)/0.2)] bg-white/[0.02] backdrop-blur-md overflow-hidden transition-all duration-500"
     >
       {/* Hover glow overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--theme-base)/0.06)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--theme-base)/0.08)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
       {/* Decorative large icon — top right */}
       <div className="absolute top-4 right-4 opacity-[0.06] group-hover:opacity-[0.12] transition-opacity duration-500 pointer-events-none">
         <CategoryIcon className="w-28 h-28 text-[hsl(var(--theme-base))]" />
       </div>
 
-      <div className="relative z-10 p-6 lg:p-7">
+      <div className="relative z-10">
         {/* Category header */}
         <div className="flex items-center gap-3 mb-5">
           <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-[hsl(var(--theme-base)/0.1)] border border-[hsl(var(--theme-base)/0.2)] text-[hsl(var(--theme-base))] group-hover:bg-[hsl(var(--theme-base)/0.18)] transition-colors duration-300 shrink-0">
@@ -125,7 +126,7 @@ function Skills() {
             className="flex items-start gap-3 px-5 py-4 rounded-2xl border border-[hsl(var(--theme-base)/0.15)] bg-[hsl(var(--theme-base)/0.04)]"
           >
             <CheckCircle className="w-5 h-5 text-[hsl(var(--theme-base))] shrink-0 mt-0.5" />
-            <p className="text-white/50 leading-relaxed italic text-sm">
+            <p className="type-body-sm text-white/50 italic">
               {closingNote}
             </p>
           </motion.div>
@@ -165,7 +166,7 @@ function Skills() {
                     className="simple-card p-5 pt-3.5"
                   >
                     <div className="flex justify-between items-center mb-3">
-                      <span className="text-base font-semibold text-foreground">
+                      <span className="type-body font-semibold text-foreground">
                         {skill.name}
                       </span>
                       <span className="text-xs font-mono text-muted-foreground">
