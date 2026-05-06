@@ -162,7 +162,7 @@
         },
         "testimonials": {
           "title": "What People Say",
-          "subtitle": "Recommendations from colleagues and managers I've worked with.",
+          "subtitle": "",
           "items": [
             {
               "name": "John Doe",
@@ -430,7 +430,7 @@
         "info": [
           {
             "label": "Email",
-            "value": "rajat.designfolio@gmail.com",
+            "value": "pixelkaarigar@gmail.com",
             "icon": "Mail"
           },
           {

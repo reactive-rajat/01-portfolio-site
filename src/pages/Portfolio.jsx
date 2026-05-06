@@ -21,11 +21,11 @@ function ProjectCard({ project }) {
       rel="noopener noreferrer"
       variants={fadeInUp}
       whileHover={{ y: -4 }}
-      className="group relative flex flex-col rounded-2xl border border-white/10 hover:border-[hsl(var(--theme-base)/0.3)] hover:shadow-[0_8px_30px_-12px_hsl(var(--theme-base)/0.2)] bg-white/[0.02] backdrop-blur-md overflow-hidden transition-all duration-500"
+      className="group relative flex flex-col rounded-2xl border border-white/10 hover:border-[hsl(var(--theme-base)/0.3)] hover:shadow-[0_8px_30px_-12px_hsl(var(--theme-base)/0.2)] hover:bg-[rgba(0,0,0,0.3)] overflow-hidden transition-all duration-500"
     >
       {/* Thumbnail */}
-      <div className="relative h-44 overflow-hidden bg-white/5 shrink-0">
-        <div className="absolute inset-0 bg-[hsl(var(--theme-base)/0.15)] opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 mix-blend-overlay" />
+      <div className="relative h-64 overflow-hidden shrink-0">
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 mix-blend-overlay" />
         <img
           src={project.thumbnail}
           alt={project.title}
@@ -75,9 +75,9 @@ function WorkSection({ section, projects }) {
       whileInView="visible"
       viewport={{ once: true, margin: "-80px" }}
       variants={staggerContainer}
-      className="border-t border-white/5 pt-12"
+      className="border-t border-white/5 pt-20"
     >
-      <motion.div variants={fadeInUp} className="mb-8">
+      <motion.div variants={fadeInUp} className="mb-14">
         <p className="text-xs font-mono tracking-widest text-[hsl(var(--theme-base))] uppercase mb-1">
           {section.type.replace(/_/g, " ")}
         </p>
@@ -516,7 +516,7 @@ function Portfolio() {
 
   // ── Categorised work sections ──
   const categorisedSections = sections.length > 0 ? (
-    <div className="space-y-14 mt-14">
+    <div className="space-y-14 !mt-16">
       {sections.map((section) => (
         <WorkSection
           key={section.type}

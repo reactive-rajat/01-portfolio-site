@@ -154,8 +154,8 @@
   }
 
   .type-section-title {
-    font-size: clamp(1.1rem, 1.6vw, 1.35rem);
-    @apply leading-tight font-bold;
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    @apply leading-tight font-bold tracking-tight;
   }
 
   .type-card-title {
