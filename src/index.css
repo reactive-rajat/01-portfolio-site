@@ -760,8 +760,9 @@
   }
 
   .tooltip-panel {
-    @apply absolute bottom-full left-1/2 -translate-x-1/2 mb-3 px-4 py-3 rounded-xl border border-white/10 bg-black/95 backdrop-blur-xl opacity-0 invisible translate-y-2 transition-all duration-300 z-[100] pointer-events-none;
-    min-width: 220px;
+    @apply absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 rounded-xl border border-white/10 bg-black/95 backdrop-blur-xl opacity-0 invisible translate-y-2 transition-all duration-300 z-[100] pointer-events-none;
+    min-width: max-content;
+    white-space: nowrap;
     box-shadow:
       0 20px 40px -10px rgba(0, 0, 0, 0.5),
       0 0 20px -5px color-mix(in srgb, var(--accent, white) 20%, transparent);
@@ -777,7 +778,7 @@
   }
 
   .tooltip-title {
-    @apply block text-[10px] font-bold uppercase tracking-[0.1em] text-white mb-1.5 text-center;
+    @apply block text-[10px] font-bold uppercase tracking-[0.1em] text-white mb-0.5 text-center;
   }
 
   .tooltip-desc {
