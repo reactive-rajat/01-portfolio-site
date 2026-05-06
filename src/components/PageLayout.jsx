@@ -137,7 +137,7 @@ export function PageLayout(props) {
 
                 {/* Optional simple description paragraph */}
                 {description && (
-                  <p className="text-base lg:text-lg leading-relaxed text-white/60 max-w-2xl">
+                  <p className="type-body-lg text-white/60 max-w-2xl">
                     {description}
                   </p>
                 )}
@@ -225,7 +225,7 @@ export function PageLayout(props) {
 
                 {/* Optional description */}
                 {description && (
-                  <p className="text-base lg:text-lg leading-relaxed text-white/60 max-w-2xl">
+                  <p className="type-body-lg text-white/60 max-w-2xl">
                     {description}
                   </p>
                 )}

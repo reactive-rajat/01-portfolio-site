@@ -154,8 +154,8 @@
   }
 
   .type-section-title {
-    font-size: clamp(1.5rem, 2.5vw, 2rem);
-    @apply leading-tight font-bold tracking-tight;
+    font-size: clamp(1.1rem, 1.6vw, 1.35rem);
+    @apply leading-tight font-bold;
   }
 
   .type-card-title {
@@ -164,23 +164,27 @@
   }
 
   .type-body-lg {
-    @apply text-[1.05rem] leading-[1.75] max-[480px]:text-base max-[480px]:leading-[1.7];
+    @apply text-lg leading-[1.75] font-normal max-[480px]:text-base max-[480px]:leading-[1.7];
   }
 
   .type-body {
-    @apply text-base leading-[1.7] max-[480px]:text-[0.95rem] max-[480px]:leading-[1.65];
+    @apply text-base leading-[1.7] font-normal max-[480px]:text-[0.95rem] max-[480px]:leading-[1.65];
   }
 
   .type-body-sm {
-    @apply text-[0.9rem] leading-[1.6] max-[480px]:text-[0.88rem] max-[480px]:leading-[1.55];
+    @apply text-sm leading-[1.6] font-normal max-[480px]:text-[0.85rem] max-[480px]:leading-[1.55];
   }
 
   .type-caption {
-    @apply text-[0.82rem] leading-[1.4] tracking-wide;
+    @apply text-xs leading-[1.5] text-muted-foreground;
   }
 
   .type-label {
-    @apply text-[0.85rem] leading-[1.4] tracking-wide;
+    @apply text-[10px] sm:text-xs font-mono tracking-widest uppercase font-bold;
+  }
+
+  .type-cta {
+    @apply text-base leading-[1.7] font-semibold max-[480px]:text-[0.95rem] max-[480px]:leading-[1.65];
   }
 
   .no-scrollbar::-webkit-scrollbar {
@@ -621,7 +625,7 @@
   }
 
   .primary-btn {
-    @apply relative overflow-hidden px-7 h-14 rounded-xl font-semibold text-[0.95rem] flex items-center justify-center gap-[0.6rem] text-foreground z-[3] transition-all whitespace-nowrap backdrop-blur-sm;
+    @apply relative overflow-hidden px-7 h-14 rounded-xl type-cta flex items-center justify-center gap-[0.6rem] text-foreground z-[3] transition-all whitespace-nowrap backdrop-blur-sm;
     transition-duration: 300ms;
     background: linear-gradient(130deg,
         color-mix(in srgb, var(--accent) 70%, transparent),
@@ -680,7 +684,7 @@
 
   /* Secondary Button Standard (Greyscale variant of Primary) */
   .secondary-btn {
-    @apply relative overflow-hidden px-7 h-14 rounded-xl font-semibold text-[0.95rem] flex items-center justify-center gap-[0.6rem] text-white/90 z-[3] transition-all whitespace-nowrap backdrop-blur-md;
+    @apply relative overflow-hidden px-7 h-14 rounded-xl type-cta flex items-center justify-center gap-[0.6rem] text-white/90 z-[3] transition-all whitespace-nowrap backdrop-blur-md;
     transition-duration: 300ms;
     background: linear-gradient(130deg,
         rgba(255, 255, 255, 0.12),

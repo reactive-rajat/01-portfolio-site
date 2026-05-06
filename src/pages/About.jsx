@@ -232,7 +232,7 @@ function About() {
         {isSocialMenuOpen && (
           <div className="absolute bottom-full mb-3 left-0 min-w-[200px] bg-black/95 backdrop-blur-2xl border border-white/10 rounded-2xl p-2 shadow-[0_20px_50px_rgba(0,0,0,0.5)] animate-in fade-in slide-in-from-bottom-4 duration-300 z-[110]">
             <div className="px-3 py-2">
-              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/30">{global.labels.socialProfiles}</p>
+              <p className="type-label text-white/30">{global.labels.socialProfiles}</p>
             </div>
             <div className="grid grid-cols-3 gap-2 px-2 pb-2">
               {global.socialLinks.map((link, idx) => {
@@ -255,7 +255,7 @@ function About() {
     <motion.div initial="hidden" animate="visible"
       variants={staggerContainer} className="w-full py-16 border-t border-white/5">
       <motion.div variants={fadeInUp} className="mb-10">
-        <p className="text-xs font-mono tracking-widest text-[hsl(var(--theme-base))] mb-2 uppercase">Background</p>
+        <p className="type-label text-[hsl(var(--theme-base))] mb-2">Background</p>
         <h3 className="type-section-title text-white mb-6">Experience & Education</h3>
       </motion.div>
       <div className="flex flex-col lg:flex-row gap-6 lg:gap-10 items-start">
@@ -325,7 +325,7 @@ function About() {
     <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}
       variants={staggerContainer} className="w-full py-16 border-t border-white/5">
       <motion.div variants={fadeInUp} className="mb-10">
-        <p className="text-xs font-mono tracking-widest text-[hsl(var(--theme-base))] mb-2 uppercase">Core Principles</p>
+        <p className="type-label text-[hsl(var(--theme-base))] mb-2">Core Principles</p>
         <h3 className="type-section-title text-white mb-6">{home.whatIDeliver.title}</h3>
       </motion.div>
       <div className="grid md:grid-cols-3 gap-5">
@@ -355,7 +355,7 @@ function About() {
       variants={staggerContainer} className="w-full py-16 border-t border-white/5">
       <div className="flex flex-col lg:flex-row gap-10 lg:gap-16">
         <motion.div variants={fadeInUp} className="lg:w-[240px] flex-shrink-0">
-          <p className="text-xs font-mono tracking-widest text-[hsl(var(--theme-base))] mb-2 uppercase">Secret Sauce</p>
+          <p className="type-label text-[hsl(var(--theme-base))] mb-2">Secret Sauce</p>
           <h3 className="type-section-title text-white">{home.differentiator.title}</h3>
         </motion.div>
         <motion.div variants={fadeInUp} className="flex-1">
@@ -377,7 +377,7 @@ function About() {
     <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}
       variants={staggerContainer} className="w-full py-16 border-t border-white/5">
       <motion.div variants={fadeInUp} className="mb-10">
-        <p className="text-xs font-mono tracking-widest text-[hsl(var(--theme-base))] mb-2 uppercase">Recommendations</p>
+        <p className="type-label text-[hsl(var(--theme-base))] mb-2">Recommendations</p>
         <h3 className="type-section-title text-white mb-3">{home.testimonials.title}</h3>
         <p className="type-body text-white/45">{home.testimonials.subtitle}</p>
       </motion.div>

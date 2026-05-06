@@ -78,7 +78,7 @@ function WorkSection({ section, projects }) {
       className="border-t border-white/5 pt-20"
     >
       <motion.div variants={fadeInUp} className="mb-14">
-        <p className="text-xs font-mono tracking-widest text-[hsl(var(--theme-base))] uppercase mb-1">
+        <p className="type-label text-[hsl(var(--theme-base))] mb-1">
           {section.type.replace(/_/g, " ")}
         </p>
         <h2 className="type-section-title text-white">
@@ -308,7 +308,7 @@ function Portfolio() {
               <h2 className="portfolio-title text-3xl lg:text-5xl font-bold tracking-tight text-white">
                 {activeProject.title}
               </h2>
-              <p className="portfolio-desc text-gray-400 text-lg leading-relaxed line-clamp-3">
+              <p className="type-body-lg text-gray-400 line-clamp-3 max-w-[28rem] max-lg:max-w-none">
                 {activeProject.description}
               </p>
               <div className="portfolio-tags pt-5">
@@ -393,7 +393,7 @@ function Portfolio() {
                   <h2 className="text-2xl font-bold text-white leading-tight">
                     {project.title}
                   </h2>
-                  <p className="text-sm text-gray-400 leading-relaxed line-clamp-2 lg:line-clamp-4">
+                  <p className="type-body-sm text-gray-400 line-clamp-2 lg:line-clamp-4">
                     {project.description}
                   </p>
                 </div>

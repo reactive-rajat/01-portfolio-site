@@ -177,7 +177,7 @@ function Contact() {
             </div>
           </button>
 
-          <p className="text-white/30 text-sm mt-4 max-w-lg">
+          <p className="type-body-sm text-white/30 mt-4 max-w-lg">
             {contact.prompts.formal}
           </p>
         </motion.div>
@@ -194,16 +194,16 @@ function Contact() {
                         }}
                         className="group flex flex-col items-center gap-1.5 p-2 -my-2 rounded-xl transition-all text-center"
                       >
-                        <p className="text-[10px] uppercase tracking-widest text-white/30 font-bold">
+                        <p className="type-label text-white/30">
                           PHONE
                         </p>
                         <div className="relative flex items-center justify-center gap-2">
-                          <p className={`text-sm font-medium transition-colors duration-300 ${copiedLabel === "Phone" ? "opacity-0" : "text-white/80 group-hover:text-white"}`}>
+                          <p className={`type-body-sm font-medium transition-colors duration-300 ${copiedLabel === "Phone" ? "opacity-0" : "text-white/80 group-hover:text-white"}`}>
                             {phoneItem.value}
                           </p>
                           <Copy size={12} className={`transition-opacity duration-300 ${copiedLabel === "Phone" ? "opacity-0" : "text-white/30 group-hover:text-white/60"}`} />
                           <div className={`absolute inset-0 flex items-center justify-center gap-1.5 transition-all duration-300 ${copiedLabel === "Phone" ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none"}`}>
-                            <p className="text-sm font-medium text-[hsl(var(--theme-base))]">Copied!</p>
+                            <p className="type-body-sm font-medium text-[hsl(var(--theme-base))]">Copied!</p>
                             <Check size={12} className="text-[hsl(var(--theme-base))]" />
                           </div>
                         </div>
@@ -226,16 +226,16 @@ function Contact() {
                         }}
                         className="group flex flex-col items-center gap-1.5 p-2 -my-2 rounded-xl transition-all text-center"
                       >
-                        <p className="text-[10px] uppercase tracking-widest text-white/30 font-bold">
+                        <p className="type-label text-white/30">
                           EMAIL
                         </p>
                         <div className="relative flex items-center justify-center gap-2">
-                          <p className={`text-sm font-medium transition-colors duration-300 ${copiedLabel === "Email" ? "opacity-0" : "text-white/80 group-hover:text-white"}`}>
+                          <p className={`type-body-sm font-medium transition-colors duration-300 ${copiedLabel === "Email" ? "opacity-0" : "text-white/80 group-hover:text-white"}`}>
                             {emailItem.value}
                           </p>
                           <Copy size={12} className={`transition-opacity duration-300 ${copiedLabel === "Email" ? "opacity-0" : "text-white/30 group-hover:text-white/60"}`} />
                           <div className={`absolute inset-0 flex items-center justify-center gap-1.5 transition-all duration-300 ${copiedLabel === "Email" ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none"}`}>
-                            <p className="text-sm font-medium text-[hsl(var(--theme-base))]">Copied!</p>
+                            <p className="type-body-sm font-medium text-[hsl(var(--theme-base))]">Copied!</p>
                             <Check size={12} className="text-[hsl(var(--theme-base))]" />
                           </div>
                         </div>
@@ -268,7 +268,7 @@ function Contact() {
                           className="absolute bottom-full mb-3 right-0 min-w-[200px] bg-black/95 backdrop-blur-2xl border border-white/10 rounded-2xl p-2 shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-[110]"
                         >
                           <div className="px-3 py-2 text-center">
-                            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/30">{global.labels.socialProfiles}</p>
+                            <p className="type-label text-white/30">{global.labels.socialProfiles}</p>
                           </div>
                           <div className="flex flex-wrap justify-center gap-2 px-2 pb-2">
                             {global.socialLinks.map((link, idx) => {
@@ -321,7 +321,7 @@ function Contact() {
 
                     {/* Received Bubble */}
                     <div className="self-start bg-[#202c33] border border-white/5 px-4 py-3 rounded-2xl rounded-tl-sm max-w-[90%] shadow-lg">
-                      <p className="text-sm text-[#e9edef] leading-relaxed">Hey! I have a project in mind. Are you available? 🚀</p>
+                      <p className="type-body-sm text-[#e9edef]">Hey! I have a project in mind. Are you available? 🚀</p>
                       <div className="flex justify-end items-center gap-1 mt-1">
                         <span className="text-[10px] text-white/40">10:00 AM</span>
                       </div>
@@ -329,7 +329,7 @@ function Contact() {
                     
                     {/* Sent Bubble (Less Opaque) */}
                     <div className="self-end bg-[#25D366]/10 border border-[#25D366]/20 px-4 py-3 rounded-2xl rounded-tr-sm max-w-[90%]">
-                      <p className="text-sm text-white/80 leading-relaxed">Absolutely! I'm always open to discussing new ideas. Reach out below! 👋</p>
+                      <p className="type-body-sm text-white/80">Absolutely! I'm always open to discussing new ideas. Reach out below! 👋</p>
                       <div className="flex justify-end items-center gap-1 mt-1">
                         <span className="text-[10px] text-white/40">Just now</span>
                         <div className="flex -space-x-[8px] relative top-[1px]">
@@ -367,7 +367,7 @@ function Contact() {
               <div className="space-y-6">
                 <div className="space-y-1">
                   <h3 className="type-heading-3 text-white">Send a Message</h3>
-                  <p className="text-white/50 text-sm">
+                  <p className="type-body-sm text-white/50">
                     Fill out the form below and I'll get back to you shortly.
                   </p>
                 </div>

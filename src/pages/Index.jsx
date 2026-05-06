@@ -189,7 +189,7 @@ function Index() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
               </span>
-              <p className="text-xs font-mono tracking-[0.15em] uppercase text-green-400">
+              <p className="type-label text-green-400">
                 {home.greeting.label}
               </p>
             </motion.div>
@@ -223,7 +223,7 @@ function Index() {
                 .split("\n")
                 .filter((p) => p.trim())
                 .map((para, i) => (
-                  <p key={i}>{para}</p>
+                  <p key={i} className="type-body">{para}</p>
                 ))}
             </motion.div>
 
