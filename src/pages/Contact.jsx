@@ -139,37 +139,31 @@ function Contact() {
             </div>
           </a>
 
-          {/* Email Toggle Card */}
           <button
             onClick={() => setShowForm(!showForm)}
-            className={`group relative flex items-center justify-between gap-4 p-5 rounded-2xl border transition-all duration-400 overflow-hidden max-w-lg w-full text-left ${showForm ? "border-[hsl(var(--theme-base)/0.4)] bg-[hsl(var(--theme-base)/0.1)]" : "border-white/10 bg-white/[0.02] hover:bg-white/[0.05]"}`}
-            style={
-              showForm
-                ? { boxShadow: "0 0 40px -16px hsl(var(--theme-base)/0.2)" }
-                : {}
-            }
+            className={`group relative flex items-center justify-between gap-4 p-5 rounded-2xl border transition-all duration-400 overflow-hidden max-w-lg w-full text-left ${showForm ? "border-[hsl(var(--theme-base)/0.4)] bg-[hsl(var(--theme-base)/0.1)] shadow-[0_0_40px_-16px_hsl(var(--theme-base)/0.2)]" : "border-white/10 bg-white/[0.02] hover:bg-[hsl(var(--theme-base)/0.1)] hover:border-[hsl(var(--theme-base)/0.4)] hover:shadow-[0_10px_30px_-10px_hsl(var(--theme-base)/0.3)]"}`}
           >
             <div className="flex items-center gap-4 relative z-10">
               <div
-                className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl transition-transform ${showForm ? "bg-[hsl(var(--theme-base)/0.2)] text-[hsl(var(--theme-base))] group-hover:scale-110" : "bg-white/5 text-white/50 group-hover:scale-110"}`}
+                className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition-all ${showForm ? "bg-[hsl(var(--theme-base)/0.2)] text-[hsl(var(--theme-base))] group-hover:scale-110" : "bg-white/5 text-white/50 group-hover:scale-110 group-hover:bg-[hsl(var(--theme-base)/0.2)] group-hover:text-[hsl(var(--theme-base))]"}`}
               >
-                <Mail className="w-6 h-6" />
+                <Mail className="w-5 h-5" />
               </div>
               <div>
                 <p
-                  className={`type-body-lg font-bold mb-1 ${showForm ? "text-white" : "text-white/60"}`}
+                  className={`type-body-lg font-bold mb-1 transition-colors ${showForm ? "text-white" : "text-white/60 group-hover:text-white"}`}
                 >
                   Email
                 </p>
                 <p
-                  className={`type-body-sm font-medium transition-colors ${showForm ? "text-[hsl(var(--theme-base)/0.8)]" : "text-white/40 group-hover:text-white/60"}`}
+                  className={`type-body-sm font-medium transition-colors ${showForm ? "text-[hsl(var(--theme-base)/0.8)]" : "text-white/40 group-hover:text-[hsl(var(--theme-base)/0.8)]"}`}
                 >
                   {showForm ? "Close email form" : "Send a direct message"}
                 </p>
               </div>
             </div>
             <div
-              className={`shrink-0 h-9 w-9 flex items-center justify-center rounded-full transition-colors relative z-10 ${showForm ? "bg-[hsl(var(--theme-base)/0.2)] border border-[hsl(var(--theme-base)/0.4)] text-[hsl(var(--theme-base))]" : "bg-white/5 border border-white/10 text-white/40 group-hover:text-white"}`}
+              className={`shrink-0 h-10 w-10 flex items-center justify-center rounded-full transition-all relative z-10 ${showForm ? "bg-[hsl(var(--theme-base)/0.2)] border border-[hsl(var(--theme-base)/0.4)] text-[hsl(var(--theme-base))]" : "bg-white/5 border border-white/10 text-white/40 group-hover:bg-[hsl(var(--theme-base)/0.2)] group-hover:border-[hsl(var(--theme-base)/0.4)] group-hover:text-[hsl(var(--theme-base))]"}`}
             >
               <ArrowRight
                 className={`w-4 h-4 transition-transform ${showForm ? "rotate-90" : "group-hover:translate-x-0.5"}`}

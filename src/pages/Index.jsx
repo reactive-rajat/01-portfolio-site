@@ -207,38 +207,33 @@ function Index() {
 
             <motion.h2
               variants={fadeInUp}
-              className="home-subtitle text-xl lg:text-2xl text-white/90 mt-12 lg:mt-0 mb-6 lg:mb-8"
+              className="text-shimmer text-2xl lg:text-[1.75rem] font-semibold mt-6 mb-4 lg:mt-8 lg:mb-5 leading-tight"
             >
-              <span className="block text-shimmer text-3xl lg:text-4xl font-bold mt-1 mb-2">
-                {home.subtitle.highlight}
-              </span>
-              {home.subtitle.intro}
+              {home.subtitle.highlight}
             </motion.h2>
 
             <motion.div
               variants={fadeInUp}
-              className="text-md lg:text-lg text-white/70 mb-6 max-w-lg leading-relaxed space-y-4"
+              className="type-body text-sm lg:text-base text-white/50 mb-10 max-w-lg leading-relaxed space-y-3"
             >
+              {home.subtitle.intro && <p>{home.subtitle.intro}</p>}
               {home.description
                 .split("\n")
                 .filter((p) => p.trim())
                 .map((para, i) => (
-                  <p key={i} className="type-body">{para}</p>
+                  <p key={i}>{para}</p>
                 ))}
             </motion.div>
 
             <motion.div
               variants={fadeInUp}
-              className="flex flex-col gap-8 mt-2"
+              className="flex flex-col gap-6 mt-2"
             >
-              <div className="flex items-center gap-3 text-sm text-white/50 font-medium flex-wrap">
-                <span>Frontend Dev</span>
-                <span className="w-1 h-1 rounded-full bg-white/20" />
-                <span>Backend Architecture</span>
-                <span className="w-1 h-1 rounded-full bg-white/20" />
-                <span>UI Design</span>
-                <span className="w-1 h-1 rounded-full bg-white/20" />
-                <span>Web3</span>
+              <div className="flex items-center gap-2 text-[10px] uppercase tracking-wider text-white/50 font-medium flex-wrap mb-2">
+                <span className="px-3 py-1 rounded-full border border-white/10 bg-white/5">Frontend Dev</span>
+                <span className="px-3 py-1 rounded-full border border-white/10 bg-white/5">Backend Architecture</span>
+                <span className="px-3 py-1 rounded-full border border-white/10 bg-white/5">UI Design</span>
+                <span className="px-3 py-1 rounded-full border border-white/10 bg-white/5">Web3</span>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4 mb-4">
@@ -254,19 +249,17 @@ function Index() {
                   {home.cta.label}
                 </PrimaryButton>
 
-                <a
+                <PrimaryButton
+                  theme="neutral"
                   href={global.resume?.file || "#"}
                   download="Alex_Carter_Resume.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 hover:bg-white/10 transition-all font-semibold text-white/90 group"
+                  containerClass="flex-1 sm:flex-none"
+                  icon={<Download size={18} />}
                 >
-                  <Download
-                    size={18}
-                    className="group-hover:-translate-y-1 transition-transform"
-                  />
-                  <span>Download Resume</span>
-                </a>
+                  {about.cvCta?.label || "Download Resume"}
+                </PrimaryButton>
               </div>
             </motion.div>
           </div>

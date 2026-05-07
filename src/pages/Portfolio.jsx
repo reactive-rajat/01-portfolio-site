@@ -287,14 +287,16 @@ function Portfolio() {
           {/* Prev/Next nav arrows */}
           <button
             onClick={() => { navigateProject(-1); pauseAndResume(); }}
-            className="absolute -left-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full border border-white/10 bg-black/60 text-white/50 hover:text-white hover:scale-110 transition-all backdrop-blur-xl hidden md:flex items-center justify-center group/nav"
+            className="absolute -left-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full border border-white/10 bg-black/60 text-white/50 hover:text-[var(--accent)] hover:border-[var(--accent)] hover:shadow-[0_0_20px_-5px_var(--accent)] hover:scale-110 transition-all duration-300 backdrop-blur-xl hidden md:flex items-center justify-center group/nav"
+            style={{ "--accent": activeProject.accent }}
             aria-label={labels.prevProject}
           >
             <ChevronLeft className="w-6 h-6 group-hover/nav:-translate-x-0.5 transition-transform" />
           </button>
           <button
             onClick={() => { navigateProject(1); pauseAndResume(); }}
-            className="absolute -right-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full border border-white/10 bg-black/60 text-white/50 hover:text-white hover:scale-110 transition-all backdrop-blur-xl hidden md:flex items-center justify-center group/nav"
+            className="absolute -right-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full border border-white/10 bg-black/60 text-white/50 hover:text-[var(--accent)] hover:border-[var(--accent)] hover:shadow-[0_0_20px_-5px_var(--accent)] hover:scale-110 transition-all duration-300 backdrop-blur-xl hidden md:flex items-center justify-center group/nav"
+            style={{ "--accent": activeProject.accent }}
             aria-label={labels.nextProject}
           >
             <ChevronRight className="w-6 h-6 group-hover/nav:translate-x-0.5 transition-transform" />
