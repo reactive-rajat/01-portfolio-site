@@ -12,7 +12,7 @@
           {
             "id": "linkedin",
             "label": "LinkedIn",
-            "url": "https://www.linkedin.com/in/rajat-gulati-design/",
+            "url": "https://www.linkedin.com/",
             "icon": "Linkedin"
           },
           {
@@ -126,7 +126,7 @@
         },
         "experience": {
           "title": "Experience",
-          "subtitle": "Worked across ResumeHelp, ResumeNerd, LiveCareer, Zety and other large-scale products with millions of users.",
+          "subtitle": "Worked across TechNova, InnovateCorp, GlobalWeb, DataSystems and other large-scale products with millions of users.",
           "items": [
             {
               "title": "Lead Product Engineer",

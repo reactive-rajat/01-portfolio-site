@@ -258,7 +258,7 @@ function Index() {
                   containerClass="flex-1 sm:flex-none"
                   icon={<Download size={18} />}
                 >
-                  {about.cvCta?.label || "Download Resume"}
+                  {global.resume?.label || "Download Resume"}
                 </PrimaryButton>
               </div>
             </motion.div>
