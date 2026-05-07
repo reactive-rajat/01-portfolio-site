@@ -21,7 +21,8 @@ function ProjectCard({ project }) {
       rel="noopener noreferrer"
       variants={fadeInUp}
       whileHover={{ y: -4 }}
-      className="group relative flex flex-col rounded-2xl border border-white/10 hover:border-[hsl(var(--theme-base)/0.3)] hover:shadow-[0_8px_30px_-12px_hsl(var(--theme-base)/0.2)] hover:bg-[rgba(0,0,0,0.3)] overflow-hidden transition-all duration-500"
+      style={{ "--card-accent": project.accent }}
+      className="group relative flex flex-col rounded-2xl border border-white/10 hover:border-[var(--card-accent)] hover:shadow-[0_8px_30px_-12px_var(--card-accent)] hover:bg-[rgba(0,0,0,0.3)] overflow-hidden transition-all duration-500"
     >
       {/* Thumbnail */}
       <div className="relative h-64 overflow-hidden shrink-0">
@@ -37,7 +38,7 @@ function ProjectCard({ project }) {
       {/* Info */}
       <div className="p-5 flex flex-col flex-1 gap-3">
         <div className="flex items-start justify-between gap-3">
-          <h4 className="type-card-title text-white group-hover:text-[hsl(var(--theme-base)/0.9)] transition-colors pr-6">
+          <h4 className="type-card-title text-white group-hover:text-[var(--card-accent)] transition-colors pr-6">
             {project.title}
           </h4>
         </div>
@@ -57,7 +58,14 @@ function ProjectCard({ project }) {
       </div>
       
       {/* Bottom Right Cutout Arrow Button */}
-      <div className="absolute bottom-0 right-0 w-12 h-12 rounded-xl !rounded-tr-none !rounded-bl-none !rounded-tl-3xl border border-[hsl(var(--theme-base)/0.4)] border-t-0 border-r-0 bg-[hsl(var(--theme-base)/0.15)] text-[hsl(var(--theme-base))] flex items-center justify-center opacity-0 scale-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-300 z-20">
+      <div 
+        className="absolute bottom-0 right-0 w-12 h-12 rounded-xl !rounded-tr-none !rounded-bl-none !rounded-tl-3xl border border-t-0 border-r-0 flex items-center justify-center opacity-0 scale-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-300 z-20"
+        style={{ 
+          borderColor: `color-mix(in srgb, ${project.accent} 40%, transparent)`,
+          backgroundColor: `color-mix(in srgb, ${project.accent} 15%, transparent)`,
+          color: project.accent 
+        }}
+      >
         <ArrowRight size={20} />
       </div>
     </motion.a>
@@ -110,49 +118,52 @@ function Portfolio() {
   const carouselRef = useRef(null);
   const autoTimerRef = useRef(null);
 
+  // Helper to extract only featured projects for the carousel
+  const carouselProjects = React.useMemo(() => {
+    return content?.portfolio?.projects?.filter((p) => p.featured) || [];
+  }, [content]);
+
   // Reset activeId when role changes or content loads
   useEffect(() => {
-    if (content?.portfolio?.projects?.length > 0) {
-      setActiveId(content.portfolio.projects[0].id);
+    if (carouselProjects.length > 0 && !carouselProjects.find((p) => p.id === activeId)) {
+      setActiveId(carouselProjects[0].id);
     }
-  }, [activeRole, content]);
+  }, [activeRole, carouselProjects]); // eslint-disable-line
 
   // ── Auto-cycle thumbnails on desktop ──
   useEffect(() => {
-    const projects = content?.portfolio?.projects;
-    if (!isDesktop || !projects || projects.length <= 1) return;
+    if (!isDesktop || carouselProjects.length <= 1) return;
 
     autoTimerRef.current = setInterval(() => {
       setActiveId((prev) => {
-        const idx = projects.findIndex((p) => p.id === prev);
-        const next = (idx + 1) % projects.length;
-        return projects[next].id;
+        const idx = carouselProjects.findIndex((p) => p.id === prev);
+        const next = (idx + 1) % carouselProjects.length;
+        return carouselProjects[next].id;
       });
     }, AUTO_CYCLE_INTERVAL);
 
     return () => clearInterval(autoTimerRef.current);
-  }, [isDesktop, content]);
+  }, [isDesktop, carouselProjects]);
 
   // Keyboard navigation
   useEffect(() => {
     function handleKeyDown(e) {
-      const projects = content?.portfolio?.projects;
-      if (!projects) return;
+      if (!carouselProjects || carouselProjects.length === 0) return;
       setActiveId((prev) => {
-        const idx = projects.findIndex((p) => p.id === prev);
+        const idx = carouselProjects.findIndex((p) => p.id === prev);
         if (e.key === "ArrowLeft") {
-          const next = idx <= 0 ? projects.length - 1 : idx - 1;
-          return projects[next].id;
+          const next = idx <= 0 ? carouselProjects.length - 1 : idx - 1;
+          return carouselProjects[next].id;
         } else if (e.key === "ArrowRight") {
-          const next = (idx + 1) % projects.length;
-          return projects[next].id;
+          const next = (idx + 1) % carouselProjects.length;
+          return carouselProjects[next].id;
         }
         return prev;
       });
     }
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [content]); // eslint-disable-line
+  }, [carouselProjects]);
 
 
   // Pause auto-cycle on user interaction — defined after content guard below
@@ -194,23 +205,23 @@ function Portfolio() {
   };
 
   // Logic to find active project
-  let activeProject = projects[0];
+  let activeProject = carouselProjects[0] || projects[0];
   let activeIndex = 0;
-  for (let i = 0; i < projects.length; i++) {
-    if (projects[i].id === activeId) {
-      activeProject = projects[i];
+  for (let i = 0; i < carouselProjects.length; i++) {
+    if (carouselProjects[i].id === activeId) {
+      activeProject = carouselProjects[i];
       activeIndex = i;
       break;
     }
   }
 
   function navigateProject(direction) {
-    if (!projects || projects.length <= 1) return;
-    const currentIndex = projects.findIndex((p) => p.id === activeId);
+    if (!carouselProjects || carouselProjects.length <= 1) return;
+    const currentIndex = carouselProjects.findIndex((p) => p.id === activeId);
     let nextIndex = currentIndex + direction;
-    if (nextIndex < 0) nextIndex = projects.length - 1;
-    if (nextIndex >= projects.length) nextIndex = 0;
-    setActiveId(projects[nextIndex].id);
+    if (nextIndex < 0) nextIndex = carouselProjects.length - 1;
+    if (nextIndex >= carouselProjects.length) nextIndex = 0;
+    setActiveId(carouselProjects[nextIndex].id);
     if (!isDesktop && carouselRef.current) {
       carouselRef.current.scrollTo({
         left: nextIndex * carouselRef.current.offsetWidth,
@@ -221,12 +232,12 @@ function Portfolio() {
 
   function pauseAndResume() {
     clearInterval(autoTimerRef.current);
-    if (isDesktop && projects && projects.length > 1) {
+    if (isDesktop && carouselProjects && carouselProjects.length > 1) {
       autoTimerRef.current = setInterval(() => {
         setActiveId((prev) => {
-          const idx = projects.findIndex((p) => p.id === prev);
-          const next = (idx + 1) % projects.length;
-          return projects[next].id;
+          const idx = carouselProjects.findIndex((p) => p.id === prev);
+          const next = (idx + 1) % carouselProjects.length;
+          return carouselProjects[next].id;
         });
       }, AUTO_CYCLE_INTERVAL);
     }
@@ -248,8 +259,8 @@ function Portfolio() {
         activeIdx = index;
       }
     });
-    if (projects[activeIdx] && projects[activeIdx].id !== activeId) {
-      setActiveId(projects[activeIdx].id);
+    if (carouselProjects[activeIdx] && carouselProjects[activeIdx].id !== activeId) {
+      setActiveId(carouselProjects[activeIdx].id);
     }
   };
 
@@ -364,7 +375,7 @@ function Portfolio() {
         style={{ scrollBehavior: "smooth", overscrollBehaviorX: "contain" }}
         onScroll={handleScroll}
       >
-        {projects.map((project, idx) => (
+        {carouselProjects.map((project, idx) => (
           <div
             key={project.id}
             className="snap-center shrink-0 w-[calc(100vw-3rem)] max-w-[400px] flex justify-center"
@@ -430,29 +441,32 @@ function Portfolio() {
         ))}
       </div>
 
-      {/* Carousel dots */}
-      <div className="flex justify-center items-center gap-4 relative z-20 -left-6">
-        {projects.map((project, idx) => (
-          <button
-            key={`dot-${project.id}`}
-            onClick={() => {
-              if (carouselRef.current) {
-                const card = carouselRef.current.children[idx];
-                if (card) {
-                  const scrollLeft =
-                    card.offsetLeft -
-                    (carouselRef.current.offsetWidth - card.offsetWidth) / 2;
-                  carouselRef.current.scrollTo({ left: scrollLeft, behavior: "smooth" });
+      {/* Carousel Progress Bar */}
+      <div className="flex w-3/4 max-w-[240px] mx-auto h-2 rounded-full overflow-hidden bg-[rgba(255,255,255,0.05)] border border-white/10 relative z-20 -left-6">
+        {carouselProjects.map((project, idx) => {
+          const isActive = activeId === project.id;
+          return (
+            <button
+              key={`dot-${project.id}`}
+              onClick={() => {
+                if (carouselRef.current) {
+                  const card = carouselRef.current.children[idx];
+                  if (card) {
+                    const scrollLeft =
+                      card.offsetLeft -
+                      (carouselRef.current.offsetWidth - card.offsetWidth) / 2;
+                    carouselRef.current.scrollTo({ left: scrollLeft, behavior: "smooth" });
+                  }
                 }
-              }
-            }}
-            className={`h-2 transition-all duration-300 rounded-full ${
-              activeId === project.id ? "w-8" : "w-2 bg-white/10 hover:bg-white/30"
-            }`}
-            style={{ backgroundColor: activeId === project.id ? project.accent : undefined }}
-            aria-label={`Go to project ${idx + 1}`}
-          />
-        ))}
+              }}
+              className={`flex-1 h-full transition-colors duration-300 border-r border-black/40 last:border-0 hover:bg-white/20`}
+              style={{ 
+                backgroundColor: isActive ? project.accent : undefined 
+              }}
+              aria-label={`Go to project ${idx + 1}`}
+            />
+          );
+        })}
       </div>
     </div>
   );
@@ -464,11 +478,11 @@ function Portfolio() {
       style={{ "--accent": activeProject.accent }}
     >
       <div
-        className={"portfolio-thumbs-shell w-full" + (projects.length > 4 ? "" : " no-nav")}
+        className={"portfolio-thumbs-shell w-full" + (carouselProjects.length > 4 ? "" : " no-nav")}
         role="tablist"
         aria-label={labels.projectThumbnails}
       >
-        {projects.length > 4 && (
+        {carouselProjects.length > 4 && (
           <button
             type="button"
             className="portfolio-thumb-nav"
@@ -480,7 +494,7 @@ function Portfolio() {
         )}
 
         <div className="portfolio-thumbs" id="portfolio-thumbs">
-          {projects.map(function (project) {
+          {carouselProjects.map(function (project) {
             const isActive = project.id === activeProject.id;
             return (
               <button
@@ -500,7 +514,7 @@ function Portfolio() {
           })}
         </div>
 
-        {projects.length > 4 && (
+        {carouselProjects.length > 4 && (
           <button
             type="button"
             className="portfolio-thumb-nav"

@@ -321,7 +321,7 @@ function Contact() {
 
                     {/* Received Bubble */}
                     <div className="self-start bg-[#202c33] border border-white/5 px-4 py-3 rounded-2xl rounded-tl-sm max-w-[90%] shadow-lg">
-                      <p className="type-body-sm text-[#e9edef]">Hey! I have a project in mind. Are you available? 🚀</p>
+                      <p className="type-body-sm text-[#e9edef]">Hey Alex! We have a new enterprise web app project. Are you available for freelance work? 🚀</p>
                       <div className="flex justify-end items-center gap-1 mt-1">
                         <span className="text-[10px] text-white/40">10:00 AM</span>
                       </div>
@@ -329,7 +329,7 @@ function Contact() {
                     
                     {/* Sent Bubble (Less Opaque) */}
                     <div className="self-end bg-[#25D366]/10 border border-[#25D366]/20 px-4 py-3 rounded-2xl rounded-tr-sm max-w-[90%]">
-                      <p className="type-body-sm text-white/80">Absolutely! I'm always open to discussing new ideas. Reach out below! 👋</p>
+                      <p className="type-body-sm text-white/80">Absolutely! I'm currently taking on new projects. Let's schedule a call to discuss the architecture and timeline. 🤝</p>
                       <div className="flex justify-end items-center gap-1 mt-1">
                         <span className="text-[10px] text-white/40">Just now</span>
                         <div className="flex -space-x-[8px] relative top-[1px]">

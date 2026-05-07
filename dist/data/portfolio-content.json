@@ -39,10 +39,10 @@
           "label": "Hi, I'm"
         },
         "subtitle": {
-          "highlight": "Senior UI Engineer — Design Systems & React",
-          "intro": "I design scalable interfaces and build them in React."
+          "highlight": "Creative Product Engineer — Full-Stack & UI/UX",
+          "intro": "I build scalable applications and craft seamless digital experiences."
         },
-        "description": "6+ years building structured component systems and translating Figma into production-ready frontend architecture.",
+        "description": "6+ years of experience developing robust web applications, bridging the gap between aesthetic design and high-performance code.",
         "cta": {
           "label": "View Case Studies",
           "tooltipTitle": "Design to Production",
@@ -108,18 +108,18 @@
           "title": "What I Deliver",
           "blocks": [
             {
-              "title": "Design Systems That Scale",
-              "description": "I build structured component libraries and token systems that reduce design–development friction and improve release velocity.",
+              "title": "Scalable Architecture",
+              "description": "Building structured codebases that reduce technical debt and improve team velocity.",
               "icon": "Layers"
             },
             {
-              "title": "Production-Ready Frontend",
-              "description": "Clean React architecture, reusable components, TypeScript safety, and maintainable codebases built for long-term scalability.",
+              "title": "High-Performance UI",
+              "description": "Clean React components, responsive design, and accessible interfaces built for the modern web.",
               "icon": "Code"
             },
             {
-              "title": "Design-to-Code Precision",
-              "description": "Accurate translation from Figma to production UI with accessibility, responsiveness, and performance in mind.",
+              "title": "End-to-End Delivery",
+              "description": "Seamless integration from database to client-side, ensuring data integrity and fast load times.",
               "icon": "Zap"
             }
           ]
@@ -129,14 +129,14 @@
           "subtitle": "Worked across ResumeHelp, ResumeNerd, LiveCareer, Zety and other large-scale products with millions of users.",
           "items": [
             {
-              "title": "Independent Product Engineer",
-              "subtitle": "Product Experiments & System Development",
-              "date": "May 2025 – Present"
+              "title": "Lead Product Engineer",
+              "subtitle": "Nexus Tech",
+              "date": "May 2023 - Present"
             },
             {
-              "title": "Senior UI Engineer & Designer",
-              "subtitle": "Bold Technology Systems",
-              "date": "2021 – 2025"
+              "title": "Senior Frontend Developer",
+              "subtitle": "Horizon Digital",
+              "date": "2021 - 2023"
             }
           ]
         },
@@ -165,23 +165,23 @@
           "subtitle": "",
           "items": [
             {
-              "name": "John Doe",
-              "role": "Engineering Manager at TechCorp",
-              "text": "Rajat is a phenomenal UI engineer. His ability to bridge the gap between our design and engineering teams transformed how we ship features. Highly recommended.",
+              "name": "Sarah Jenkins",
+              "role": "VP of Engineering",
+              "text": "Alex transformed our product vision into reality. The code is immaculate and the UI is flawless.",
               "linkedinUrl": "#",
               "image": "https://i.pravatar.cc/150?u=john"
             },
             {
-              "name": "Jane Smith",
-              "role": "Lead Product Designer",
-              "text": "Working with Rajat is a designer's dream. He doesn't just implement Figma files; he understands the UX logic and builds robust, accessible components that scale flawlessly.",
+              "name": "David Chen",
+              "role": "Product Manager",
+              "text": "A rare talent who truly understands both deep technical architecture and modern design principles.",
               "linkedinUrl": "#",
               "image": "https://i.pravatar.cc/150?u=jane"
             },
             {
               "name": "Alex Johnson",
               "role": "Senior Frontend Engineer",
-              "text": "Rajat's expertise in React and Design Systems is top-tier. His code is clean, his components are reusable, and he always advocates for best practices in architecture.",
+              "text": "Alex's expertise in React and Design Systems is top-tier. His code is clean, his components are reusable, and he always advocates for best practices in architecture.",
               "linkedinUrl": "#",
               "image": "https://i.pravatar.cc/150?u=alex"
             }
@@ -201,9 +201,9 @@
           "icon": "User"
         },
         "description": [
-          "I started my career building interfaces in HTML and CSS. Over time, I moved beyond visual design into system thinking — understanding how UI components scale, how frontend architecture impacts teams, and how product decisions shape user experience.",
-          "My background across both design and frontend engineering allows me to see the full picture — from wireframes to production deployment.",
-          "I specialize in translating structured Figma systems into scalable, accessible React applications that teams can confidently build on."
+          "I began my journey bridging design and engineering.",
+          "Over time, I evolved into full-stack development—understanding how database architecture impacts performance, and how frontend execution shapes user experience.",
+          "I specialize in turning complex problems into elegant, scalable digital products that users love."
         ],
         "cvCta": {
           "label": "Download Full CV",
@@ -213,20 +213,41 @@
         "tabs": [
           {
             "id": "experience",
-            "label": "Journey",
+            "label": "Experience",
             "icon": "History",
             "itemIcon": "Briefcase",
             "timelineDescription": "6+ years of building and scaling UI systems across product teams.",
             "items": [
               {
-                "title": "Independent Product Engineer",
-                "subtitle": "Product Experiments & System Development",
-                "date": "May 2025 - Present"
+                "title": "Lead Product Engineer",
+                "subtitle": "Nexus Tech",
+                "date": "May 2023 - Present",
+                "link": "https://example.com/nexus",
+                "points": [
+                  "Spearheaded the migration of legacy monolithic architecture to a highly scalable Next.js micro-frontend ecosystem, improving maintainability across teams.",
+                  "Mentored a team of 8 frontend engineers and established rigorous testing protocols.",
+                  "Reduced build times by 45% through custom Webpack configuration."
+                ]
               },
               {
-                "title": "Senior UI Engineer & Designer",
-                "subtitle": "Bold Technology Systems",
-                "date": "2021 - 2025"
+                "title": "Senior Frontend Developer",
+                "subtitle": "Horizon Digital",
+                "date": "2021 - 2023",
+                "link": "https://example.com/horizon",
+                "points": [
+                  "Architected a unified design system in React, accelerating UI feature delivery across 4 enterprise products while ensuring complete WCAG compliance.",
+                  "Optimized critical rendering paths, resulting in a 25% reduction in Time to Interactive (TTI)."
+                ]
+              },
+              {
+                "title": "Frontend Developer",
+                "subtitle": "Creative Agency",
+                "date": "2019 - 2021",
+                "link": "https://example.com/creative",
+                "points": [
+                  "Developed high-performance, pixel-perfect promotional sites for Fortune 500 clients using modern web technologies.",
+                  "Implemented interactive WebGL experiences that increased user dwell time by over 60%."
+                ]
               }
             ]
           },
@@ -242,60 +263,56 @@
                 "percentage": "CGPA: 8.5/10",
                 "points": [
                   "Specialized in Human-Computer Interaction and Advanced Data Structures.",
-                  "Led the university's open-source programming club."
+                  "Led the university's open-source programming club and organized three major hackathons.",
+                  "Published a thesis on predictive rendering algorithms for modern web browsers."
                 ]
               },
               {
-                "title": "Advanced React patterns & Performance",
-                "subtitle": "Frontend Masters Certification",
+                "title": "Advanced React Patterns & Performance",
+                "subtitle": "Frontend Masters",
                 "date": "March 2022",
                 "points": [
-                  "Mastered concurrent rendering, custom hooks architecture, and state machines."
-                ],
-                "link": "#"
-              },
-              {
-                "title": "Google UX Design Professional Certificate",
-                "subtitle": "Coursera",
-                "date": "Sept 2021",
-                "points": [
-                  "Completed rigorous training in wireframing, prototyping, and user research methodologies."
-                ],
-                "link": "#"
+                  "Mastered concurrent rendering, custom hooks architecture, and state machines for enterprise-scale applications.",
+                  "Completed comprehensive projects focusing on React Server Components and Suspense."
+                ]
               }
             ]
           },
           {
-            "label": "Beyond Code",
-            "icon": "Heart",
+            "label": "Certifications",
+            "icon": "Trophy",
             "itemIcon": "Star",
-            "timelineDescription": "Activities, leadership, and contributions outside of daily engineering work.",
+            "timelineDescription": "Professional certifications and industry-recognized credentials.",
             "items": [
               {
-                "title": "Open Source Contributor",
-                "subtitle": "Various UI/Component Libraries",
-                "date": "2020 — Present",
+                "title": "AWS Certified Solutions Architect",
+                "subtitle": "Amazon Web Services (AWS)",
+                "date": "2023",
+                "link": "https://aws.amazon.com/certification/",
                 "points": [
-                  "Contributed accessibility improvements to major open-source React component libraries.",
-                  "Authored and maintain a popular Vite plugin for SVG optimization with 10k+ weekly downloads."
-                ],
-                "link": "#"
-              },
-              {
-                "title": "Engineering Mentor",
-                "subtitle": "Internal Company Initiative",
-                "date": "Jan 2023 — Present",
-                "points": [
-                  "Mentored 5 junior developers, guiding them from bug-fixing to leading feature development.",
-                  "Conducted weekly pairing sessions focusing on clean code and design system adoption."
+                  "Demonstrated backend competency by designing highly available, cost-efficient, and scalable distributed cloud systems.",
+                  "Implemented serverless computing solutions using AWS Lambda and API Gateway.",
+                  "Optimized cloud storage architectures to significantly reduce operational overhead."
                 ]
               },
               {
-                "title": "Tech Speaker",
-                "subtitle": "React India Meetup",
-                "date": "Nov 2022",
+                "title": "Meta Front-End Developer",
+                "subtitle": "Coursera",
+                "date": "2022",
+                "link": "https://www.coursera.org/professional-certificates/meta-front-end-developer",
                 "points": [
-                  "Delivered a talk on 'Bridging Figma and Code: Building Scalable Design Tokens'."
+                  "Gained expertise in building robust, interactive UIs using React, Redux, and modern JavaScript.",
+                  "Completed a capstone project involving a full-scale restaurant reservation application with complex state management."
+                ]
+              },
+              {
+                "title": "Google UX Design Certificate",
+                "subtitle": "Google via Coursera",
+                "date": "2021",
+                "link": "https://grow.google/certificates/ux-design/",
+                "points": [
+                  "Mastered the foundational concepts of user experience design, including wireframing, prototyping, and user research.",
+                  "Conducted comprehensive usability studies to iterate on high-fidelity user interfaces."
                 ]
               }
             ]
@@ -319,32 +336,34 @@
             "items": [
               "React.js",
               "Next.js",
+              "Vue.js",
               "TypeScript",
-              "Component Architecture",
-              "State Management",
-              "Performance Optimization",
-              "Responsive UI",
-              "API Integration"
+              "Tailwind CSS",
+              "Redux",
+              "Motion"
             ]
           },
           {
             "title": "Design Systems",
             "items": [
-              "Design Tokens",
-              "Component Libraries",
-              "Atomic Design Principles",
-              "Scalable UI Patterns",
-              "System Documentation & Governance"
+              "Node.js",
+              "Python",
+              "PostgreSQL",
+              "AWS",
+              "GraphQL",
+              "Docker",
+              "REST APIs"
             ]
           },
           {
             "title": "UI & Interaction Design",
             "items": [
               "Figma",
-              "Interaction Design",
-              "Visual Hierarchy",
-              "Prototyping",
-              "Accessibility (WCAG Standards)"
+              "UI/UX Prototyping",
+              "Git",
+              "CI/CD",
+              "Webpack",
+              "Jest"
             ]
           },
           {
@@ -358,7 +377,7 @@
             ]
           }
         ],
-        "closingNote": "My strength lies not in individual tools, but in connecting design logic with engineering structure."
+        "closingNote": "My strength lies in adaptable problem-solving, choosing the right tech stack for scalable and maintainable solutions."
       },
       "portfolio": {
         "meta": {
@@ -369,54 +388,98 @@
         },
         "sections": [
           {
-            "type": "case_study",
-            "heading": "Case Studies",
-            "subtitle": "End-to-end design and engineering work with documented process."
+            "type": "enterprise",
+            "heading": "Enterprise Web Apps",
+            "subtitle": "Complex, data-heavy SaaS platforms and internal tools."
           },
           {
-            "type": "ui_design",
-            "heading": "UI Design & Redesign",
-            "subtitle": "Figma-native UI design and redesign work."
+            "type": "marketing",
+            "heading": "E-Commerce & Marketing",
+            "subtitle": "High-conversion landing pages and scalable storefronts."
           },
           {
-            "type": "html_css",
-            "heading": "HTML / CSS Projects",
-            "subtitle": "Frontend implementation, landing pages, and interactive UI."
-          },
-          {
-            "type": "graphic_design",
-            "heading": "Graphic Design",
-            "subtitle": "Visual branding, marketing collateral, and print design."
+            "type": "design_system",
+            "heading": "Design Systems",
+            "subtitle": "Reusable UI component libraries and design tokens."
           }
         ],
         "projects": [
           {
-            "id": "srfg-system",
-            "type": "case_study",
-            "title": "Safer Roads for Gurugram (SRFG)",
-            "description": "Designed a high-density data dashboard in Figma and engineered the scalable React architecture powering the interface. Focused on component reuse, accessibility, and structured state management.",
-            "tags": [
-              "React",
-              "Design Systems",
-              "Dashboard Architecture"
-            ],
+            "id": "fintrack-pro",
+            "type": "enterprise",
+            "featured": true,
+            "title": "FinTrack Pro Dashboard",
+            "description": "Architected a high-frequency financial data dashboard featuring real-time analytics, complex data visualization, and secure user authentication.",
+            "tags": ["React", "Node.js", "D3.js", "WebSockets"],
             "url": "#",
             "thumbnail": "src/assets/srfg-thumbnail.png",
             "accent": "#8F1FB0"
           },
           {
-            "id": "flamingo-system",
-            "type": "case_study",
-            "title": "Flamingo Design System",
-            "description": "Architected the design language and implemented an accessible React component library used across multiple large-scale products at Bold Technology Systems.",
-            "tags": [
-              "Design Systems",
-              "React Components",
-              "Tokens"
-            ],
+            "id": "lumina-saas",
+            "type": "enterprise",
+            "featured": false,
+            "title": "Lumina SaaS Platform",
+            "description": "Developed an end-to-end multi-tenant SaaS application, streamlining team collaboration and resource management for enterprise clients.",
+            "tags": ["Next.js", "PostgreSQL", "Tailwind", "Stripe API"],
             "url": "#",
             "thumbnail": "src/assets/flamingo-thumbnail.png",
-            "accent": "#8F1FB0"
+            "accent": "#4A6CF7"
+          },
+          {
+            "id": "aura-ecommerce",
+            "type": "marketing",
+            "featured": true,
+            "title": "Aura E-Commerce storefront",
+            "description": "Built a headless Shopify storefront with sub-second page loads, boosting mobile conversion rates by 35% during peak holiday sales.",
+            "tags": ["Shopify Hydrogen", "Remix", "GraphQL"],
+            "url": "#",
+            "thumbnail": "src/assets/srfg-thumbnail.png",
+            "accent": "#F59E0B"
+          },
+          {
+            "id": "stellar-landing",
+            "type": "marketing",
+            "featured": false,
+            "title": "Stellar Marketing Pages",
+            "description": "Designed and engineered a suite of dynamic landing pages using Framer Motion for high-impact visual storytelling.",
+            "tags": ["Framer Motion", "React", "GSAP"],
+            "url": "#",
+            "thumbnail": "src/assets/flamingo-thumbnail.png",
+            "accent": "#10B981"
+          },
+          {
+            "id": "nova-campaigns",
+            "type": "marketing",
+            "featured": false,
+            "title": "Nova Campaign Microsites",
+            "description": "Developed highly interactive, gamified campaign microsites featuring WebGL product showcases and custom 3D animations.",
+            "tags": ["WebGL", "Three.js", "Vue"],
+            "url": "#",
+            "thumbnail": "src/assets/srfg-thumbnail.png",
+            "accent": "#3B82F6"
+          },
+          {
+            "id": "quantum-ui",
+            "type": "design_system",
+            "featured": true,
+            "title": "Quantum UI Kit",
+            "description": "Created a comprehensive, WCAG 2.1 AA compliant component library used by 12 distinct product teams to standardize UI across the company.",
+            "tags": ["Storybook", "Radix UI", "Tailwind CSS"],
+            "url": "#",
+            "thumbnail": "src/assets/srfg-thumbnail.png",
+            "accent": "#EC4899"
+          },
+          {
+            "id": "nexus-components",
+            "type": "design_system",
+            "featured": false,
+            "title": "Nexus Component Library",
+            "description": "Developed an internal micro-frontend architecture allowing seamless component sharing across Vue and React codebases.",
+            "tags": ["Web Components", "Vite", "TypeScript"],
+            "url": "#",
+            "thumbnail": "src/assets/flamingo-thumbnail.png",
+            "accent": "#06B6D4"
           }
         ]
       },
@@ -430,17 +493,17 @@
         "info": [
           {
             "label": "Email",
-            "value": "pixelkaarigar@gmail.com",
+            "value": "hello@alexcarter.dev",
             "icon": "Mail"
           },
           {
             "label": "Phone",
-            "value": "+91 9899321639",
+            "value": "+1 (555) 019-2837",
             "icon": "Phone"
           },
           {
             "label": "Location",
-            "value": "New Delhi, India",
+            "value": "San Francisco, CA",
             "icon": "MapPin"
           }
         ],
@@ -448,7 +511,7 @@
           "label": "WhatsApp Me",
           "hint": "Quickest way to connect",
           "description": "Available for Senior UI Engineering and Design System roles.",
-          "messageTemplate": "Hi Rajat, I'd like to discuss a frontend or design systems opportunity with you."
+          "messageTemplate": "Hi Alex, I'd like to discuss a frontend or design systems opportunity with you."
         },
         "form": {
           "fields": {

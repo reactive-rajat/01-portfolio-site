@@ -232,13 +232,13 @@ function Index() {
               className="flex flex-col gap-8 mt-2"
             >
               <div className="flex items-center gap-3 text-sm text-white/50 font-medium flex-wrap">
-                <span>Design Systems</span>
+                <span>Frontend Dev</span>
                 <span className="w-1 h-1 rounded-full bg-white/20" />
-                <span>React</span>
+                <span>Backend Architecture</span>
                 <span className="w-1 h-1 rounded-full bg-white/20" />
-                <span>TypeScript</span>
+                <span>UI Design</span>
                 <span className="w-1 h-1 rounded-full bg-white/20" />
-                <span>Accessibility</span>
+                <span>Web3</span>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4 mb-4">

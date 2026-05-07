@@ -137,7 +137,7 @@ export const ContentProvider = ({ children }) => {
     };
 
     // Name — support in-role home.name or hardcoded fallback
-    const name = roleData.home?.name || { first: "Rajat", last: "Gulati" };
+    const name = roleData.home?.name || { first: "Alex", last: "Carter" };
 
     return {
       ...roleData,

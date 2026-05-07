@@ -42,12 +42,12 @@ function TimelineItem({ title, subtitle, date, percentage, points, link, isLast,
     <div className="group relative flex gap-4 lg:gap-6 pb-8 last:pb-0" onMouseEnter={onMouseEnter}>
       {/* Dot + connector line */}
       <div className="flex flex-col items-center mt-1">
-        <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full border bg-black transition-all duration-300 shadow-lg ${
-          isActive
-            ? "border-[hsl(var(--theme-base)/0.5)] text-[hsl(var(--theme-base))] scale-110"
-            : "border-white/10 text-gray-400 group-hover:border-[hsl(var(--theme-base)/0.3)] group-hover:text-[hsl(var(--theme-base))]"
-        }`}>
-          {ItemIcon && <ItemIcon size={18} />}
+        <div className={`flex h-12 w-12 aspect-square justify-center items-center`}>
+          <span className={`rounded-full flex shrink-0 items-center justify-center w-10 h-10 border bg-black transition-all duration-300 shadow-lg ${isActive
+            ? "border-[hsl(var(--theme-base)/0.5)] text-[hsl(var(--theme-base))] scale-[120%]"
+            : "border-white/10 text-gray-400 group-hover:border-[hsl(var(--theme-base)/0.3)] group-hover:text-[hsl(var(--theme-base))]"}`}>
+            {ItemIcon && <ItemIcon size={18} />}
+          </span>
         </div>
         {!isLast && (
           <div className={`h-full w-px mt-2 bg-gradient-to-b transition-colors duration-300 ${
@@ -124,7 +124,7 @@ function isClickable(link) {
 }
 
 // ── Tab-level collapsible wrapper ─────────────────────────────────────────────
-const COLLAPSE_HEIGHT = 600; // px — if content shorter, no collapse shown
+const COLLAPSE_HEIGHT = 320; // px — if content shorter, no collapse shown
 
 function CollapsibleTabContent({ children, label, bottomNote, icon }) {
   const [expanded, setExpanded] = React.useState(false);
@@ -138,37 +138,74 @@ function CollapsibleTabContent({ children, label, bottomNote, icon }) {
   });
 
   return (
-    <div className="relative rounded-3xl border border-white/10 bg-black/60 backdrop-blur-xl shadow-2xl p-6 lg:p-8">
-      <div
-        ref={contentRef}
-        style={{ maxHeight: needsCollapse && !expanded ? COLLAPSE_HEIGHT + "px" : "none" }}
-        className="transition-[max-height] duration-500 ease-in-out"
+    <div className="flex flex-col gap-4">
+      <div className="relative rounded-3xl border border-white/10 bg-black/60 backdrop-blur-xl shadow-2xl p-6 lg:p-8 lg:pb-4">
+      <motion.div
+        initial={false}
+        animate={{ height: needsCollapse && !expanded ? COLLAPSE_HEIGHT : "auto" }}
+        transition={{ type: "spring", stiffness: 200, damping: 25 }}
+        className="overflow-hidden"
       >
-        {children}
-      </div>
+        <div ref={contentRef} className="pb-10">
+          {children}
+        </div>
+      </motion.div>
 
       {/* Fade mask + expand button */}
       {needsCollapse && (
-        <div className="relative mt-4 flex justify-center">
-          {!expanded && (
-            <div className="absolute bottom-full left-0 right-0 h-40 bg-gradient-to-t from-[rgb(10,10,10)] via-[rgba(10,10,10,0.8)] to-transparent pointer-events-none" style={{ background: "linear-gradient(to top, rgba(15, 15, 15, 1) 0%, rgba(15, 15, 15, 0.8) 50%, transparent 100%)" }} />
-          )}
-          <button
+        <motion.div 
+          initial={false}
+          animate={{
+            y: expanded ? 0 : -20,
+            marginBottom: expanded ? 20 : 0
+          }}
+          transition={{ type: "spring", stiffness: 200, damping: 25 }}
+          className="flex justify-center relative z-20"
+        >
+          <motion.div 
+            initial={false}
+            animate={{ 
+              opacity: expanded ? 0 : 1,
+              y: expanded ? 10 : 0
+            }}
+            transition={{ duration: 0.4 }}
+            className="absolute bottom-3 left-0 right-0 h-[200px] bg-gradient-to-t from-[#060507] via-[#060507c4] to-transparent pointer-events-none" 
+          />
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             onClick={() => setExpanded(!expanded)}
-            className="relative z-10 inline-flex items-center gap-2 text-sm font-semibold text-[hsl(var(--theme-base))] hover:opacity-80 transition-opacity"
+            className="relative z-10 inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-[hsl(var(--theme-base)/0.08)] border border-[hsl(var(--theme-base)/0.2)] text-sm font-semibold text-[hsl(var(--theme-base))] hover:bg-[hsl(var(--theme-base)/0.15)] hover:shadow-[0_0_20px_-5px_hsl(var(--theme-base)/0.4)] transition-all"
           >
-            {expanded ? (
-              <><ChevronUp size={16} /><span>View Less</span></>
-            ) : (
-              <><ChevronDown size={16} /><span>View More</span></>
-            )}
-          </button>
-        </div>
+            <motion.div
+              animate={{ rotate: expanded ? 180 : 0 }}
+              transition={{ type: "spring", stiffness: 200, damping: 15 }}
+            >
+              <ChevronDown size={16} />
+            </motion.div>
+            <div className="relative overflow-hidden h-5 flex items-center justify-center w-[72px]">
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={expanded ? "less" : "more"}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ duration: 0.2, ease: "easeOut" }}
+                  className={`absolute`}
+                >
+                  {expanded ? "View Less" : "View More"}
+                </motion.span>
+              </AnimatePresence>
+            </div>
+          </motion.button>
+        </motion.div>
       )}
+
+      </div>
 
       {/* Bottom Note */}
       {bottomNote && (
-        <div className="mt-8 pt-5 border-t border-white/10 flex items-start gap-3 text-white/50 relative z-10">
+        <div className="px-2 lg:px-4 flex items-start gap-3 text-white/40">
           {icon && (
             <div className="w-8 h-8 rounded-full bg-[hsl(var(--theme-base)/0.1)] flex items-center justify-center text-[hsl(var(--theme-base))] shrink-0 mt-0.5">
               {React.createElement(icon, { size: 16 })}
