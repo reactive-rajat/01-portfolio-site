@@ -103,13 +103,11 @@ function TimelineItem({ title, subtitle, date, percentage, points, link, isLast,
 
         {/* Points */}
         {points && points.length > 0 && (
-          <ul className="mt-5 space-y-2.5">
+          <ul className="mt-5 space-y-4">
             {points.map((point, i) => (
-              <li key={i} className="flex items-start gap-3 type-body-sm text-gray-400/90">
-                <div className="mt-1 flex-shrink-0">
-                  <CheckCircle2 size={16} className={isActive ? "text-[hsl(var(--theme-base)/0.7)]" : "text-white/20"} />
-                </div>
-                <span className="leading-relaxed">{point}</span>
+              <li key={i} className="group/point flex items-start gap-4 type-body-sm">
+                <ChevronRight size={16} strokeWidth={3} className="text-[hsl(var(--theme-base))] shrink-0 mt-0.5 opacity-80 transition-transform duration-300 group-hover/point:translate-x-1" />
+                <span className="text-white/50 leading-relaxed transition-colors duration-300 group-hover/point:text-white/90">{point}</span>
               </li>
             ))}
           </ul>
@@ -395,11 +393,11 @@ function About() {
           <h3 className="type-section-title text-white">{home.differentiator.title}</h3>
         </motion.div>
         <motion.div variants={fadeInUp} className="flex-1">
-          <div className="space-y-4">
+          <div className="space-y-4 mt-2">
             {home.differentiator.points.map((pt, i) => (
-              <div key={i} className="flex gap-3 group">
-                <ChevronRight className="w-4 h-4 text-[hsl(var(--theme-base))] mt-1 shrink-0 group-hover:translate-x-0.5 transition-transform" />
-                <p className="type-body text-white/65">{pt}</p>
+              <div key={i} className="group/point flex gap-4 items-center">
+                <ChevronRight size={16} strokeWidth={3} className="text-[hsl(var(--theme-base))] shrink-0 mt-0.5 opacity-80 transition-transform duration-300 group-hover/point:translate-x-1" />
+                <p className="type-body text-white/50 leading-relaxed transition-colors duration-300 group-hover/point:text-white/90">{pt}</p>
               </div>
             ))}
           </div>

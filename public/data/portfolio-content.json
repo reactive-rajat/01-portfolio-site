@@ -330,22 +330,28 @@
           "tools": "Core Technologies",
           "craft": "Capabilities"
         },
-        "categories": [
+        "skillGroups": [
           {
+            "id": "frontend",
             "title": "Frontend Engineering",
-            "items": [
+            "pills": [
               "React.js",
               "Next.js",
               "Vue.js",
               "TypeScript",
               "Tailwind CSS",
               "Redux",
-              "Motion"
+              "Framer Motion"
+            ],
+            "points": [
+              "Build responsive, accessible interfaces with clean UI systems",
+              "Ensure performance, WCAG compliance, and cross-browser consistency"
             ]
           },
           {
-            "title": "Design Systems",
-            "items": [
+            "id": "backend",
+            "title": "Backend & Cloud",
+            "pills": [
               "Node.js",
               "Python",
               "PostgreSQL",
@@ -353,27 +359,29 @@
               "GraphQL",
               "Docker",
               "REST APIs"
+            ],
+            "points": [
+              "Architect scalable full-stack applications with modern frameworks",
+              "Design robust, scalable REST and GraphQL APIs",
+              "Optimize database queries and schema architecture"
             ]
           },
           {
-            "title": "UI & Interaction Design",
-            "items": [
+            "id": "tools",
+            "title": "Ecosystem & Tools",
+            "pills": [
+              "VS Code",
+              "Git / GitHub",
               "Figma",
-              "UI/UX Prototyping",
-              "Git",
-              "CI/CD",
               "Webpack",
-              "Jest"
-            ]
-          },
-          {
-            "title": "AI & Workflow Tools",
-            "items": [
+              "Jest",
               "Cursor",
-              "Bolt",
-              "Google AI Studio",
-              "AI-Assisted Code Generation",
-              "Design-to-Code Optimization"
+              "CI/CD"
+            ],
+            "points": [
+              "Translate Figma designs into production UI with pixel precision",
+              "Leverage AI tools for rapid prototyping and design-to-code optimization",
+              "Implement robust CI/CD pipelines and automated testing"
             ]
           }
         ],

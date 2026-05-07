@@ -1,90 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { PageLayout } from "../components/PageLayout";
-import { Code2, Layers, Palette, Bot, CheckCircle } from "lucide-react";
+import { Code2, Layers, Bot, ChevronRight } from "lucide-react";
 import { useContent } from "../context/ContentContext";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { fadeInUp, staggerContainer } from "../utils/motionVariants";
 
-// Map category titles to their icon and a decorative label
-const CATEGORY_META = {
-  "Frontend Engineering": {
-    Icon: Code2,
-    label: "Frontend",
-    decorSize: "w-28 h-28",
-  },
-  "Design Systems": {
-    Icon: Layers,
-    label: "Systems",
-    decorSize: "w-28 h-28",
-  },
-  "UI & Interaction Design": {
-    Icon: Palette,
-    label: "Design",
-    decorSize: "w-28 h-28",
-  },
-  "AI & Workflow Tools": {
-    Icon: Bot,
-    label: "AI Tools",
-    decorSize: "w-28 h-28",
-  },
+// Map category IDs to their icon
+const CATEGORY_ICONS = {
+  "frontend": Code2,
+  "backend": Layers,
+  "tools": Bot,
 };
 
-// Fallback for any unrecognised category
-function getIconForCategory(title) {
-  return CATEGORY_META[title]?.Icon || Code2;
+function getIconForCategory(id) {
+  return CATEGORY_ICONS[id] || Code2;
 }
 
 function SkillPill({ item }) {
   return (
-    <span
-      className="tech-pill hover:border-[hsl(var(--theme-base)/0.55)] hover:bg-[hsl(var(--theme-base)/0.12)] hover:text-[hsl(var(--theme-base))] transition-all duration-250 cursor-default select-none"
-    >
+    <span className="tech-pill group-hover:border-[hsl(var(--theme-base)/0.55)] group-hover:bg-[hsl(var(--theme-base)/0.12)] group-hover:text-[hsl(var(--theme-base))] transition-all duration-250 cursor-default select-none">
       {item}
     </span>
   );
 }
 
-function CategoryCard({ cat, index }) {
-  const CategoryIcon = getIconForCategory(cat.title);
-
-  return (
-    <motion.div
-      variants={fadeInUp}
-      whileHover={{ y: -4 }}
-      className="group relative p-7 rounded-2xl border border-white/10 hover-glow bg-white/[0.02] backdrop-blur-md overflow-hidden transition-all duration-500"
-    >
-      {/* Hover glow overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--theme-base)/0.08)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-
-      {/* Decorative large icon — top right */}
-      <div className="absolute top-4 right-4 opacity-[0.06] group-hover:opacity-[0.12] transition-opacity duration-500 pointer-events-none">
-        <CategoryIcon className="w-28 h-28 text-[hsl(var(--theme-base))]" />
-      </div>
-
-      <div className="relative z-10">
-        {/* Category header */}
-        <div className="flex items-center gap-3 mb-5">
-          <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-[hsl(var(--theme-base)/0.1)] border border-[hsl(var(--theme-base)/0.2)] text-[hsl(var(--theme-base))] group-hover:bg-[hsl(var(--theme-base)/0.18)] transition-colors duration-300 shrink-0">
-            <CategoryIcon size={18} />
-          </div>
-          <h3 className="text-sm font-bold uppercase tracking-[0.14em] text-[hsl(var(--theme-base))]">
-            {cat.title}
-          </h3>
-        </div>
-
-        {/* Skill pills */}
-        <div className="flex flex-wrap gap-2">
-          {cat.items.map((item) => (
-            <SkillPill key={item} item={item} />
-          ))}
-        </div>
-      </div>
-    </motion.div>
-  );
-}
-
 function Skills() {
   const { content, loading } = useContent();
+  const [activeTabId, setActiveTabId] = useState(null);
 
   if (loading) {
     return (
@@ -95,123 +37,115 @@ function Skills() {
   }
 
   const { skills: skillsData } = content;
-  const { meta } = skillsData;
+  const { meta, skillGroups } = skillsData;
+  
+  // Set default active tab
+  if (skillGroups?.length > 0 && !activeTabId) {
+    setActiveTabId(skillGroups[0].id);
+  }
 
-  // ── New schema: categories ──
-  if (Array.isArray(skillsData.categories)) {
-    const categories = skillsData.categories;
-    const closingNote = skillsData.closingNote;
+  const activeGroup = skillGroups?.find(g => g.id === activeTabId) || skillGroups?.[0];
 
-    const mainContent = (
+  const mainContent = (
+    <div className="grid lg:grid-cols-12 gap-6 lg:gap-12 xl:gap-16">
+      {/* Left Column - Category Tabs */}
       <motion.div
         initial="hidden"
         animate="visible"
         variants={staggerContainer}
-        className="space-y-6"
+        className="lg:col-span-5 space-y-4"
       >
-        <div className="grid md:grid-cols-2 gap-5">
-          {categories.map((cat, index) => (
-            <CategoryCard key={cat.title} cat={cat} index={index} />
-          ))}
-        </div>
+        {skillGroups?.map((group) => {
+          const Icon = getIconForCategory(group.id);
+          const isActive = activeTabId === group.id;
 
-        {closingNote && (
-          <motion.div
-            variants={fadeInUp}
-            className="flex items-start gap-3 px-5 py-4 rounded-2xl border border-[hsl(var(--theme-base)/0.15)] bg-[hsl(var(--theme-base)/0.04)]"
-          >
-            <CheckCircle className="w-5 h-5 text-[hsl(var(--theme-base))] shrink-0 mt-0.5" />
-            <p className="type-body-sm text-white/50 italic">
-              {closingNote}
-            </p>
-          </motion.div>
-        )}
-      </motion.div>
-    );
-
-    return (
-      <PageLayout
-        themeName={meta.theme}
-        title={meta.title}
-        letter={meta.letter}
-        icon={meta.icon}
-        right={mainContent}
-      />
-    );
-  }
-
-  // ── Legacy schema: levels + tools + craft ──
-  const levels = skillsData.levels || [];
-  const tools = skillsData.tools || [];
-  const craft = skillsData.craft || [];
-
-  const legacyContent = (
-    <div className="space-y-8">
-      {levels.map(function (category) {
-        return (
-          <div key={category.label} className="space-y-4">
-            <span className="text-sm font-bold uppercase tracking-[0.2em] text-[hsl(var(--theme-base))]">
-              {category.label}
-            </span>
-            <div className="grid sm:grid-cols-2 gap-4" style={{ marginTop: "0.8rem" }}>
-              {category.skills.map(function (skill) {
-                return (
-                  <div
-                    key={skill.name}
-                    className="simple-card p-5 pt-3.5"
-                  >
-                    <div className="flex justify-between items-center mb-3">
-                      <span className="type-body font-semibold text-foreground">
-                        {skill.name}
-                      </span>
-                      <span className="text-xs font-mono text-muted-foreground">
-                        {skill.percentage}%
-                      </span>
-                    </div>
-                    <div className="h-1.5 w-full max-w-[200px] bg-white/5 rounded-full overflow-hidden">
-                      <div
-                        className="h-full bg-[hsl(var(--theme-base))] transition-all duration-1000 ease-out shadow-[0_0_12px_hsl(var(--theme-base)/0.5)]"
-                        style={{ width: skill.percentage + "%" }}
-                      />
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        );
-      })}
-
-      {tools.length > 0 && (
-        <div className="space-y-3 pt-4 border-t border-white/5">
-          <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-[hsl(var(--theme-base))]">
-            {skillsData.labels?.tools || "Tools"}
-          </h3>
-          <div className="flex flex-wrap gap-2">
-            {tools.map(function (tool) {
-              return <SkillPill key={tool} item={tool} />;
-            })}
-          </div>
-        </div>
-      )}
-
-      {craft.length > 0 && (
-        <div className="space-y-4 pt-4 border-t border-white/5">
-          <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-[hsl(var(--theme-base))]">
-            {skillsData.labels?.craft || "Capabilities"}
-          </h3>
-          <div className="grid gap-3">
-            {craft.map(function (item, i) {
-              return (
-                <div key={i} className="flex gap-3 items-start">
-                  <CheckCircle className="w-5 h-5 text-[hsl(var(--theme-base))] shrink-0 mt-0.5" />
-                  <span className="text-white/60 leading-normal">{item}</span>
+          return (
+            <motion.button
+              key={group.id}
+              variants={fadeInUp}
+              onClick={() => setActiveTabId(group.id)}
+              className={`w-full group relative p-6 rounded-2xl border transition-all duration-400 overflow-hidden text-left flex items-center justify-between backdrop-blur-md ${
+                isActive
+                  ? "border-[hsl(var(--theme-base))] bg-black shadow-[0_0_25px_2px_hsl(var(--theme-base))]"
+                  : "border-white/10 bg-white/[0.02] hover:bg-[hsl(var(--theme-base)/0.1)] hover-glow"
+              }`}
+            >
+              <div className="flex items-center gap-4 relative z-10">
+                <div className={`flex items-center justify-center w-10 h-10 rounded-xl transition-colors duration-300 shrink-0 ${
+                  isActive
+                    ? "bg-[hsl(var(--theme-base)/0.2)] border border-[hsl(var(--theme-base)/0.4)] text-[hsl(var(--theme-base))]"
+                    : "bg-white/5 border border-white/10 text-white/50 group-hover:bg-[hsl(var(--theme-base)/0.1)] group-hover:text-[hsl(var(--theme-base))]"
+                }`}>
+                  <Icon size={18} />
                 </div>
-              );
-            })}
-          </div>
-        </div>
-      )}
+                <h3 className={`text-sm font-bold uppercase tracking-[0.14em] transition-colors duration-300 ${
+                  isActive ? "text-white" : "text-white/50 group-hover:text-white"
+                }`}>
+                  {group.title}
+                </h3>
+              </div>
+              <div className={`relative z-10 transition-all duration-300 ${
+                isActive ? "text-[hsl(var(--theme-base))] translate-x-0 opacity-100" : "text-white/20 -translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100"
+              }`}>
+                <ChevronRight size={20} />
+              </div>
+            </motion.button>
+          );
+        })}
+      </motion.div>
+
+      {/* Right Column - Detail View */}
+      <motion.div
+        className="lg:col-span-7 relative min-h-[400px]"
+      >
+        <AnimatePresence mode="wait">
+          {activeGroup && (
+            <motion.div
+              key={activeGroup.id}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.3 }}
+              className="space-y-6"
+            >
+              {/* Pills Block */}
+              <div className="group relative p-7 rounded-2xl border border-[hsl(var(--theme-base)/0.4)] shadow-[0_0_25px_2px_hsl(var(--theme-base)/0.1)] bg-black backdrop-blur-md overflow-hidden transition-all duration-500 hover-glow">
+                <div className="relative z-10">
+                  <div className="flex items-center gap-3 mb-5">
+                    <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-[hsl(var(--theme-base))]">
+                      Technologies
+                    </h3>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {activeGroup.pills.map((item) => (
+                      <SkillPill key={item} item={item} />
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Capabilities Block */}
+              <div className="group relative p-7 rounded-2xl border border-[hsl(var(--theme-base)/0.4)] shadow-[0_0_25px_2px_hsl(var(--theme-base)/0.1)] bg-black backdrop-blur-md overflow-hidden transition-all duration-500 h-full hover-glow">
+                <div className="relative z-10 h-full flex flex-col">
+                  <div className="flex items-center gap-3 mb-6">
+                    <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-[hsl(var(--theme-base))]">
+                      Capabilities
+                    </h3>
+                  </div>
+                  <div className="space-y-5 mt-2 flex-1">
+                    {activeGroup.points.map((item, idx) => (
+                      <div key={idx} className="flex gap-4 items-center">
+                        <ChevronRight size={16} strokeWidth={3} className="text-[hsl(var(--theme-base))] shrink-0 mt-0.5 opacity-80 transition-transform duration-300 group-hover:translate-x-1" />
+                        <span className="text-white/50 leading-relaxed text-[0.95rem] transition-colors duration-300 group-hover:text-white/90">{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.div>
     </div>
   );
 
@@ -221,7 +155,7 @@ function Skills() {
       title={meta.title}
       letter={meta.letter}
       icon={meta.icon}
-      right={legacyContent}
+      right={mainContent}
     />
   );
 }

@@ -12,7 +12,7 @@
           {
             "id": "linkedin",
             "label": "LinkedIn",
-            "url": "https://www.linkedin.com/in/rajat-gulati-design/",
+            "url": "https://www.linkedin.com/",
             "icon": "Linkedin"
           },
           {
@@ -23,7 +23,7 @@
           }
         ],
         "resume": {
-          "label": "Download Resume",
+          "label": "Download CV",
           "file": "/alex-carter-resume.pdf"
         },
         "labels": {
@@ -39,12 +39,12 @@
           "label": "Hi, I'm"
         },
         "subtitle": {
-          "highlight": "Creative Product Engineer — Full-Stack & UI/UX",
+          "highlight": "Creative Product Engineer — Full Stack & UI/UX",
           "intro": ""
         },
         "description": "With 6+ years of experience, I build scalable applications that bridge the gap between aesthetic design and high-performance code.",
         "cta": {
-          "label": "Explore Live Projects",
+          "label": "Explore Projects",
           "tooltipTitle": "Design to Production",
           "tooltipDesc": "See how I translate Figma systems into scalable, accessible React applications."
         },
@@ -126,7 +126,7 @@
         },
         "experience": {
           "title": "Experience",
-          "subtitle": "Worked across ResumeHelp, ResumeNerd, LiveCareer, Zety and other large-scale products with millions of users.",
+          "subtitle": "Worked across TechNova, InnovateCorp, GlobalWeb, DataSystems and other large-scale products with millions of users.",
           "items": [
             {
               "title": "Lead Product Engineer",
@@ -330,22 +330,28 @@
           "tools": "Core Technologies",
           "craft": "Capabilities"
         },
-        "categories": [
+        "skillGroups": [
           {
+            "id": "frontend",
             "title": "Frontend Engineering",
-            "items": [
+            "pills": [
               "React.js",
               "Next.js",
               "Vue.js",
               "TypeScript",
               "Tailwind CSS",
               "Redux",
-              "Motion"
+              "Framer Motion"
+            ],
+            "points": [
+              "Build responsive, accessible interfaces with clean UI systems",
+              "Ensure performance, WCAG compliance, and cross-browser consistency"
             ]
           },
           {
-            "title": "Design Systems",
-            "items": [
+            "id": "backend",
+            "title": "Backend & Cloud",
+            "pills": [
               "Node.js",
               "Python",
               "PostgreSQL",
@@ -353,27 +359,29 @@
               "GraphQL",
               "Docker",
               "REST APIs"
+            ],
+            "points": [
+              "Architect scalable full-stack applications with modern frameworks",
+              "Design robust, scalable REST and GraphQL APIs",
+              "Optimize database queries and schema architecture"
             ]
           },
           {
-            "title": "UI & Interaction Design",
-            "items": [
+            "id": "tools",
+            "title": "Ecosystem & Tools",
+            "pills": [
+              "VS Code",
+              "Git / GitHub",
               "Figma",
-              "UI/UX Prototyping",
-              "Git",
-              "CI/CD",
               "Webpack",
-              "Jest"
-            ]
-          },
-          {
-            "title": "AI & Workflow Tools",
-            "items": [
+              "Jest",
               "Cursor",
-              "Bolt",
-              "Google AI Studio",
-              "AI-Assisted Code Generation",
-              "Design-to-Code Optimization"
+              "CI/CD"
+            ],
+            "points": [
+              "Translate Figma designs into production UI with pixel precision",
+              "Leverage AI tools for rapid prototyping and design-to-code optimization",
+              "Implement robust CI/CD pipelines and automated testing"
             ]
           }
         ],
