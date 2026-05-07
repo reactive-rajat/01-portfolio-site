@@ -302,7 +302,7 @@ function About() {
             return (
               <button key={tab.label} onClick={() => setActiveTab(tab.label)}
                 className={`relative group flex flex-col lg:flex-row items-center lg:items-center gap-2 lg:gap-3 rounded-xl border transition-all duration-300 min-w-[80px] lg:min-w-0 w-full py-2 px-2 lg:px-3 lg:py-2.5 text-center lg:text-left ${
-                  isActive ? "text-[hsl(var(--theme-base))] bg-black/60 border-[hsl(var(--theme-base)/0.3)] shadow-[0_0_20px_-10px_hsl(var(--theme-base)/0.2)]" : "text-gray-400 border-transparent hover:text-white hover:bg-black/60 hover:border-[hsl(var(--theme-base)/0.3)]"
+                  isActive ? "text-[hsl(var(--theme-base))] bg-black/80 border-[hsl(var(--theme-base)/0.5)] shadow-[0_0_15px_-2px_hsl(var(--theme-base)/0.4)]" : "text-gray-400 border-transparent hover:text-white hover:bg-black/60 hover:border-[hsl(var(--theme-base)/0.4)] hover:shadow-[0_0_15px_-3px_hsl(var(--theme-base)/0.3)]"
                 }`}
               >
                 <div className={`flex shrink-0 items-center justify-center w-9 h-9 rounded-lg transition-colors ${isActive ? "bg-[hsl(var(--theme-base)/0.15)]" : "bg-white/5"}`}>
