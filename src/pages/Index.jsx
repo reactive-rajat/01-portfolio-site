@@ -256,6 +256,7 @@ function Index() {
 
                 <a
                   href={global.resume?.file || "#"}
+                  download="Alex_Carter_Resume.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-white/10 hover:border-white/20 hover:bg-white/10 transition-all font-semibold text-white/90 group"

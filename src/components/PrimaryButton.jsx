@@ -74,6 +74,7 @@ function PrimaryButton(props) {
           className={baseClasses}
           target={props.target}
           rel={props.rel}
+          download={props.download}
           style={style}
         >
           {content}

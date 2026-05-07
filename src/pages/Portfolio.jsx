@@ -42,10 +42,10 @@ function ProjectCard({ project }) {
             {project.title}
           </h4>
         </div>
-        <p className="type-body-sm text-white/50 line-clamp-2 flex-1">
+        <p className="type-body-sm text-white/50 line-clamp-2">
           {project.description}
         </p>
-        <div className="flex flex-wrap gap-1.5 pt-1">
+        <div className="flex flex-wrap gap-1.5 pt-1 mt-auto">
           {project.tags.slice(0, 3).map((tag) => (
             <span
               key={tag}
@@ -362,6 +362,27 @@ function Portfolio() {
             <div className="absolute bottom-0 left-0 w-full h-[45%] bg-gradient-to-t from-black/65 via-black/35 to-transparent z-10" />
           </div>
         </div>
+      </div>
+      
+      {/* Desktop Carousel Progress Bar */}
+      <div className="flex w-full max-w-[320px] mx-auto h-2 mt-8 rounded-full overflow-hidden bg-[rgba(255,255,255,0.05)] border border-white/10 relative z-20">
+        {carouselProjects.map((project, idx) => {
+          const isActive = activeId === project.id;
+          return (
+            <button
+              key={`desk-dot-${project.id}`}
+              onClick={() => {
+                setActiveId(project.id);
+                pauseAndResume();
+              }}
+              className={`flex-1 h-full transition-colors duration-300 border-r border-black/40 last:border-0 hover:bg-white/20`}
+              style={{ 
+                backgroundColor: isActive ? project.accent : undefined 
+              }}
+              aria-label={`Go to project ${idx + 1}`}
+            />
+          );
+        })}
       </div>
     </div>
   );

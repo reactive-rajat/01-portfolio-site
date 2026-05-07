@@ -24,7 +24,7 @@
         ],
         "resume": {
           "label": "Download Resume",
-          "file": "/rajat-gulati-resume.pdf"
+          "file": "/alex-carter-resume.pdf"
         },
         "labels": {
           "socialProfiles": "Social Profiles",
@@ -44,7 +44,7 @@
         },
         "description": "6+ years of experience developing robust web applications, bridging the gap between aesthetic design and high-performance code.",
         "cta": {
-          "label": "View Case Studies",
+          "label": "Explore Live Projects",
           "tooltipTitle": "Design to Production",
           "tooltipDesc": "See how I translate Figma systems into scalable, accessible React applications."
         },
@@ -70,7 +70,7 @@
           {
             "page": "projects",
             "label": "Work",
-            "description": "Case Studies",
+            "description": "Featured Projects",
             "route": "/portfolio",
             "theme": "violet",
             "letter": "P",
@@ -158,7 +158,7 @@
         "featuredProjects": {
           "title": "Selected Work",
           "subtitle": "Recent projects highlighting design system architecture and complex UI engineering.",
-          "ctaLabel": "View All Case Studies"
+          "ctaLabel": "View All Projects"
         },
         "testimonials": {
           "title": "What People Say",
@@ -412,7 +412,7 @@
             "description": "Architected a high-frequency financial data dashboard featuring real-time analytics, complex data visualization, and secure user authentication.",
             "tags": ["React", "Node.js", "D3.js", "WebSockets"],
             "url": "#",
-            "thumbnail": "src/assets/srfg-thumbnail.png",
+            "thumbnail": "/projects/fintrack_thumbnail.png",
             "accent": "#8F1FB0"
           },
           {
@@ -423,7 +423,7 @@
             "description": "Developed an end-to-end multi-tenant SaaS application, streamlining team collaboration and resource management for enterprise clients.",
             "tags": ["Next.js", "PostgreSQL", "Tailwind", "Stripe API"],
             "url": "#",
-            "thumbnail": "src/assets/flamingo-thumbnail.png",
+            "thumbnail": "/projects/lumina_saas_thumbnail.png",
             "accent": "#4A6CF7"
           },
           {
@@ -434,7 +434,7 @@
             "description": "Built a headless Shopify storefront with sub-second page loads, boosting mobile conversion rates by 35% during peak holiday sales.",
             "tags": ["Shopify Hydrogen", "Remix", "GraphQL"],
             "url": "#",
-            "thumbnail": "src/assets/srfg-thumbnail.png",
+            "thumbnail": "/projects/aura_thumbnail.png",
             "accent": "#F59E0B"
           },
           {
@@ -445,7 +445,7 @@
             "description": "Designed and engineered a suite of dynamic landing pages using Framer Motion for high-impact visual storytelling.",
             "tags": ["Framer Motion", "React", "GSAP"],
             "url": "#",
-            "thumbnail": "src/assets/flamingo-thumbnail.png",
+            "thumbnail": "/projects/steller_thumbnail.png",
             "accent": "#10B981"
           },
           {
@@ -456,7 +456,7 @@
             "description": "Developed highly interactive, gamified campaign microsites featuring WebGL product showcases and custom 3D animations.",
             "tags": ["WebGL", "Three.js", "Vue"],
             "url": "#",
-            "thumbnail": "src/assets/srfg-thumbnail.png",
+            "thumbnail": "/projects/nova_thumbnail.png",
             "accent": "#3B82F6"
           },
           {
@@ -467,7 +467,7 @@
             "description": "Created a comprehensive, WCAG 2.1 AA compliant component library used by 12 distinct product teams to standardize UI across the company.",
             "tags": ["Storybook", "Radix UI", "Tailwind CSS"],
             "url": "#",
-            "thumbnail": "src/assets/srfg-thumbnail.png",
+            "thumbnail": "/projects/quantum_thumbnail.png",
             "accent": "#EC4899"
           },
           {
@@ -478,7 +478,7 @@
             "description": "Developed an internal micro-frontend architecture allowing seamless component sharing across Vue and React codebases.",
             "tags": ["Web Components", "Vite", "TypeScript"],
             "url": "#",
-            "thumbnail": "src/assets/flamingo-thumbnail.png",
+            "thumbnail": "/projects/nexus_thumbnail.png",
             "accent": "#06B6D4"
           }
         ]

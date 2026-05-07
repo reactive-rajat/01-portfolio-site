@@ -258,7 +258,7 @@ function About() {
   // ── Hero action ──────────────────────────────────────────────────────────
   const heroAction = (
     <>
-      <PrimaryButton href={global.resume.file} target="_blank" icon={<Download size={18} />}
+      <PrimaryButton href={global.resume.file} download="Alex_Carter_Resume.pdf" target="_blank" icon={<Download size={18} />}
         tooltipTitle={about.cvCta.tooltipTitle} tooltipDesc={about.cvCta.tooltipDesc}>
         {about.cvCta.label}
       </PrimaryButton>
