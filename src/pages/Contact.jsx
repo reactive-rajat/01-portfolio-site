@@ -308,7 +308,7 @@ function Contact() {
                   <div className="relative z-10 flex flex-col gap-4">
                     {/* Date Badge */}
                     <div className="flex justify-center">
-                      <span className="bg-white/5 border border-white/10 text-white/40 text-[10px] uppercase tracking-widest px-3 py-1 rounded-full font-medium">
+                      <span className="tech-pill">
                         Today
                       </span>
                     </div>

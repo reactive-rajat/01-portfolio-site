@@ -163,7 +163,7 @@ export function PageLayout(props) {
             <>
               <div className="page-header flex flex-col gap-6 mb-10 md:mb-12">
                 {/* Row: back button + title */}
-                <div className="flex items-center gap-6">
+                <div className="inline-flex relative w-fit items-center gap-6">
                   <Link
                     to="/"
                     className={
@@ -202,12 +202,12 @@ export function PageLayout(props) {
                   </h1>
 
                   {/* ── Fixed decorative page icon — perfectly aligned behind heading ── */}
-                  <div className="absolute left-full -top-5 pointer-events-none -z-10 flex justify-center">
-                    <div className="w-20 h-20 lg:w-28 lg:h-28 mix-blend-screen opacity-[0.055]">
+                  <div className="absolute left-[108%] -top-2 pointer-events-none -z-10 flex justify-center">
+                    <div className="w-20 h-20 mix-blend-screen opacity-[0.10]">
                       {BackgroundIcon ? (
                         <BackgroundIcon
                           className={"w-full h-full " + styles.text}
-                          strokeWidth={1}
+                          strokeWidth={1.1}
                         />
                       ) : (
                         <span

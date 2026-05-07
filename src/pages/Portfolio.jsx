@@ -46,10 +46,10 @@ function ProjectCard({ project }) {
           {project.description}
         </p>
         <div className="flex flex-wrap gap-1.5 pt-1 mt-auto">
-          {project.tags.slice(0, 3).map((tag) => (
+          {project.tags.slice(0, 3).map((tag, tIndex) => (
             <span
-              key={tag}
-              className="px-2.5 py-1 rounded-full text-[10px] uppercase tracking-wider font-medium border border-white/10 bg-white/5 text-white/60"
+              key={tIndex}
+              className="tech-pill"
             >
               {tag}
             </span>

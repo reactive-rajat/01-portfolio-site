@@ -37,12 +37,7 @@ function getIconForCategory(title) {
 function SkillPill({ item }) {
   return (
     <span
-      className={[
-        "px-3.5 py-1.5 rounded-full border text-sm font-medium",
-        "border-white/15 bg-white/5 text-white/80",
-        "hover:border-[hsl(var(--theme-base)/0.55)] hover:bg-[hsl(var(--theme-base)/0.12)] hover:text-[hsl(var(--theme-base))]",
-        "transition-all duration-250 cursor-default select-none",
-      ].join(" ")}
+      className="tech-pill hover:border-[hsl(var(--theme-base)/0.55)] hover:bg-[hsl(var(--theme-base)/0.12)] hover:text-[hsl(var(--theme-base))] transition-all duration-250 cursor-default select-none"
     >
       {item}
     </span>

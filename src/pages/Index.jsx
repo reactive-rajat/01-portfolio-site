@@ -173,95 +173,107 @@ function Index() {
       {/* ─────────────────────────────────────────────────────────
           HERO (First Fold)
           ───────────────────────────────────────────────────────── */}
-      <div className="max-w-7xl mx-auto grid relative z-10 px-6 lg:px-16 items-center">
+      <div className="max-w-6xl mx-auto grid relative z-10 px-6 items-center">
         <motion.div
           initial="hidden"
           animate="visible"
           variants={staggerContainer}
-          className="w-full flex flex-col lg:flex-row lg:items-center gap-16 lg:gap-10 lg:gap-15"
+          className="w-full flex flex-col lg:flex-row lg:items-center gap-16 lg:gap-20"
         >
-          <div className="lg:w-1/2">
-            <motion.div
-              variants={fadeInUp}
-              className="home-greeting relative flex flex-wrap items-center gap-2.5 px-3 py-1.5 bg-white/5 border border-white/10 rounded-full mb-6 lg:mb-0 w-fit backdrop-blur-md"
-            >
-              <span className="flex h-2 w-2 relative">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-              </span>
-              <p className="type-label text-green-400">
-                {home.greeting.label}
-              </p>
-            </motion.div>
-
-            <motion.div variants={fadeInUp} className="relative mb-4 lg:mb-6">
-              <h1 className="type-hero">
-                <span className="text-foreground text-8xl lg:text-[7.25rem]">
-                  {home.name.first}
+          <div className="lg:w-1/2 pr-4">
+            <div className="w-full">
+              <motion.div
+                variants={fadeInUp}
+                className="home-greeting relative flex flex-wrap items-center gap-2.5 px-3 py-1.5 bg-white/5 border border-white/10 rounded-full mb-6 lg:mb-0 w-fit backdrop-blur-md"
+              >
+                <span className="flex h-2 w-2 relative">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                 </span>
-                <span className="last-name font-normal text-[2.15rem] uppercase tracking-[1.65rem] ml-1">
-                  {home.name.last}
-                </span>
-              </h1>
-            </motion.div>
+                <p className="type-label text-green-400">
+                  {home.greeting.label}
+                </p>
+              </motion.div>
 
-            <motion.h2
-              variants={fadeInUp}
-              className="text-shimmer text-2xl lg:text-[1.75rem] font-semibold mt-6 mb-4 lg:mt-8 lg:mb-5 leading-tight"
-            >
-              {home.subtitle.highlight}
-            </motion.h2>
+              <motion.div variants={fadeInUp} className="relative mb-4 lg:mb-6">
+                <h1 className="type-hero">
+                  <span className="text-foreground text-8xl lg:text-[7.25rem]">
+                    {home.name.first}
+                  </span>
+                  <span className="last-name font-normal text-[2.15rem] uppercase tracking-[1.65rem] ml-1">
+                    {home.name.last}
+                  </span>
+                </h1>
+              </motion.div>
 
-            <motion.div
-              variants={fadeInUp}
-              className="type-body text-sm lg:text-base text-white/50 mb-10 max-w-lg leading-relaxed space-y-3"
-            >
-              {home.subtitle.intro && <p>{home.subtitle.intro}</p>}
-              {home.description
-                .split("\n")
-                .filter((p) => p.trim())
-                .map((para, i) => (
-                  <p key={i}>{para}</p>
-                ))}
-            </motion.div>
+              <motion.h2
+                variants={fadeInUp}
+                className="text-shimmer text-2xl lg:text-[1.75rem] font-semibold mt-6 mb-4 lg:mt-8 lg:mb-5 leading-tight text-balance"
+              >
+                {home.subtitle.highlight}
+              </motion.h2>
 
-            <motion.div
-              variants={fadeInUp}
-              className="flex flex-col gap-6 mt-2"
-            >
-              <div className="flex items-center gap-2 text-[10px] uppercase tracking-wider text-white/50 font-medium flex-wrap mb-2">
-                <span className="px-3 py-1 rounded-full border border-white/10 bg-white/5">Frontend Dev</span>
-                <span className="px-3 py-1 rounded-full border border-white/10 bg-white/5">Backend Architecture</span>
-                <span className="px-3 py-1 rounded-full border border-white/10 bg-white/5">UI Design</span>
-                <span className="px-3 py-1 rounded-full border border-white/10 bg-white/5">Web3</span>
-              </div>
+              <motion.div
+                variants={fadeInUp}
+                className="type-body text-sm lg:text-base text-white/50 mb-10 max-w-lg leading-relaxed space-y-3"
+              >
+                {home.subtitle.intro && <p>{home.subtitle.intro}</p>}
+                {home.description
+                  .split("\n")
+                  .filter((p) => p.trim())
+                  .map((para, i) => (
+                    <p key={i}>{para}</p>
+                  ))}
+              </motion.div>
 
-              <div className="flex flex-col sm:flex-row gap-4 mb-4">
-                <PrimaryButton
-                  href={home.cta.route || "/portfolio"}
-                  theme={
-                    home.navigation?.find((n) => n.page === "projects")
-                      ?.theme || "violet"
-                  }
-                  containerClass="flex-1 lg:flex-none"
-                  icon={<ArrowRight className="w-4 h-4" />}
-                >
-                  {home.cta.label}
-                </PrimaryButton>
+              <motion.div
+                variants={fadeInUp}
+                className="flex flex-col gap-6 mt-2"
+              >
+                <div className="flex items-center gap-2 flex-wrap mb-2">
+                  <span className="tech-pill">
+                    Frontend Dev
+                  </span>
+                  <span className="tech-pill">
+                    Backend Architecture
+                  </span>
+                  <span className="tech-pill">
+                    UI Design
+                  </span>
+                  <span className="tech-pill">
+                    Web3
+                  </span>
+                </div>
 
-                <PrimaryButton
-                  theme="neutral"
-                  href={global.resume?.file || "#"}
-                  download="Alex_Carter_Resume.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  containerClass="flex-1 sm:flex-none"
-                  icon={<Download size={18} />}
-                >
-                  {global.resume?.label || "Download Resume"}
-                </PrimaryButton>
-              </div>
-            </motion.div>
+                <div className="flex flex-col sm:flex-row gap-4 mt-4">
+                  <PrimaryButton
+                    href={home.cta.route || "/portfolio"}
+                    theme={
+                      home.navigation?.find((n) => n.page === "projects")
+                        ?.theme || "violet"
+                    }
+                    containerClass="flex-1 lg:flex-none"
+                    className="!text-sm !h-12 !px-5"
+                    icon={<ArrowRight className="w-4 h-4" />}
+                  >
+                    {home.cta.label}
+                  </PrimaryButton>
+
+                  <PrimaryButton
+                    theme="neutral"
+                    href={global.resume?.file || "#"}
+                    download="Alex_Carter_Resume.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    containerClass="flex-1 sm:flex-none"
+                    className="!text-sm !h-12 !px-5"
+                    icon={<Download size={16} />}
+                  >
+                    {global.resume?.label || "Download Resume"}
+                  </PrimaryButton>
+                </div>
+              </motion.div>
+            </div>
           </div>
 
           <motion.div variants={fadeInUp} className="lg:w-1/2">
@@ -301,7 +313,6 @@ function Index() {
           </motion.div>
         </motion.div>
       </div>
-
     </main>
   );
 }
