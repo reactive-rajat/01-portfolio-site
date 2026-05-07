@@ -175,7 +175,7 @@ function CollapsibleTabContent({ children, label, bottomNote, icon }) {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setExpanded(!expanded)}
-            className="relative z-10 inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-[hsl(var(--theme-base)/0.08)] border border-[hsl(var(--theme-base)/0.2)] text-sm font-semibold text-[hsl(var(--theme-base))] hover:bg-[hsl(var(--theme-base)/0.15)] hover:shadow-[0_0_20px_-5px_hsl(var(--theme-base)/0.4)] transition-all"
+            className="relative z-10 inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-[hsl(var(--theme-base)/0.08)] border border-[hsl(var(--theme-base)/0.2)] text-sm font-semibold text-[hsl(var(--theme-base))] hover:bg-[hsl(var(--theme-base)/0.15)] hover-glow transition-all"
           >
             <motion.div
               animate={{ rotate: expanded ? 180 : 0 }}
@@ -258,16 +258,15 @@ function About() {
   // ── Hero action ──────────────────────────────────────────────────────────
   const heroAction = (
     <>
-      <PrimaryButton href={global.resume.file} download="Alex_Carter_Resume.pdf" target="_blank" icon={<Download size={18} />}
-        tooltipTitle={about.cvCta.tooltipTitle} tooltipDesc={about.cvCta.tooltipDesc}>
-        {about.cvCta.label}
+      <PrimaryButton href={global.resume.file} download="Alex_Carter_Resume.pdf" target="_blank" icon={<Download size={18} />}>
+        {global.resume?.label || "Download CV"}
       </PrimaryButton>
       <div className="relative" ref={menuRef}>
         <IconButton icon={MoreVertical} theme="neutral" onClick={() => setIsSocialMenuOpen(!isSocialMenuOpen)}
           aria-label={global.labels.moreOptions} size="lg"
-          className={isSocialMenuOpen ? "!bg-secondary !border-white/20" : ""} />
+          className={isSocialMenuOpen ? "!bg-[hsl(var(--theme-base)/0.12)] !border-[hsl(var(--theme-base))] !shadow-[0_0_25px_2px_hsl(var(--theme-base))] !text-[hsl(var(--theme-base))]" : ""} />
         {isSocialMenuOpen && (
-          <div className="absolute bottom-full mb-3 left-0 min-w-[200px] bg-black/95 backdrop-blur-2xl border border-white/10 rounded-2xl p-2 shadow-[0_20px_50px_rgba(0,0,0,0.5)] animate-in fade-in slide-in-from-bottom-4 duration-300 z-[110]">
+          <div className="absolute bottom-full mb-3 left-0 min-w-[200px] bg-black/95 backdrop-blur-2xl border border-[hsl(var(--theme-base))] rounded-2xl p-2 shadow-[0_0_25px_2px_hsl(var(--theme-base))] animate-in fade-in slide-in-from-bottom-4 duration-300 z-[110]">
             <div className="px-3 py-2">
               <p className="type-label text-white/30">{global.labels.socialProfiles}</p>
             </div>
@@ -370,7 +369,7 @@ function About() {
           const BlockIcon = getIcon(block.icon);
           return (
             <motion.div key={i} variants={fadeInUp} whileHover={{ y: -4 }}
-              className="group relative p-7 rounded-2xl border border-white/10 hover:border-[hsl(var(--theme-base)/0.3)] hover:shadow-[0_8px_30px_-12px_hsl(var(--theme-base)/0.2)] bg-white/[0.02] backdrop-blur-md overflow-hidden transition-all duration-500">
+              className="group relative p-7 rounded-2xl border border-white/10 hover-glow bg-white/[0.02] backdrop-blur-md overflow-hidden transition-all duration-500">
               <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--theme-base)/0.08)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="relative z-10">
                 <div className="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[hsl(var(--theme-base))] mb-5 group-hover:scale-110 group-hover:bg-[hsl(var(--theme-base)/0.15)] group-hover:border-[hsl(var(--theme-base)/0.3)] transition-all duration-300">
@@ -421,7 +420,7 @@ function About() {
       <div className="grid md:grid-cols-3 gap-5">
         {home.testimonials.items.map((testimonial, i) => (
           <motion.div key={i} variants={fadeInUp} whileHover={{ y: -4 }}
-            className="group relative p-7 rounded-2xl border border-white/10 hover:border-[hsl(var(--theme-base)/0.3)] hover:shadow-[0_8px_30px_-12px_hsl(var(--theme-base)/0.2)] bg-white/[0.02] backdrop-blur-md overflow-hidden transition-all duration-500">
+            className="group relative p-7 rounded-2xl border border-white/10 hover-glow bg-white/[0.02] backdrop-blur-md overflow-hidden transition-all duration-500">
             <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--theme-base)/0.08)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
             
             <div className="relative z-10">

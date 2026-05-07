@@ -21,8 +21,8 @@ function ProjectCard({ project }) {
       rel="noopener noreferrer"
       variants={fadeInUp}
       whileHover={{ y: -4 }}
-      style={{ "--card-accent": project.accent }}
-      className="group relative flex flex-col rounded-2xl border border-white/10 hover:border-[var(--card-accent)] hover:shadow-[0_8px_30px_-12px_var(--card-accent)] hover:bg-[rgba(0,0,0,0.3)] overflow-hidden transition-all duration-500"
+      style={{ "--card-accent": project.accent, "--hover-glow-color": "var(--card-accent)" }}
+      className="group relative flex flex-col rounded-2xl border border-white/10 hover-glow hover:bg-[rgba(0,0,0,0.3)] overflow-hidden transition-all duration-500"
     >
       {/* Thumbnail */}
       <div className="relative h-64 overflow-hidden shrink-0">
@@ -287,16 +287,16 @@ function Portfolio() {
           {/* Prev/Next nav arrows */}
           <button
             onClick={() => { navigateProject(-1); pauseAndResume(); }}
-            className="absolute -left-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full border border-white/10 bg-black/60 text-white/50 hover:text-[var(--accent)] hover:border-[var(--accent)] hover:shadow-[0_0_20px_-5px_var(--accent)] hover:scale-110 transition-all duration-300 backdrop-blur-xl hidden md:flex items-center justify-center group/nav"
-            style={{ "--accent": activeProject.accent }}
+            className="absolute -left-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full border border-white/10 bg-black/60 text-white/50 hover:text-[var(--accent)] hover-glow hover:scale-110 transition-all duration-300 backdrop-blur-xl hidden md:flex items-center justify-center group/nav"
+            style={{ "--hover-glow-color": "var(--accent)", "--accent": activeProject.accent }}
             aria-label={labels.prevProject}
           >
             <ChevronLeft className="w-6 h-6 group-hover/nav:-translate-x-0.5 transition-transform" />
           </button>
           <button
             onClick={() => { navigateProject(1); pauseAndResume(); }}
-            className="absolute -right-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full border border-white/10 bg-black/60 text-white/50 hover:text-[var(--accent)] hover:border-[var(--accent)] hover:shadow-[0_0_20px_-5px_var(--accent)] hover:scale-110 transition-all duration-300 backdrop-blur-xl hidden md:flex items-center justify-center group/nav"
-            style={{ "--accent": activeProject.accent }}
+            className="absolute -right-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full border border-white/10 bg-black/60 text-white/50 hover:text-[var(--accent)] hover-glow hover:scale-110 transition-all duration-300 backdrop-blur-xl hidden md:flex items-center justify-center group/nav"
+            style={{ "--hover-glow-color": "var(--accent)", "--accent": activeProject.accent }}
             aria-label={labels.nextProject}
           >
             <ChevronRight className="w-6 h-6 group-hover/nav:translate-x-0.5 transition-transform" />

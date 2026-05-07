@@ -141,7 +141,7 @@ function Contact() {
 
           <button
             onClick={() => setShowForm(!showForm)}
-            className={`group relative flex items-center justify-between gap-4 p-5 rounded-2xl border transition-all duration-400 overflow-hidden max-w-lg w-full text-left ${showForm ? "border-[hsl(var(--theme-base)/0.4)] bg-[hsl(var(--theme-base)/0.1)] shadow-[0_0_40px_-16px_hsl(var(--theme-base)/0.2)]" : "border-white/10 bg-white/[0.02] hover:bg-[hsl(var(--theme-base)/0.1)] hover:border-[hsl(var(--theme-base)/0.4)] hover:shadow-[0_10px_30px_-10px_hsl(var(--theme-base)/0.3)]"}`}
+            className={`group relative flex items-center justify-between gap-4 p-5 rounded-2xl border transition-all duration-400 overflow-hidden max-w-lg w-full text-left ${showForm ? "border-[hsl(var(--theme-base))] bg-[hsl(var(--theme-base)/0.1)] shadow-[0_0_25px_2px_hsl(var(--theme-base))]" : "border-white/10 bg-white/[0.02] hover:bg-[hsl(var(--theme-base)/0.1)] hover-glow"}`}
           >
             <div className="flex items-center gap-4 relative z-10">
               <div
@@ -249,7 +249,7 @@ function Contact() {
                       theme="neutral" 
                       onClick={() => setIsSocialMenuOpen(!isSocialMenuOpen)}
                       size="social"
-                      className={`!w-10 !h-10 !rounded-full transition-all duration-300 hover:!bg-[hsl(var(--theme-base)/0.1)] hover:!text-[hsl(var(--theme-base))] hover:!border-[hsl(var(--theme-base)/0.4)] ${isSocialMenuOpen ? "!bg-[hsl(var(--theme-base)/0.1)] !text-[hsl(var(--theme-base))] !border-[hsl(var(--theme-base)/0.4)]" : "bg-white/5 border-white/10 text-white/50"}`} 
+                      className={`!w-10 !h-10 !rounded-full transition-all duration-300 ${isSocialMenuOpen ? "!bg-[hsl(var(--theme-base)/0.12)] !border-[hsl(var(--theme-base))] !shadow-[0_0_25px_2px_hsl(var(--theme-base))] !text-[hsl(var(--theme-base))]" : "bg-white/5 border-white/10 text-white/50 hover-glow"}`} 
                     />
                     
                     <AnimatePresence>
@@ -259,7 +259,7 @@ function Contact() {
                           animate={{ opacity: 1, y: 0, scale: 1 }}
                           exit={{ opacity: 0, y: 10, scale: 0.95 }}
                           transition={{ duration: 0.2 }}
-                          className="absolute bottom-full mb-3 right-0 min-w-[200px] bg-black/95 backdrop-blur-2xl border border-white/10 rounded-2xl p-2 shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-[110]"
+                          className="absolute bottom-full mb-3 right-0 min-w-[200px] bg-black/95 backdrop-blur-2xl border border-[hsl(var(--theme-base))] rounded-2xl p-2 shadow-[0_0_25px_2px_hsl(var(--theme-base))] z-[110]"
                         >
                           <div className="px-3 py-2 text-center">
                             <p className="type-label text-white/30">{global.labels.socialProfiles}</p>

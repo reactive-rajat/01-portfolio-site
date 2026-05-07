@@ -551,6 +551,15 @@
     @apply px-3 py-1 rounded-full border border-white/10 bg-white/5 text-[10px] uppercase tracking-widest font-medium text-white/60 whitespace-nowrap;
   }
 
+  .hover-glow {
+    transition: box-shadow 0.5s ease, border-color 0.5s ease, transform 0.3s ease;
+  }
+  
+  .hover-glow:hover {
+    border-color: var(--hover-glow-color, hsl(var(--theme-base, 0 0% 100%))) !important;
+    box-shadow: 0 0 25px 2px var(--hover-glow-color, hsl(var(--theme-base, 0 0% 100%))) !important;
+  }
+
   .portfolio-tag {
     @apply px-[0.8rem] py-[0.35rem] rounded-full text-xs uppercase tracking-widest;
     border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
@@ -633,7 +642,7 @@
   }
 
   .primary-btn {
-    @apply relative overflow-hidden px-7 h-14 rounded-xl type-cta flex items-center justify-center gap-[0.6rem] text-foreground z-[3] transition-all whitespace-nowrap backdrop-blur-sm;
+    @apply relative overflow-hidden px-6 h-14 rounded-xl type-cta flex items-center justify-center gap-[0.6rem] text-foreground z-[3] transition-all whitespace-nowrap backdrop-blur-sm;
     transition-duration: 500ms;
     background: linear-gradient(130deg,
         color-mix(in srgb, var(--accent) 70%, transparent),
@@ -650,8 +659,8 @@
     background: linear-gradient(130deg,
         color-mix(in srgb, var(--accent) 85%, transparent),
         color-mix(in srgb, var(--accent) 45%, transparent));
-    box-shadow: 0 8px 30px -12px color-mix(in srgb, var(--accent) 60%, transparent);
-    border-color: color-mix(in srgb, var(--accent) 80%, transparent);
+    box-shadow: 0 0 25px 2px var(--accent);
+    border-color: var(--accent);
   }
 
   .primary-btn-icon {
@@ -712,8 +721,8 @@
     background: linear-gradient(130deg,
         color-mix(in srgb, hsl(var(--theme-base, 0 0% 100%)) 15%, transparent),
         color-mix(in srgb, hsl(var(--theme-base, 0 0% 100%)) 5%, transparent));
-    border-color: color-mix(in srgb, hsl(var(--theme-base, 0 0% 100%)) 30%, transparent);
-    box-shadow: 0 8px 30px -12px color-mix(in srgb, hsl(var(--theme-base, 0 0% 100%)) 40%, transparent);
+    border-color: hsl(var(--theme-base, 0 0% 100%));
+    box-shadow: 0 0 25px 2px hsl(var(--theme-base, 0 0% 100%));
   }
 
   .secondary-btn:hover .secondary-btn-icon {
@@ -734,8 +743,8 @@
     @apply text-white;
     transform: translateY(-4px);
     background-color: color-mix(in srgb, hsl(var(--theme-base, 0 0% 100%)) 12%, transparent);
-    border-color: color-mix(in srgb, hsl(var(--theme-base, 0 0% 100%)) 40%, transparent);
-    box-shadow: 0 8px 30px -12px color-mix(in srgb, hsl(var(--theme-base, 0 0% 100%)) 40%, transparent);
+    border-color: hsl(var(--theme-base, 0 0% 100%));
+    box-shadow: 0 0 25px 2px hsl(var(--theme-base, 0 0% 100%));
   }
 
   .icon-btn-neutral:active {

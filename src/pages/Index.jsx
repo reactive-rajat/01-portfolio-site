@@ -253,7 +253,6 @@ function Index() {
                         ?.theme || "violet"
                     }
                     containerClass="flex-1 lg:flex-none"
-                    className="!text-sm !h-12 !px-5"
                     icon={<ArrowRight className="w-4 h-4" />}
                   >
                     {home.cta.label}
@@ -266,7 +265,6 @@ function Index() {
                     target="_blank"
                     rel="noopener noreferrer"
                     containerClass="flex-1 sm:flex-none"
-                    className="!text-sm !h-12 !px-5"
                     icon={<Download size={16} />}
                   >
                     {global.resume?.label || "Download Resume"}

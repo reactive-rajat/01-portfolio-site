@@ -51,7 +51,7 @@ function CategoryCard({ cat, index }) {
     <motion.div
       variants={fadeInUp}
       whileHover={{ y: -4 }}
-      className="group relative p-7 rounded-2xl border border-white/10 hover:border-[hsl(var(--theme-base)/0.3)] hover:shadow-[0_8px_30px_-12px_hsl(var(--theme-base)/0.2)] bg-white/[0.02] backdrop-blur-md overflow-hidden transition-all duration-500"
+      className="group relative p-7 rounded-2xl border border-white/10 hover-glow bg-white/[0.02] backdrop-blur-md overflow-hidden transition-all duration-500"
     >
       {/* Hover glow overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--theme-base)/0.08)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
