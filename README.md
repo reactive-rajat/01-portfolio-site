@@ -136,6 +136,19 @@ This project is built with Vite, making it incredibly easy to deploy for free on
 
 ---
 
+## ❓ FAQ
+
+**Q: Does it have a backend?**  
+**Ans:** No — it's frontend only. The contact form currently logs data to the console. You can easily connect it to a free service like **EmailJS**, **Web3Forms**, or **Formspree** to actually receive emails. The WhatsApp feature is also fully frontend (it builds a direct chat link).
+
+**Q: Can I change colors?**  
+**Ans:** Yes — one global config file controls everything. You can easily edit the CSS variables in `src/index.css` to update the global theme colors.
+
+**Q: What Node version is required?**  
+**Ans:** Node 18+ is recommended.
+
+---
+
 ## 📜 License
 **Personal & Commercial Use Allowed.**
 You can use this template to build and publish your personal portfolio or portfolios for your clients. 
